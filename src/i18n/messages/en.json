@@ -200,7 +200,8 @@
     "fetching": "Fetching rates from carriers…",
     "stepOf": "Step {current} of {total}",
     "approxClass": "~ Class {n}",
-    "classValue": "Class {n}"
+    "classValue": "Class {n}",
+    "weightUnit": "WEIGHT UNIT"
   },
   "results": {
     "backToQuote": "Back to calculator",

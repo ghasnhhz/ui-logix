@@ -200,7 +200,8 @@
     "fetching": "Получаем ставки у перевозчиков…",
     "stepOf": "Шаг {current} из {total}",
     "approxClass": "~ класс {n}",
-    "classValue": "Класс {n}"
+    "classValue": "Класс {n}",
+    "weightUnit": "ЕДИНИЦА ВЕСА"
   },
   "results": {
     "backToQuote": "Назад к калькулятору",

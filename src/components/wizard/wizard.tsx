@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { STEP_COUNT } from "@/lib/wizard/spec";
 import { StepCargo } from "./step-cargo";
+import { StepDetails } from "./step-details";
 import { StepMode } from "./step-mode";
 import { StepRoute } from "./step-route";
 import { Stepper } from "./stepper";
@@ -39,6 +40,7 @@ export function Wizard() {
         {step === 1 && <StepRoute />}
         {step === 2 && <StepMode />}
         {step === 3 && <StepCargo />}
+        {step === 4 && <StepDetails />}
       </div>
 
       <div className="mt-[18px] flex items-center gap-[14px]">

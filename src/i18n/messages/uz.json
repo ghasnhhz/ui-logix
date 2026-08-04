@@ -200,7 +200,8 @@
     "fetching": "Tashuvchilardan narx olinmoqda…",
     "stepOf": "Bosqich {current}/{total}",
     "approxClass": "~ {n}-sinf",
-    "classValue": "{n}-sinf"
+    "classValue": "{n}-sinf",
+    "weightUnit": "OG‘IRLIK BIRLIGI"
   },
   "results": {
     "backToQuote": "Kalkulyatorga qaytish",
