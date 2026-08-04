@@ -49,5 +49,10 @@ export function bestValue(displayed: Quote[]): Quote | null {
   );
 }
 
-export const isSameQuote = (a: Quote, b: Quote) =>
+// Carrier plus mode identifies a row: the engine returns each pair once. Taking
+// the pick rather than the whole quote lets a caller match against a selection
+// that only carries those two fields, such as a booking request.
+export type QuoteKey = Pick<Quote, "carrierId" | "mode">;
+
+export const isSameQuote = (a: QuoteKey, b: QuoteKey) =>
   a.carrierId === b.carrierId && a.mode === b.mode;

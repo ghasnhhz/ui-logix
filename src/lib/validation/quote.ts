@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { PLACE_CODES, type CargoType, type Mode, type PlaceCode } from "@/lib/pricing";
 import { CARGO_TYPES, MODES } from "@/lib/wizard/spec";
-
-// z.enum needs a non-empty tuple to infer the union; the constants are arrays.
-const oneOf = <T extends string>(values: readonly T[]) => z.enum(values as [T, ...T[]]);
+import { oneOf } from "./one-of";
 
 // Bounds the wizard already enforces, restated because the route handler is the
 // trust boundary and the wizard is only a client.
