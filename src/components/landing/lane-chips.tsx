@@ -23,7 +23,7 @@ export function LaneChips({ origin, destination, onPick }: Props) {
 
   return (
     <div className="mt-4">
-      <p className="micro-label mb-2 text-[9.5px] text-ink-400">{t("popularLanes")}</p>
+      <p className="micro-label mb-2 text-[9.5px] text-ink-500">{t("popularLanes")}</p>
       <div className="flex flex-wrap gap-2">
         {LANES.map(([from, to]) => {
           const on = origin === from && destination === to;

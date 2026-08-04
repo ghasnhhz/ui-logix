@@ -37,7 +37,7 @@ export function Stepper({ step }: { step: number }) {
                     ? "bg-success-solid text-white"
                     : current
                       ? "bg-blue text-white"
-                      : "bg-border text-ink-400"
+                      : "bg-border text-ink-600"
                 }`}
               >
                 {done ? <Check className="size-[15px]" aria-hidden="true" /> : n}
@@ -48,7 +48,7 @@ export function Stepper({ step }: { step: number }) {
                     ? "font-bold text-blue"
                     : done
                       ? "font-medium text-[#334155]"
-                      : "font-medium text-ink-400"
+                      : "font-medium text-ink-500"
                 }`}
               >
                 {t(label)}

@@ -42,7 +42,7 @@ export function StepReview() {
           >
             <Icon className="mt-px size-[15px] flex-none text-ink-500" aria-hidden="true" />
             <div className="min-w-0">
-              <dt className="micro-label text-[9.5px] text-ink-400">{label}</dt>
+              <dt className="micro-label text-[9.5px] text-ink-500">{label}</dt>
               <dd className="mt-1 text-[13px] font-semibold">{value}</dd>
             </div>
           </div>

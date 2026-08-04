@@ -44,7 +44,7 @@ export function StepMode() {
                 <p className="mt-[5px] text-pretty text-[12px] leading-snug text-ink-500">
                   {t(`mode${key}Desc`)}
                 </p>
-                <p className="mt-2 flex flex-wrap items-center gap-x-[10px] gap-y-1 text-[11.5px] text-ink-400">
+                <p className="mt-2 flex flex-wrap items-center gap-x-[10px] gap-y-1 text-[11.5px] text-ink-500">
                   <span className="flex items-center gap-1">
                     <Clock className="size-[13px] flex-none" aria-hidden="true" />
                     {t(`mode${key}Days`)} {tc("days")}

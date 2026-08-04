@@ -45,7 +45,7 @@ export function StepRoute() {
           {formatKm(laneDistanceKm(spec.origin, spec.destination))}
         </p>
         <div className="flex-1" />
-        <p className="text-[12px] text-ink-400">{t("coverage")}</p>
+        <p className="text-[12px] text-ink-500">{t("coverage")}</p>
       </div>
     </div>
   );

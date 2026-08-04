@@ -57,7 +57,7 @@ export function Hero() {
         </ul>
       </div>
 
-      <p className="text-[12px] text-[#5F7093]">{t("trustLine")}</p>
+      <p className="text-[12px] text-navy-muted">{t("trustLine")}</p>
     </section>
   );
 }

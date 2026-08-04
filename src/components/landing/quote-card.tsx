@@ -12,7 +12,7 @@ import { DEFAULT_SPEC } from "@/lib/wizard/spec";
 
 const ASSURANCES = ["assureNoCard", "assureFast", "assureCarriers"] as const;
 
-const LABEL = "micro-label mb-[3px] block text-[9.5px] font-medium text-ink-400";
+const LABEL = "micro-label mb-[3px] block text-[9.5px] font-medium text-ink-500";
 const VALUE =
   "min-h-[24px] w-full cursor-pointer border-none bg-transparent p-0 text-[15px] font-semibold text-ink";
 
@@ -105,8 +105,10 @@ export function QuoteCard() {
           </button>
         </div>
 
-        <div className="flex border-t border-border">
-          <div className="min-w-0 flex-1 border-r border-border px-[15px] py-[11px]">
+        {/* Uzbek "JO‘NATISH SANASI" outgrows a fixed two-column split at 375px,
+            so the pair stacks before it can clip. */}
+        <div className="grid grid-cols-1 divide-y divide-border border-t border-border sm:grid-cols-[1fr_128px] sm:divide-x sm:divide-y-0">
+          <div className="min-w-0 px-[15px] py-[11px]">
             <label htmlFor="landing-date" className={LABEL}>
               {t("dateLabel")}
             </label>
@@ -118,7 +120,7 @@ export function QuoteCard() {
               className={`${VALUE} text-[14px]`}
             />
           </div>
-          <div className="w-[128px] flex-none px-[15px] py-[11px]">
+          <div className="min-w-0 px-[15px] py-[11px]">
             <p className={LABEL}>{tw("laneDistance")}</p>
             <p className="flex min-h-[24px] items-center font-mono text-[14px] font-semibold">
               {formatKm(laneDistanceKm(origin, destination))}
@@ -153,7 +155,7 @@ export function QuoteCard() {
         ))}
       </ul>
 
-      <p className="mt-3 text-pretty text-[12px] leading-normal text-ink-400">{t("note")}</p>
+      <p className="mt-3 text-pretty text-[12px] leading-normal text-ink-500">{t("note")}</p>
 
       <p className="mt-4 border-t border-page-alt pt-4 text-center text-[12.5px] text-ink-500">
         {ta("haveAccount")}{" "}

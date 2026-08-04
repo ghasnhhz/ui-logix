@@ -34,7 +34,7 @@ export function MetricsPanel({ spec }: { spec: WizardSpec }) {
       <dl className="mt-3 grid grid-cols-2 gap-[14px] sm:grid-cols-4">
         {rows.map((row) => (
           <div key={row.label}>
-            <dt className="text-[11.5px] text-ink-400">{row.label}</dt>
+            <dt className="text-[11.5px] text-ink-500">{row.label}</dt>
             <dd className={`mt-1 font-mono text-[15px] font-semibold ${row.tone}`}>
               {row.value}
             </dd>

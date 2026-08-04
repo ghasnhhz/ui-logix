@@ -38,7 +38,7 @@ export function StepCargo() {
               </p>
               <p
                 className={`mt-2 font-mono text-[10.5px] font-semibold ${
-                  checked ? "text-blue" : "text-ink-400"
+                  checked ? "text-blue" : "text-ink-500"
                 }`}
               >
                 {t("approxClass", { n: CARGO_BASE_CLASS[cargoType] })}

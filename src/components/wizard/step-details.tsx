@@ -62,7 +62,7 @@ export function StepDetails() {
         <div className="grid grid-cols-3 gap-3">
           {DIMENSIONS.map(([key, label]) => (
             <div key={key}>
-              <label htmlFor={key} className="mb-[6px] block text-[11.5px] text-ink-400">
+              <label htmlFor={key} className="mb-[6px] block text-[11.5px] text-ink-500">
                 {t(label)}
               </label>
               <NumberInput
