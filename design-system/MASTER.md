@@ -186,6 +186,9 @@ every user. Replace on sight using this mapping:
 | ▭ | `Archive` | sidebar My Cabinet |
 | + | `Plus` | topbar Get Quote |
 | ‹ › | `ChevronLeft` / `ChevronRight` | back links, book action |
+| 💡 | `Lightbulb` | dashboard save tip |
+| ⬇ | `Download` | cabinet CSV export |
+| ↓ ↑ | `TrendingDown` / `TrendingUp` | savings KPI delta direction |
 
 The comp draws the sidebar's three nav glyphs and the results star rating as CSS
 boxes and `★★★★☆` text respectively. Both become Lucide: five `Star`s with the

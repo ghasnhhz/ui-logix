@@ -20,7 +20,7 @@ export function ExportButton({ disabled }: { disabled: boolean }) {
 
   if (disabled) {
     return (
-      <span className={`${className} cursor-not-allowed bg-page-alt text-ink-400`} aria-disabled>
+      <span className={`${className} cursor-not-allowed bg-page-alt text-ink-500`} aria-disabled>
         <Download className="size-4" aria-hidden="true" />
         {t("exportCsv")}
       </span>

@@ -54,7 +54,9 @@ export function CabinetView({
                 key={value}
                 type="button"
                 role="tab"
+                id={`cabinet-tab-${value}`}
                 aria-selected={tab === value}
+                aria-controls="cabinet-records"
                 onClick={() => setTab(value)}
                 className={`min-h-[34px] cursor-pointer rounded-[7px] px-[13px] text-[12.5px] font-semibold transition-colors duration-150 ${
                   tab === value ? "bg-surface text-ink shadow-[0_1px_2px_rgba(15,23,42,.06)]" : "text-ink-500 hover:text-ink"
@@ -70,7 +72,12 @@ export function CabinetView({
 
         {/* The tab switch re-filters without a navigation, so the change is
             announced rather than happening silently. */}
-        <div aria-live="polite">
+        <div
+          id="cabinet-records"
+          role="tabpanel"
+          aria-labelledby={`cabinet-tab-${tab}`}
+          aria-live="polite"
+        >
           {records.length === 0 ? (
             <div className="p-[18px]">
               <EmptyState title={t("emptyTitle")} body={t("emptyBody")} cta={t("emptyCta")} />
