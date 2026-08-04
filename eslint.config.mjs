@@ -18,6 +18,10 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // PM handoff and tooling, not application source. design/ is a custom
+      // template format that does not parse as React.
+      "design/**",
+      ".claude/**",
     ],
   },
 ];
