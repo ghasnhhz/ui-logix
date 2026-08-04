@@ -1,20 +1,6 @@
-import type { Benchmark, ModeFilter, Quote } from "./types";
+import type { Benchmark, Quote } from "./types";
 
 const MARKET_UPLIFT = 1.16;
-
-// On ALL, one row per carrier — their cheapest mode. On a specific mode, every
-// carrier that serves it. Carrier order follows CARRIERS, not price; sorting is
-// the results page's job.
-export function displayedQuotes(quotes: Quote[], filter: ModeFilter): Quote[] {
-  if (filter !== "ALL") return quotes.filter((q) => q.mode === filter);
-
-  const cheapest = new Map<string, Quote>();
-  for (const q of quotes) {
-    const held = cheapest.get(q.carrierId);
-    if (!held || q.allIn < held.allIn) cheapest.set(q.carrierId, q);
-  }
-  return [...cheapest.values()];
-}
 
 // Named "median" throughout the product; it is an arithmetic mean of the
 // displayed quotes lifted 16% to stand in for an untendered market rate. Kept as
