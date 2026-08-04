@@ -172,7 +172,19 @@ every user. Replace on sight using this mapping:
 | ★ | `Star` | carrier rating |
 | 🕐 | `Clock` | transit days on a mode card |
 | ⇅ | `ArrowUpDown` | swap origin and destination |
-| ✓ | `Check` | assurance lines, completed step |
+| ✓ | `Check` | assurance lines, completed step, gate benefits |
+| 🔒 | `Lock` | gate eyebrow, guest notice |
+| 🔍 | `Search` | results empty state |
+| ⏻ | `Power` | sidebar log out |
+| ▦ | `LayoutDashboard` | sidebar Dashboard |
+| ▯ | `FilePlus` | sidebar New Quote |
+| ▭ | `Archive` | sidebar My Cabinet |
+| + | `Plus` | topbar Get Quote |
+| ‹ › | `ChevronLeft` / `ChevronRight` | back links, book action |
+
+The comp draws the sidebar's three nav glyphs and the results star rating as CSS
+boxes and `★★★★☆` text respectively. Both become Lucide: five `Star`s with the
+first `round(rating)` filled, and the three icons above.
 
 Inline icons 16–20px, decorative icons 24px maximum. Decorative icons get
 `aria-hidden="true"`; icon-only buttons get `aria-label`.
