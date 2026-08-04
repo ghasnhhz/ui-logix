@@ -295,7 +295,7 @@
     "tabShipments": "Shipments",
     "tabQuotes": "Quotes",
     "exportCsv": "Export CSV",
-    "csvNote": "CSV export includes quote ID, route, mode, carrier, transit, all-in cost, market benchmark and saving for every row — the format your accountant asks for.",
+    "csvNote": "CSV export includes quote ID, origin, destination, mode, carrier, status, all-in cost, market benchmark and saving for every row — the format your accountant asks for.",
     "requote": "Re-quote",
     "track": "Track",
     "emptyTitle": "Nothing in your cabinet yet",

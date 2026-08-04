@@ -295,7 +295,7 @@
     "tabShipments": "Yuklar",
     "tabQuotes": "Narxlar",
     "exportCsv": "CSV yuklab olish",
-    "csvNote": "CSV faylda har bir satr uchun so‘rov ID, yo‘nalish, usul, tashuvchi, muddat, all-in narx, bozor benchmarki va tejov bo‘ladi.",
+    "csvNote": "CSV faylda har bir satr uchun so‘rov ID, qayerdan, qayerga, usul, tashuvchi, holat, all-in narx, bozor benchmarki va tejov bo‘ladi.",
     "requote": "Qayta so‘rash",
     "track": "Kuzatish",
     "emptyTitle": "Kabinet hozircha bo‘sh",
