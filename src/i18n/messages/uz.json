@@ -197,7 +197,10 @@
     "readyTitle": "Narx olishga tayyor",
     "readyBody": "6 tashuvchiga bir vaqtda so‘rov yuboramiz. Narxlarni ko‘rish va bron qilish uchun bepul akkaunt kerak — bitta qadam.",
     "getCarrierQuotes": "Tashuvchi narxlarini olish",
-    "fetching": "Tashuvchilardan narx olinmoqda…"
+    "fetching": "Tashuvchilardan narx olinmoqda…",
+    "stepOf": "Bosqich {current}/{total}",
+    "approxClass": "~ {n}-sinf",
+    "classValue": "{n}-sinf"
   },
   "results": {
     "backToQuote": "Kalkulyatorga qaytish",

@@ -197,7 +197,10 @@
     "readyTitle": "Ready to get quotes",
     "readyBody": "We’ll query 6 carriers simultaneously. A free account is needed to see the rates and book — it takes one step.",
     "getCarrierQuotes": "Get Carrier Quotes",
-    "fetching": "Fetching rates from carriers…"
+    "fetching": "Fetching rates from carriers…",
+    "stepOf": "Step {current} of {total}",
+    "approxClass": "~ Class {n}",
+    "classValue": "Class {n}"
   },
   "results": {
     "backToQuote": "Back to calculator",
