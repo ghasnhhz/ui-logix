@@ -51,9 +51,14 @@ Blue is for navigation and selection. One amber action per screen.
 |---------|------|------|-----|
 | success | `#D1FAE5` | `#047857` | below market, delivered, KPI deltas |
 | success-solid | `#10B981` | — | completed wizard step |
-| warning | `#FFFBEB` | `#D97706` | above market, pending |
+| warning | `#FFFBEB` | `#D97706` | pending pill, on the `#FFFBEB` fill |
+| warning-strong | — | `#B45309` | above-market flag — warning text on white |
 | danger | `#FEE2E2` | `#DC2626` | expired, errors |
 | info | `#EFF6FF` | `#2563EB` | active filter, selected card background `#F5F9FF` |
+
+`#D97706` reaches only 3.4:1 on white, so the above-market flag — which sits on a
+white quote card, not on the amber fill — uses `#B45309` (4.9:1). Same reasoning
+as the three greys raised in § 1 Neutral.
 
 ### Transport mode chips
 

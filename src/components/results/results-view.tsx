@@ -84,7 +84,9 @@ export function ResultsView({ data }: { data: ResultsData }) {
           <SortControl active={sort} onPick={setSort} />
         </div>
 
-        <div className="flex min-w-0 flex-col gap-[14px]">
+        {/* The list re-orders and re-filters without a navigation, so the
+            change has to be announced rather than happening silently. */}
+        <div className="flex min-w-0 flex-col gap-[14px]" aria-live="polite">
           {view.rows.map((quote) => (
             <QuoteCard
               key={`${quote.carrierId}-${quote.mode}`}

@@ -83,7 +83,7 @@ export function QuoteCard({
           <p className="mt-px text-[11px] text-ink-500">{t("allInTotal")}</p>
           <p
             className={`mt-1 text-[11.5px] font-semibold ${
-              vsPct <= 0 ? "text-success-ink" : "text-warning-ink"
+              vsPct <= 0 ? "text-success-ink" : "text-warning-ink-strong"
             }`}
           >
             {Math.abs(vsPct)}% {vsPct <= 0 ? t("belowMarket") : t("aboveMarket")}

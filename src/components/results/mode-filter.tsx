@@ -46,8 +46,11 @@ export function ModeFilter({
               >
                 {value}
               </span>
+              {/* Wraps rather than truncates: "LTL yuk mashinasi" and "Все
+                  способы" both outrun the 200px rail, and a clipped filter
+                  label is a filter the user cannot read. */}
               <span
-                className={`min-w-0 flex-1 truncate text-[12.5px] font-semibold ${
+                className={`min-w-0 flex-1 text-pretty text-[12.5px] font-semibold leading-tight ${
                   on ? "text-info-ink" : "text-ink-600"
                 }`}
               >

@@ -54,7 +54,9 @@ export async function Sidebar({ user, active }: { user: ShellUser; active?: Sect
             }`}
           >
             <Icon className="size-4 flex-none" aria-hidden="true" />
-            <span className="min-w-0 flex-1 truncate">{t(key)}</span>
+            {/* Wraps, not truncates — "Yangi so‘rov" plus the NEW badge is
+                already at the 200px rail's limit, and "Новый запрос" with it. */}
+            <span className="min-w-0 flex-1 text-pretty leading-tight">{t(key)}</span>
             {section === "quote" && (
               <span className="micro-label flex-none rounded-chip bg-amber px-[5px] py-[2px] text-[8.5px] font-bold tracking-[0.06em] text-amber-ink">
                 {t("newBadge")}

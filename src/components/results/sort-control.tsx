@@ -42,7 +42,7 @@ export function SortControl({
                 aria-hidden="true"
               />
               <span
-                className={`min-w-0 truncate text-[12.5px] font-semibold ${
+                className={`min-w-0 text-pretty text-[12.5px] font-semibold leading-tight ${
                   on ? "text-info-ink" : "text-ink-600"
                 }`}
               >
