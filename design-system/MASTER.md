@@ -82,12 +82,28 @@ Logo chip background per carrier. Text is always white.
 
 ## 2. Typography
 
-Two families, loaded from Google Fonts with `latin, latin-ext, cyrillic` subsets.
-The Cyrillic subset is mandatory — Russian is a launch locale.
+Three families, loaded from Google Fonts. Cyrillic coverage is mandatory —
+Russian is a launch locale.
 
 - **Plus Jakarta Sans** (400, 500, 600, 700) — everything by default.
+  Subsets `latin, latin-ext`.
+- **Manrope** (400, 500, 600, 700) — Cyrillic understudy. Never selected
+  directly; it is reached only by fallback. Subsets `latin, cyrillic`.
 - **IBM Plex Mono** (400, 500, 600) — uppercase micro-labels, field labels,
   reference numbers, and the "FREIGHT PLATFORM" tagline.
+  Subsets `latin, latin-ext, cyrillic`.
+
+Plus Jakarta Sans has no `cyrillic` subset on Google Fonts. It offers
+`cyrillic-ext`, which covers historic and minority-language characters but not
+the basic Russian alphabet at U+0400–045F. Requesting `cyrillic` from
+`next/font` is a build error; shipping without it drops every Russian string to
+a system font.
+
+So `--font-sans` is a stack, not a single family: Jakarta first, Manrope behind
+it. Latin renders in Jakarta, Cyrillic falls through to Manrope, and the two are
+close enough in geometry that a mixed-script line still reads as one typeface.
+Do not collapse this to one family. IBM Plex Mono has real Cyrillic and needs no
+understudy.
 
 The mono/uppercase/wide-tracking treatment is the product's signature. Use it for
 field labels above inputs (`ORIGIN`, `TOTAL WEIGHT`, `SORT BY`) and for section
