@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpDown, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/shell/locale-switcher";
+import { LaneChips } from "./lane-chips";
 import { laneDistanceKm, type PlaceCode } from "@/lib/pricing";
 import { formatKm, PLACE_OPTIONS } from "@/lib/ui/places";
 import { DEFAULT_SPEC } from "@/lib/wizard/spec";
@@ -125,6 +126,15 @@ export function QuoteCard() {
           </div>
         </div>
       </div>
+
+      <LaneChips
+        origin={origin}
+        destination={destination}
+        onPick={(from, to) => {
+          setOrigin(from);
+          setDestination(to);
+        }}
+      />
 
       <Link
         href={href}
