@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { STEP_COUNT } from "@/lib/wizard/spec";
+import { StepCargo } from "./step-cargo";
+import { StepMode } from "./step-mode";
 import { StepRoute } from "./step-route";
 import { Stepper } from "./stepper";
 import { useWizard } from "./wizard-provider";
@@ -35,6 +37,8 @@ export function Wizard() {
 
       <div className={`${CARD} mt-[14px] p-4 sm:p-6`}>
         {step === 1 && <StepRoute />}
+        {step === 2 && <StepMode />}
+        {step === 3 && <StepCargo />}
       </div>
 
       <div className="mt-[18px] flex items-center gap-[14px]">
