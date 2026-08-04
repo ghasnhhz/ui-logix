@@ -272,6 +272,7 @@
   "confirmed": {
     "title": "Booking confirmed.",
     "sub": "The carrier has your shipment. Track status and export the record from My Cabinet — no email chain needed.",
+    "carrier": "CARRIER",
     "bookingRef": "BOOKING REFERENCE",
     "backToDash": "Back to Dashboard",
     "openCabinet": "Open My Cabinet",

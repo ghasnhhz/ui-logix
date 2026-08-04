@@ -272,6 +272,7 @@
   "confirmed": {
     "title": "Bron tasdiqlandi.",
     "sub": "Tashuvchi yukingizni oldi. Holatni kuzating va yozuvni «Mening kabinetim»dan eksport qiling.",
+    "carrier": "TASHUVCHI",
     "bookingRef": "BRON RAQAMI",
     "backToDash": "Panelga qaytish",
     "openCabinet": "Kabinetni ochish",
