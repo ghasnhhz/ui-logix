@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tokens transcribed from design-system/MASTER.md. That file is the source of
+   truth — change it first, then mirror the change here. */
+@theme {
+  --color-navy: #16233f;
+  --color-navy-hover: #1e2e52;
+  --color-navy-active: #24365c;
+  --color-navy-muted: #8fa0bf;
+  --color-navy-dim: #6b7c9e;
+  --color-amber: #f5a623;
+  --color-amber-ink: #3b2600;
+  --color-blue: #2563eb;
+  --color-blue-hover: #1d4ed8;
+
+  --color-ink: #0f172a;
+  --color-ink-600: #475569;
+  --color-ink-500: #64748b;
+  --color-ink-400: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-surface: #ffffff;
+  --color-page: #f8fafc;
+  --color-page-alt: #f1f5f9;
+
+  --color-success: #d1fae5;
+  --color-success-ink: #047857;
+  --color-success-solid: #10b981;
+  --color-warning: #fffbeb;
+  --color-warning-ink: #d97706;
+  --color-danger: #fee2e2;
+  --color-danger-ink: #dc2626;
+  --color-info: #eff6ff;
+  --color-info-ink: #2563eb;
+  --color-selected: #f5f9ff;
+
+  --color-mode-air: #dbeafe;
+  --color-mode-air-ink: #1d4ed8;
+  --color-mode-ltl: #ede9fe;
+  --color-mode-ltl-ink: #6d28d9;
+  --color-mode-ftl: #d1fae5;
+  --color-mode-ftl-ink: #047857;
+  --color-mode-fcl: #cffafe;
+  --color-mode-fcl-ink: #0e7490;
+  --color-mode-all: #f1f5f9;
+  --color-mode-all-ink: #475569;
+
+  --color-carrier-msk: #1d4ed8;
+  --color-carrier-dbs: #dc2626;
+  --color-carrier-fdx: #6d28d9;
+  --color-carrier-dhl: #f5a623;
+  --color-carrier-knl: #0e7490;
+  --color-carrier-cma: #0f766e;
+
+  --radius-chip: 4px;
+  --radius-control: 9px;
+  --radius-card: 12px;
+
+  --font-sans: var(--font-jakarta), var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :focus-visible {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.12);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* The signature treatment from MASTER §2 — field labels, eyebrows, reference
+   numbers. Never body copy. */
+@utility micro-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
