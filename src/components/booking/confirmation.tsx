@@ -71,13 +71,13 @@ export function Confirmation({ data }: { data: ConfirmationData }) {
         <div className="mt-[18px] flex flex-wrap justify-center gap-[10px]">
           <Link
             href="/dashboard"
-            className="flex min-h-[46px] flex-1 cursor-pointer items-center justify-center rounded-control border border-border px-5 text-[13px] font-semibold transition-colors duration-150 hover:border-border-strong"
+            className="flex min-h-[46px] min-w-[160px] flex-1 cursor-pointer items-center justify-center rounded-control border border-border px-5 text-[13px] font-semibold transition-colors duration-150 hover:border-border-strong"
           >
             {t("backToDash")}
           </Link>
           <Link
             href="/cabinet"
-            className="flex min-h-[46px] flex-1 cursor-pointer items-center justify-center rounded-control bg-navy px-5 text-[13px] font-semibold text-white transition-[filter] duration-150 hover:brightness-110"
+            className="flex min-h-[46px] min-w-[160px] flex-1 cursor-pointer items-center justify-center rounded-control bg-navy px-5 text-[13px] font-semibold text-white transition-[filter] duration-150 hover:brightness-110"
           >
             {t("openCabinet")}
           </Link>

@@ -24,17 +24,13 @@ const FORMAT_CODES: Record<string, ErrorCode> = {
   datetime: "invalidDate",
 };
 
-const isEmpty = (issue: z.core.$ZodIssue) =>
-  issue.input === undefined || issue.input === null || issue.input === "";
-
 export function issueCode(issue: z.core.$ZodIssue): ErrorCode {
   switch (issue.code) {
     case "invalid_type":
-      // A missing key and a cleared numeric input both land here — undefined for
-      // the first, NaN for the second — and both read as "required" to a user.
+      // Both forms drop empty inputs before posting, so a field the user cleared
+      // arrives as a missing key and lands here rather than in too_small.
       return "required";
     case "too_small":
-      if (isEmpty(issue)) return "required";
       return issue.origin === "string" ? "tooShort" : "outOfRange";
     case "too_big":
       return issue.origin === "string" ? "tooLong" : "outOfRange";
