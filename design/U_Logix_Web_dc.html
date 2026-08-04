@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics=""><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap&amp;subset=latin,latin-ext,cyrillic" rel="stylesheet"><style>
+*{box-sizing:border-box}
+body{margin:0;background:#F8FAFC;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#0F172A;-webkit-font-smoothing:antialiased}
+a{color:#2563EB;text-decoration:none}a:hover{color:#1D4ED8}
+input,select,textarea,button{font-family:inherit;font-size:inherit;color:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#2563EB !important;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+button{cursor:pointer;border:none;background:none}
+@keyframes ulxin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes ulxspin{to{transform:rotate(360deg)}}
+input[type="date"]::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:6px;border:3px solid #F1F5F9}
+</style></helmet>
+
+<div style="min-height:100vh;display:flex;background:#F1F5F9">
+
+<sc-if value="{{ showRail }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;width:200px;background:#16233F;display:flex;flex-direction:column;position:sticky;top:0;height:100vh">
+<div style="padding:18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #24365C">
+<div style="width:34px;height:34px;border-radius:9px;background:#F5A623;display:flex;align-items:center;justify-content:center;flex:none;font-size:16px">🚚</div>
+<div style="min-width:0"><div style="font-size:13.5px;font-weight:700;color:#fff;letter-spacing:0.03em">U LOGIX</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#8FA0BF;letter-spacing:0.14em">FREIGHT PLATFORM</div></div>
+</div>
+<div style="padding:16px 12px 8px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#6B7C9E">{{ t.navigation }}</div>
+<div style="padding:0 8px;display:flex;flex-direction:column;gap:3px">
+<button onClick="{{ navDash }}" style="width:100%;padding:11px 12px;border-radius:9px;font-size:13.5px;font-weight:600;text-align:left;display:flex;align-items:center;gap:11px;background:{{ navDashBg }};color:{{ navDashFg }}" style-hover="background:#1E2E52;color:#fff">
+<span style="width:16px;height:16px;flex:none;display:grid;grid-template-columns:1fr 1fr;gap:2px"><span style="background:currentColor;border-radius:1.5px"></span><span style="background:currentColor;border-radius:1.5px"></span><span style="background:currentColor;border-radius:1.5px"></span><span style="background:currentColor;border-radius:1.5px"></span></span>{{ t.navDash }}</button>
+<button onClick="{{ navQuote }}" style="width:100%;padding:11px 12px;border-radius:9px;font-size:13.5px;font-weight:600;text-align:left;display:flex;align-items:center;gap:11px;background:{{ navQuoteBg }};color:{{ navQuoteFg }}" style-hover="background:#1E2E52;color:#fff">
+<span style="width:14px;height:17px;flex:none;border:1.6px solid currentColor;border-radius:2.5px"></span><span style="flex:1">{{ t.navQuote }}</span>
+<span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:700;padding:2px 5px;border-radius:4px;background:#F5A623;color:#3B2600;letter-spacing:0.06em">NEW</span></button>
+<button onClick="{{ navCabinet }}" style="width:100%;padding:11px 12px;border-radius:9px;font-size:13.5px;font-weight:600;text-align:left;display:flex;align-items:center;gap:11px;background:{{ navCabBg }};color:{{ navCabFg }}" style-hover="background:#1E2E52;color:#fff">
+<span style="width:16px;height:14px;flex:none;border:1.6px solid currentColor;border-radius:2.5px;border-top-width:4px"></span>{{ t.navCabinet }}</button>
+</div>
+<div style="flex:1"></div>
+<div style="padding:12px">
+<div style="display:flex;gap:3px;padding:3px;background:#1E2E52;border-radius:8px;margin-bottom:10px">
+<button onClick="{{ setEn }}" style="flex:1;padding:6px 0;border-radius:6px;font-size:11px;font-weight:600;background:{{ lgEn }};color:{{ lfEn }}">EN</button>
+<button onClick="{{ setUz }}" style="flex:1;padding:6px 0;border-radius:6px;font-size:11px;font-weight:600;background:{{ lgUz }};color:{{ lfUz }}">UZ</button>
+<button onClick="{{ setRu }}" style="flex:1;padding:6px 0;border-radius:6px;font-size:11px;font-weight:600;background:{{ lgRu }};color:{{ lfRu }}">RU</button>
+</div>
+<div style="background:#1E2E52;border-radius:11px;padding:11px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:50%;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex:none">{{ userInitials }}</div>
+<div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ userName }}</div><div style="font-size:10.5px;color:#8FA0BF;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ userCompany }}</div></div>
+<button onClick="{{ logout }}" title="Log out" style="flex:none;color:#6B7C9E;font-size:13px" style-hover="color:#fff">⏻</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showHero }}" hint-placeholder-val="{{ true }}">
+<div style="flex: none; width: 50%; min-width: 400px; padding: 34px 34px 30px; display: flex; flex-direction: column; background-color: #16233F">
+<div style="display:flex;align-items:center;gap:11px">
+<div style="width:34px;height:34px;border-radius:9px;background:#F5A623;display:flex;align-items:center;justify-content:center;flex:none;font-size:16px">🚚</div>
+<div><div style="font-size:14px;font-weight:700;color:#fff;letter-spacing:0.03em">U LOGIX</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#8FA0BF;letter-spacing:0.16em">FREIGHT PLATFORM</div></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:36px 0">
+<div style="font-size:40px;font-weight:700;color:#fff;letter-spacing:-0.035em;line-height:1.1">{{ t.heroLine1 }}</div>
+<div style="font-size:40px;font-weight:700;color:#fff;letter-spacing:-0.035em;line-height:1.1">{{ t.heroLine1b }}</div>
+<div style="font-size:22px;font-weight:700;color:#F5A623;letter-spacing:-0.02em;line-height:1.2;margin-top:10px">{{ t.heroLine2 }}</div>
+<div style="font-size:14.5px;color:#A7B4CC;margin-top:16px;line-height:1.6;max-width:430px;text-wrap:pretty">{{ t.heroSub }}</div>
+
+<div style="margin-top:28px;display:flex;flex-direction:column;gap:11px;max-width:430px">
+<sc-for list="{{ heroFeatures }}" as="h" hint-placeholder-count="3">
+<div style="display:flex;gap:14px;align-items:flex-start;background:#1C2B4A;border-radius:10px;padding:15px 17px">
+<div style="flex:none;font-size:17px;line-height:1.1">{{ h.icon }}</div>
+<div style="min-width:0">
+<div style="font-size:13.5px;font-weight:700;color:#fff">{{ h.title }}</div>
+<div style="font-size:12px;color:#94A3B8;margin-top:4px;line-height:1.5;text-wrap:pretty">{{ h.sub }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="font-size:12px;color:#5F7093">{{ t.trustLine }}</div>
+</div>
+</sc-if>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+<sc-if value="{{ showTopbar }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;height:56px;background:#fff;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;padding:0 24px;gap:12px;position:sticky;top:0;z-index:30">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:#334155">U Logix</div>
+<div style="color:#CBD5E1;font-size:12px">›</div>
+<div style="font-size:13.5px;color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{ crumb }}</div>
+<div style="flex:1"></div>
+<button onClick="{{ navQuote }}" style="padding:10px 17px;border-radius:9px;background:#2563EB;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;min-height:40px" style-hover="background:#1D4ED8"><span style="font-size:14px;line-height:1">+</span><span style="white-space:nowrap">{{ t.getQuote }}</span></button>
+<div style="width:34px;height:34px;border-radius:50%;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex:none">{{ userInitials }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showGuestBar }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;height:60px;background:#16233F;display:flex;align-items:center;padding:0 24px;gap:14px;position:sticky;top:0;z-index:30">
+<button onClick="{{ guestHome }}" style="display:flex;align-items:center;gap:10px">
+<div style="width:30px;height:30px;border-radius:8px;background:#F5A623;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px">🚚</div>
+<div style="text-align:left"><div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.03em">U LOGIX</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#8FA0BF;letter-spacing:0.14em">FREIGHT PLATFORM</div></div>
+</button>
+<div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:20px;background:#1C2B4A;font-size:11.5px;font-weight:600;color:#34D399"><span style="width:6px;height:6px;border-radius:50%;background:#34D399;flex:none"></span>{{ t.guestMode }}</div>
+<div style="flex:1"></div>
+<div style="display:flex;gap:3px;padding:3px;background:#1E2E52;border-radius:8px">
+<button onClick="{{ setEn }}" style="padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;background:{{ lgEn }};color:{{ lfEn }}">EN</button>
+<button onClick="{{ setUz }}" style="padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;background:{{ lgUz }};color:{{ lfUz }}">UZ</button>
+<button onClick="{{ setRu }}" style="padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;background:{{ lgRu }};color:{{ lfRu }}">RU</button>
+</div>
+<button onClick="{{ goLogin }}" style="padding:9px 15px;border-radius:8px;font-size:12.5px;font-weight:600;color:#fff;border:1px solid #33456B;min-height:38px" style-hover="background:#1E2E52">{{ t.signIn }}</button>
+</div>
+</sc-if>
+
+<div style="flex:1;padding:{{ contentPad }}">
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 80px);animation:ulxin .3s ease both">
+<div style="width:100%;max-width:420px;background:#fff;border-radius:14px;padding:26px;box-shadow:0 4px 24px rgba(15,23,42,.06)">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<div style="display: none; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 20px; background: #ECFDF5; color: #047857; font-size: 11px; font-weight: 700; letter-spacing: 0.02em">✓ {{ t.freeNoSignup }}</div>
+<div style="flex:1"></div>
+<div style="display:flex;gap:2px;padding:3px;background:#EEF2F7;border-radius:8px">
+<button onClick="{{ setEn }}" style="padding:5px 8px;border-radius:6px;font-size:10.5px;font-weight:700;background:{{ inlineEnBg }};color:{{ inlineEnFg }}">EN</button>
+<button onClick="{{ setUz }}" style="padding:5px 8px;border-radius:6px;font-size:10.5px;font-weight:700;background:{{ inlineUzBg }};color:{{ inlineUzFg }}">UZ</button>
+<button onClick="{{ setRu }}" style="padding:5px 8px;border-radius:6px;font-size:10.5px;font-weight:700;background:{{ inlineRuBg }};color:{{ inlineRuFg }}">RU</button>
+</div>
+<button onClick="{{ goLogin }}" style="padding: 7px 12px; border-radius: 8px; border: 1px solid #E2E8F0; background: #fff; font-size: 12px; font-weight: 600; color: #334155; min-height: 34px; display: none" style-hover="background:#F8FAFC">{{ t.signIn }}</button>
+</div>
+<div style="font-size:21px;font-weight:700;letter-spacing:-0.025em;margin-top:14px">{{ t.landingTitle }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:6px;line-height:1.55;text-wrap:pretty">{{ t.landingSub }}</div>
+
+<div style="margin-top:20px;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden">
+<div style="padding:13px 15px;display:flex;align-items:center;gap:12px">
+<div style="flex:none;width:12px;display:flex;flex-direction:column;align-items:center;gap:3px">
+<div style="width:9px;height:9px;border-radius:50%;border:2.5px solid #2563EB"></div>
+<div style="width:2px;height:28px;background:linear-gradient(180deg,#2563EB,#F5A623)"></div>
+<div style="width:9px;height:9px;border-radius:50%;background:#F5A623"></div>
+</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:9px">
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:3px">{{ t.originLabel }}</div>
+<select value="{{ f.origin }}" onChange="{{ onOrigin }}" style="width:100%;padding:0;border:none;background:transparent;font-size:15px;font-weight:600;color:#0F172A;min-height:24px">
+<option value="TAS">Tashkent, UZ</option><option value="SKD">Samarkand, UZ</option><option value="ALA">Almaty, KZ</option><option value="IST">Istanbul, TR</option><option value="PVG">Shanghai, CN</option><option value="ICN">Seoul, KR</option><option value="HAM">Hamburg, DE</option><option value="BER">Berlin, DE</option><option value="RTM">Rotterdam, NL</option><option value="FRA">Frankfurt, DE</option><option value="JFK">New York, US</option><option value="LAX">Los Angeles, US</option>
+</select>
+</div>
+<div style="height:1px;background:#F1F5F9"></div>
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:3px">{{ t.destLabel }}</div>
+<select value="{{ f.dest }}" onChange="{{ onDest }}" style="width:100%;padding:0;border:none;background:transparent;font-size:15px;font-weight:600;color:#0F172A;min-height:24px">
+<option value="TAS">Tashkent, UZ</option><option value="SKD">Samarkand, UZ</option><option value="ALA">Almaty, KZ</option><option value="IST">Istanbul, TR</option><option value="PVG">Shanghai, CN</option><option value="ICN">Seoul, KR</option><option value="HAM">Hamburg, DE</option><option value="BER">Berlin, DE</option><option value="RTM">Rotterdam, NL</option><option value="FRA">Frankfurt, DE</option><option value="JFK">New York, US</option><option value="LAX">Los Angeles, US</option>
+</select>
+</div>
+</div>
+<button onClick="{{ swapRoute }}" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2E8F0;background:#fff;color:#475569;font-size:13px;display:flex;align-items:center;justify-content:center" style-hover="border-color:#2563EB;color:#2563EB">⇅</button>
+</div>
+<div style="display:flex;border-top:1px solid #E2E8F0">
+<div style="flex:1;min-width:0;padding:11px 15px;border-right:1px solid #E2E8F0">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:3px">{{ t.dateLabel }}</div>
+<input type="date" value="{{ f.date }}" onChange="{{ onDate }}" style="box-sizing:border-box;appearance:none;-webkit-appearance:none;width:100%;padding:0;border:none;background:transparent;font-size:14px;font-weight:600;color:#0F172A;min-height:24px">
+</div>
+<div style="flex:none;width:128px;padding:11px 15px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:3px">{{ t.laneDistance }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;min-height:24px;display:flex;align-items:center">{{ laneKm }}</div>
+</div>
+</div>
+</div>
+
+<button onClick="{{ startCalc }}" style="width: 100%; margin-top: 18px; padding: 14px; border-radius: 9px; color: #fff; font-size: 14.5px; font-weight: 600; min-height: 50px; display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #16233F" style-hover="background:#1D4ED8">{{ t.continue }}<span>›</span></button>
+
+<div style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+<sc-for list="{{ landingAssurances }}" as="la" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748B"><span style="color:#059669">✓</span>{{ la }}</div>
+</sc-for>
+</div>
+
+<div style="margin-top:12px;font-size:12px;color:#94A3B8;line-height:1.5;text-wrap:pretty">{{ t.landingNote }}</div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid #F1F5F9;text-align:center;font-size:12.5px;color:#64748B">{{ t.haveAccount }} <button onClick="{{ goLogin }}" style="font-size:12.5px;font-weight:600;color:#2563EB">{{ t.signInInstead }}</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAuthCard }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 80px);animation:ulxin .3s ease both">
+<div style="width:100%;max-width:404px;background:#fff;border-radius:14px;padding:26px;box-shadow:0 4px 24px rgba(15,23,42,.06)">
+
+<sc-if value="{{ isGate }}" hint-placeholder-val="{{ false }}">
+<div style="margin-bottom:22px">
+<div style="display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:20px;background:#FEF3C7;color:#92400E;font-size:11px;font-weight:700;letter-spacing:0.03em">🔒 {{ t.oneStepLeft }}</div>
+<div style="font-size:20px;font-weight:700;letter-spacing:-0.025em;margin-top:14px;text-wrap:pretty">{{ t.gateTitle }}</div>
+<div style="margin-top:16px;border:1px solid #E2E8F0;border-radius:11px;padding:14px;background:#F8FAFC">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8">{{ t.gateSummary }}</div>
+<div style="font-size:13px;font-weight:700;margin-top:6px">{{ gateLane }}</div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap">
+<sc-for list="{{ gateChips }}" as="gc" hint-placeholder-count="4">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:3px 7px;border-radius:5px;background:#fff;border:1px solid #E2E8F0;color:#475569">{{ gc }}</span>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlainAuth }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:0;padding:4px;background:#EEF2F7;border-radius:10px;margin-bottom:24px">
+<button onClick="{{ goLogin }}" style="flex:1;padding:10px 0;border-radius:8px;font-size:13.5px;font-weight:600;background:{{ tabLoginBg }};color:{{ tabLoginFg }};min-height:42px;box-shadow:{{ tabLoginShadow }}">{{ t.signIn }}</button>
+<button onClick="{{ goSignup }}" style="flex:1;padding:10px 0;border-radius:8px;font-size:13.5px;font-weight:600;background:{{ tabSignupBg }};color:{{ tabSignupFg }};min-height:42px;box-shadow:{{ tabSignupShadow }}">{{ t.createAccount }}</button>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{ needsCompany }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div><div style="font-size:12.5px;font-weight:600;color:#334155;margin-bottom:7px">{{ t.companyLabel }}</div><input value="{{ a.company }}" onChange="{{ onCompany }}" placeholder="Nazarov Trading LLC" style="width:100%;padding:12px 13px;border:1px solid #E2E8F0;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+<div><div style="font-size:12.5px;font-weight:600;color:#334155;margin-bottom:7px">{{ t.phone }}</div><input value="{{ a.phone }}" onChange="{{ onAPhone }}" placeholder="+998 90 123 4567" style="width:100%;padding:12px 13px;border:1px solid #E2E8F0;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+</div>
+</sc-if>
+<div>
+<div style="font-size:12.5px;font-weight:600;color:#334155;margin-bottom:7px">{{ t.businessEmail }}</div>
+<input value="{{ a.email }}" onChange="{{ onEmail }}" placeholder="alisher@company.uz" style="width:100%;padding:12px 13px;border:1px solid #E2E8F0;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC">
+</div>
+<div>
+<div style="font-size:12.5px;font-weight:600;color:#334155;margin-bottom:7px">{{ t.password }}</div>
+<input type="password" value="{{ a.pass }}" onChange="{{ onPass }}" placeholder="••••••••" style="width:100%;padding:12px 13px;border:1px solid #E2E8F0;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC">
+<div style="display:flex;justify-content:flex-end;margin-top:9px;visibility:{{ forgotVis }}"><a href="#0" style="font-size:12.5px;font-weight:600;color:#2563EB">{{ t.forgotPassword }}</a></div>
+</div>
+<button onClick="{{ doAuth }}" style="width:100%;padding:14px;border-radius:9px;background:{{ authCtaBg }};color:#fff;font-size:14.5px;font-weight:600;min-height:50px" style-hover="filter:brightness(1.1)">{{ authCta }}</button>
+</div>
+
+<sc-if value="{{ isPlainAuth }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="display:flex;align-items:center;gap:14px;margin-top:22px">
+<div style="flex:1;height:1px;background:#E2E8F0"></div>
+<div style="font-size:12px;color:#94A3B8;white-space:nowrap">{{ t.orCalc }}</div>
+<div style="flex:1;height:1px;background:#E2E8F0"></div>
+</div>
+<button onClick="{{ startGuest }}" style="width:100%;margin-top:18px;padding:13px;border-radius:9px;border:1px solid #E2E8F0;background:#fff;font-size:14px;font-weight:600;color:#334155;min-height:48px" style-hover="background:#F8FAFC">{{ t.calcWithoutAccount }} →</button>
+<div style="margin-top:20px;text-align:center;font-size:12.5px;color:#64748B">{{ switchPrompt }} <button onClick="{{ switchAuth }}" style="font-size:12.5px;font-weight:600;color:#2563EB">{{ switchCta }}</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isGate }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ gateBenefits }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:#475569;line-height:1.5"><span style="color:#059669;flex:none">✓</span><span style="text-wrap:pretty">{{ g }}</span></div>
+</sc-for>
+</div>
+<div style="margin-top:18px;text-align:center;font-size:12.5px;color:#64748B">{{ t.haveAccount }} <button onClick="{{ goLogin }}" style="font-size:12.5px;font-weight:600;color:#2563EB">{{ t.signInInstead }}</button></div>
+<button onClick="{{ backToQuote }}" style="width:100%;margin-top:14px;font-size:12.5px;font-weight:600;color:#94A3B8">‹ {{ t.keepComparing }}</button>
+</div>
+</sc-if>
+</div>
+<div style="margin-top:22px;font-size:12px;color:#94A3B8;text-align:center;max-width:404px;line-height:1.5">{{ t.termsPrefix }} <a href="#0" style="color:#94A3B8;text-decoration:underline">{{ t.termsOfService }}</a> {{ t.and }} <a href="#0" style="color:#94A3B8;text-decoration:underline">{{ t.privacyPolicy }}</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDash }}" hint-placeholder-val="{{ false }}">
+<div style="animation:ulxin .3s ease both;max-width:1320px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:17px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+<div style="width:34px;height:34px;border-radius:9px;background:{{ k.iconBg }};display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">{{ k.icon }}</div>
+<div style="padding:4px 9px;border-radius:20px;background:{{ k.pillBg }};color:{{ k.pillFg }};font-size:11px;font-weight:600;white-space:nowrap">{{ k.pill }}</div>
+</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:27px;font-weight:600;letter-spacing:-0.03em;margin-top:14px">{{ k.value }}</div>
+<div style="font-size:13px;font-weight:600;color:#334155;margin-top:5px">{{ k.label }}</div>
+<div style="font-size:11.5px;color:#94A3B8;margin-top:3px">{{ k.sub }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:16px">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px">
+<div><div style="font-size:14.5px;font-weight:700;letter-spacing:-0.01em">{{ t.recentShipments }}</div><div style="font-size:12px;color:#94A3B8;margin-top:2px">{{ t.recentShipmentsSub }}</div></div>
+<button onClick="{{ navCabinet }}" style="padding:8px 13px;border-radius:8px;background:#EFF6FF;color:#2563EB;font-size:12px;font-weight:600;min-height:36px" style-hover="background:#DBEAFE">{{ t.viewAll }} →</button>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:10px 20px;border-top:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;background:#F8FAFC;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8">
+<div style="flex:0 0 132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thQuoteId }}</div><div style="flex:1.6;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thRoute }}</div><div style="flex:0 0 52px">{{ t.thMode }}</div><div style="flex:0 0 96px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thStatus }}</div><div style="flex:0 0 76px;text-align:right;white-space:nowrap">{{ t.thAmount }}</div>
+</div>
+<sc-for list="{{ recent }}" as="r" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid #F1F5F9">
+<div style="flex:0 0 132px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#475569;white-space:nowrap">{{ r.id }}</div>
+<div style="flex:1.6;min-width:0"><div style="font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.from }}</div><div style="font-size:11px;color:#94A3B8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">→ {{ r.to }}</div></div>
+<div style="flex:0 0 52px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:3px 6px;border-radius:5px;background:{{ r.modeBg }};color:{{ r.modeFg }}">{{ r.mode }}</span></div>
+<div style="flex:0 0 96px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:{{ r.statusFg }};min-width:0"><span style="width:6px;height:6px;border-radius:50%;background:{{ r.statusFg }};flex:none"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.status }}</span></div>
+<div style="flex:0 0 76px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;white-space:nowrap">{{ r.amount }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="font-size:14px;font-weight:700;margin-bottom:14px">{{ t.quickActions }}</div>
+<button onClick="{{ navQuote }}" style="width:100%;text-align:left;display:flex;align-items:center;gap:12px;padding:14px;border-radius:11px;border:1.5px solid #2563EB;background:#F5F9FF;min-height:60px" style-hover="background:#EFF6FF">
+<div style="width:34px;height:34px;border-radius:9px;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex:none">+</div>
+<div><div style="font-size:13px;font-weight:600;color:#2563EB">{{ t.qaQuote }}</div><div style="font-size:11.5px;color:#64748B;margin-top:2px">{{ t.qaQuoteSub }}</div></div>
+</button>
+<button onClick="{{ navCabinet }}" style="width:100%;text-align:left;display:flex;align-items:center;gap:12px;padding:14px;border-radius:11px;border:1px solid #E2E8F0;background:#fff;margin-top:10px;min-height:60px" style-hover="background:#F8FAFC">
+<div style="width:34px;height:34px;border-radius:9px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">📁</div>
+<div><div style="font-size:13px;font-weight:600">{{ t.qaCabinet }}</div><div style="font-size:11.5px;color:#64748B;margin-top:2px">{{ t.qaCabinetSub }}</div></div>
+</button>
+</div>
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="font-size:14px;font-weight:700;margin-bottom:14px">{{ t.topCarriers }}</div>
+<sc-for list="{{ topCarriers }}" as="c" hint-placeholder-count="3">
+<div style="margin-bottom:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px">
+<div style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600"><span style="width:7px;height:7px;border-radius:50%;background:{{ c.color }};flex:none"></span>{{ c.name }}</div>
+<div style="font-size:11.5px;color:#94A3B8;white-space:nowrap">{{ c.count }}</div>
+</div>
+<div style="height:5px;border-radius:3px;background:#F1F5F9;overflow:hidden"><div style="height:100%;border-radius:3px;background:{{ c.color }};width:{{ c.pct }}"></div></div>
+</div>
+</sc-for>
+</div>
+<div style="border:1px solid #FDE68A;border-radius:13px;padding:16px;background:#FFFBEB">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#92400E">💡 {{ t.saveTip }}</div>
+<div style="font-size:12px;color:#A16207;line-height:1.55;margin-top:7px;text-wrap:pretty">{{ t.saveTipBody }}</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isQuote }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:{{ wizardMax }};margin:0 auto;animation:ulxin .3s ease both">
+
+<sc-if value="{{ showGuestInline }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+<div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:20px;background:#ECFDF5;color:#047857;font-size:11.5px;font-weight:700;letter-spacing:0.02em">✓ {{ t.freeNoSignup }}</div>
+<div style="flex:1"></div>
+<div style="display:flex;gap:3px;padding:3px;background:#EEF2F7;border-radius:8px">
+<button onClick="{{ setEn }}" style="padding:6px 11px;border-radius:6px;font-size:11px;font-weight:700;background:{{ inlineEnBg }};color:{{ inlineEnFg }}">EN</button>
+<button onClick="{{ setUz }}" style="padding:6px 11px;border-radius:6px;font-size:11px;font-weight:700;background:{{ inlineUzBg }};color:{{ inlineUzFg }}">UZ</button>
+<button onClick="{{ setRu }}" style="padding:6px 11px;border-radius:6px;font-size:11px;font-weight:700;background:{{ inlineRuBg }};color:{{ inlineRuFg }}">RU</button>
+</div>
+<button onClick="{{ goLogin }}" style="padding:9px 15px;border-radius:8px;border:1px solid #E2E8F0;background:#fff;font-size:12.5px;font-weight:600;color:#334155;min-height:38px" style-hover="background:#F8FAFC">{{ t.signIn }}</button>
+</div>
+</sc-if>
+
+<div style="font-size:25px;font-weight:700;letter-spacing:-0.03em">{{ t.quoteTitle }}</div>
+<div style="font-size:13.5px;color:#64748B;margin-top:6px;text-wrap:pretty">{{ t.quoteSub }}</div>
+
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:18px 20px;margin-top:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:flex;align-items:center">
+<sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;flex:{{ st.flex }};min-width:0">
+<div style="flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;width:74px">
+<div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;background:{{ st.bg }};color:{{ st.fg }}">{{ st.mark }}</div>
+<div style="font-size:10.5px;font-weight:{{ st.weight }};color:{{ st.tc }};text-align:center;line-height:1.25">{{ st.label }}</div>
+</div>
+<div style="flex:1;height:2px;background:{{ st.line }};margin-bottom:20px;min-width:6px;display:{{ st.lineDisplay }}"></div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:24px;margin-top:14px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+
+<sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ t.s1Title }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:18px">
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.origin }}</div>
+<select value="{{ f.origin }}" onChange="{{ onOrigin }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;background:#fff;min-height:48px">
+<option value="TAS">Tashkent, UZ</option><option value="SKD">Samarkand, UZ</option><option value="ALA">Almaty, KZ</option><option value="IST">Istanbul, TR</option><option value="PVG">Shanghai, CN</option><option value="ICN">Seoul, KR</option><option value="HAM">Hamburg, DE</option><option value="BER">Berlin, DE</option><option value="RTM">Rotterdam, NL</option><option value="FRA">Frankfurt, DE</option><option value="JFK">New York, US</option><option value="LAX">Los Angeles, US</option>
+</select>
+</div>
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.destination }}</div>
+<select value="{{ f.dest }}" onChange="{{ onDest }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;background:#fff;min-height:48px">
+<option value="TAS">Tashkent, UZ</option><option value="SKD">Samarkand, UZ</option><option value="ALA">Almaty, KZ</option><option value="IST">Istanbul, TR</option><option value="PVG">Shanghai, CN</option><option value="ICN">Seoul, KR</option><option value="HAM">Hamburg, DE</option><option value="BER">Berlin, DE</option><option value="RTM">Rotterdam, NL</option><option value="FRA">Frankfurt, DE</option><option value="JFK">New York, US</option><option value="LAX">Los Angeles, US</option>
+</select>
+</div>
+</div>
+<div style="margin-top:16px;max-width:320px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.shipDate }}</div>
+<input type="date" value="{{ f.date }}" onChange="{{ onDate }}" style="box-sizing:border-box;appearance:none;-webkit-appearance:none;width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;background:#fff;min-height:48px">
+</div>
+<div style="margin-top:16px;padding:13px 15px;border-radius:10px;background:#F8FAFC;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#64748B">{{ t.laneDistance }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600">{{ laneKm }}</div>
+<div style="flex:1"></div>
+<div style="font-size:12px;color:#94A3B8">{{ t.coverage }}</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ t.s2Title }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:6px">{{ t.s2Sub }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:18px">
+<sc-for list="{{ modeOpts }}" as="m" hint-placeholder-count="4">
+<button onClick="{{ m.onPick }}" style="text-align:left;padding:15px;border-radius:11px;border:{{ m.border }};background:{{ m.bg }};display:flex;gap:12px;align-items:flex-start;min-height:96px" style-hover="border-color:#2563EB">
+<div style="flex:none;font-size:20px;line-height:1;margin-top:1px">{{ m.icon }}</div>
+<div style="flex:1;min-width:0">
+<div style="display:flex;align-items:center;gap:7px"><div style="font-size:14px;font-weight:700">{{ m.title }}</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:3px 6px;border-radius:5px;background:{{ m.chipBg }};color:{{ m.chipFg }}">{{ m.code }}</span></div>
+<div style="font-size:12px;color:#64748B;margin-top:5px;line-height:1.45;text-wrap:pretty">{{ m.desc }}</div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:8px;font-size:11.5px;color:#94A3B8"><span>🕐 {{ m.days }}</span><span>{{ m.note }}</span></div>
+</div>
+<div style="flex:none;width:18px;height:18px;border-radius:50%;border:{{ m.radioBorder }};margin-top:2px"></div>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ t.s3Title }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:6px;text-wrap:pretty">{{ t.s3Sub }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px">
+<sc-for list="{{ cargoOpts }}" as="c" hint-placeholder-count="6">
+<button onClick="{{ c.onPick }}" style="text-align:left;padding:14px;border-radius:11px;border:{{ c.border }};background:{{ c.bg }};min-height:96px" style-hover="border-color:#2563EB">
+<div style="font-size:19px;line-height:1">{{ c.icon }}</div>
+<div style="font-size:13px;font-weight:700;margin-top:8px">{{ c.label }}</div>
+<div style="font-size:11.5px;color:#64748B;margin-top:4px;line-height:1.4;text-wrap:pretty">{{ c.hint }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ c.classFg }};margin-top:8px;font-weight:600">{{ c.classLabel }}</div>
+</button>
+</sc-for>
+</div>
+<div style="margin-top:14px;padding:14px 16px;border-radius:11px;background:#F8FAFC;border:1px solid #E2E8F0;display:flex;gap:11px;align-items:flex-start">
+<div style="font-size:15px;line-height:1;flex:none">🏷️</div>
+<div style="font-size:12.5px;color:#475569;line-height:1.55;text-wrap:pretty">{{ t.classNote }}</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ t.s4Title }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:6px">{{ t.s4Sub }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:18px">
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.totalWeight }}</div>
+<div style="display:flex;gap:10px">
+<input type="number" value="{{ f.weight }}" onChange="{{ onWeight }}" style="flex:1;min-width:0;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:48px">
+<select value="{{ f.unit }}" onChange="{{ onUnit }}" style="flex:none;width:74px;padding:12px 10px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;background:#F8FAFC;min-height:48px"><option value="kg">kg</option><option value="lb">lb</option></select>
+</div>
+</div>
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.pieces }}</div>
+<input type="number" value="{{ f.pieces }}" onChange="{{ onPieces }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:48px">
+</div>
+</div>
+<div style="margin-top:16px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:10px">{{ t.dims }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px">
+<div><div style="font-size:11.5px;color:#94A3B8;margin-bottom:6px">{{ t.length }}</div><input type="number" value="{{ f.len }}" onChange="{{ onLen }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:48px"></div>
+<div><div style="font-size:11.5px;color:#94A3B8;margin-bottom:6px">{{ t.width }}</div><input type="number" value="{{ f.wid }}" onChange="{{ onWid }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:48px"></div>
+<div><div style="font-size:11.5px;color:#94A3B8;margin-bottom:6px">{{ t.height }}</div><input type="number" value="{{ f.hei }}" onChange="{{ onHei }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:48px"></div>
+</div>
+</div>
+<div style="margin-top:16px;border:1px solid #E2E8F0;border-radius:11px;background:#F8FAFC;padding:15px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B">{{ t.calcMetrics }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin-top:12px">
+<div><div style="font-size:11.5px;color:#94A3B8">{{ t.volume }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;margin-top:4px">{{ calc.volume }}</div></div>
+<div><div style="font-size:11.5px;color:#94A3B8">{{ t.volWeight }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;margin-top:4px">{{ calc.volWeight }}</div></div>
+<div><div style="font-size:11.5px;color:#94A3B8">{{ t.chargeable }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;margin-top:4px;color:#2563EB">{{ calc.chargeable }}</div></div>
+<div><div style="font-size:11.5px;color:#94A3B8">{{ t.freightClass }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;margin-top:4px;color:#059669">{{ calc.fclass }}</div></div>
+</div>
+</div>
+<div style="margin-top:16px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#64748B;margin-bottom:8px">{{ t.cargoDesc }}</div>
+<textarea value="{{ f.desc }}" onChange="{{ onDesc }}" rows="3" placeholder="{{ t.cargoDescPh }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;resize:vertical"></textarea>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isStep5 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ t.s5Title }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:18px">
+<sc-for list="{{ reviewCards }}" as="r" hint-placeholder-count="8">
+<div style="background:#F8FAFC;border-radius:11px;padding:13px 15px;display:flex;gap:12px;align-items:flex-start">
+<div style="font-size:15px;line-height:1;flex:none;margin-top:1px">{{ r.icon }}</div>
+<div style="min-width:0">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8">{{ r.label }}</div>
+<div style="font-size:13px;font-weight:600;margin-top:4px">{{ r.value }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:14px;border:1px solid #FDE68A;border-radius:11px;background:#FFFBEB;padding:15px 17px;display:flex;gap:11px;align-items:flex-start">
+<div style="font-size:15px;line-height:1;flex:none">⚡</div>
+<div><div style="font-size:13.5px;font-weight:700;color:#92400E">{{ t.readyTitle }}</div><div style="font-size:12.5px;color:#A16207;line-height:1.55;margin-top:4px;text-wrap:pretty">{{ t.readyBody }}</div></div>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="display:flex;align-items:center;gap:14px;margin-top:18px">
+<button onClick="{{ prevStep }}" style="padding:12px 20px;border-radius:9px;background:#fff;border:1px solid #CBD5E1;font-size:13.5px;font-weight:600;color:#475569;min-height:46px;display:flex;align-items:center;gap:7px;visibility:{{ backVis }}" style-hover="background:#F8FAFC"><span>‹</span>{{ t.back }}</button>
+<div style="flex:1;display:flex;justify-content:center;align-items:center;gap:6px">
+<sc-for list="{{ dots }}" as="d" hint-placeholder-count="5">
+<div style="height:6px;border-radius:4px;width:{{ d.w }};background:{{ d.bg }}"></div>
+</sc-for>
+</div>
+<button onClick="{{ nextStep }}" style="padding:12px 22px;border-radius:9px;background:{{ nextBg }};color:#fff;font-size:13.5px;font-weight:600;min-height:46px;display:flex;align-items:center;gap:8px" style-hover="filter:brightness(1.08)">
+<span style="display:{{ spinnerDisplay }};width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:ulxspin .7s linear infinite"></span>{{ nextLabel }}<span style="display:{{ chevDisplay }}">›</span></button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+<div style="animation:ulxin .3s ease both;max-width:1320px;margin:0 auto">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+<div>
+<button onClick="{{ backToQuote }}" style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:#64748B;font-weight:600" style-hover="color:#2563EB"><span>‹</span>{{ t.backToQuote }}</button>
+<div style="font-size:24px;font-weight:700;letter-spacing:-0.03em;margin-top:10px">{{ resultsTitle }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:5px"><span style="font-weight:600;color:#334155">{{ laneFull }}</span> · {{ f.date }}</div>
+</div>
+<div style="flex:none;border:1px solid #A7F3D0;border-radius:12px;background:#ECFDF5;padding:14px 18px;min-width:230px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#047857">{{ t.marketBenchmark }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:#047857;margin-top:6px;letter-spacing:-0.02em">{{ bench.median }}</div>
+<div style="font-size:11.5px;color:#059669;margin-top:4px">{{ bench.line }}</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:200px 1fr;gap:18px;margin-top:18px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:14px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8;margin-bottom:10px">{{ t.transportMode }}</div>
+<div style="display:flex;flex-direction:column;gap:3px">
+<sc-for list="{{ modeFilters }}" as="mf" hint-placeholder-count="5">
+<button onClick="{{ mf.onPick }}" style="width:100%;text-align:left;padding:9px 11px;border-radius:8px;background:{{ mf.bg }};display:flex;align-items:center;gap:9px;min-height:40px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:2px 5px;border-radius:4px;background:{{ mf.chipBg }};color:{{ mf.chipFg }};flex:none;min-width:30px;text-align:center">{{ mf.code }}</span>
+<span style="flex:1;font-size:12.5px;font-weight:600;color:{{ mf.fg }}">{{ mf.label }}</span>
+<span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#94A3B8">{{ mf.count }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:14px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8;margin-bottom:10px">{{ t.sortBy }}</div>
+<div style="display:flex;flex-direction:column;gap:3px">
+<sc-for list="{{ sortOpts }}" as="so" hint-placeholder-count="3">
+<button onClick="{{ so.onPick }}" style="width:100%;text-align:left;padding:9px 11px;border-radius:8px;background:{{ so.bg }};display:flex;align-items:center;gap:9px;min-height:40px">
+<span style="width:7px;height:7px;border-radius:50%;background:{{ so.dot }};flex:none"></span>
+<span style="font-size:12.5px;font-weight:600;color:{{ so.fg }}">{{ so.label }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ guest }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid #FDE68A;border-radius:13px;background:#FFFBEB;padding:15px">
+<div style="font-size:12.5px;font-weight:700;color:#92400E">🔒 {{ t.guestPanelTitle }}</div>
+<div style="font-size:11.5px;color:#A16207;line-height:1.55;margin-top:7px;text-wrap:pretty">{{ t.guestPanelBody }}</div>
+</div>
+</sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ quotes }}" as="q" hint-placeholder-count="6">
+<div style="background:#fff;border:{{ q.border }};border-radius:13px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:{{ q.ribbonDisplay }};padding:5px 14px;background:#F5A623;color:#3B2600;font-size:10.5px;font-weight:700;letter-spacing:0.04em;border-radius:0 0 8px 0;width:fit-content">★ {{ t.bestValue }}</div>
+<div style="padding:16px 18px;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap">
+<div style="flex:none;width:46px;height:46px;border-radius:9px;background:{{ q.logoBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;letter-spacing:0.02em">{{ q.initials }}</div>
+<div style="flex:1;min-width:150px">
+<div style="display:flex;align-items:center;gap:9px">
+<div style="font-size:15px;font-weight:700">{{ q.name }}</div>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:3px 6px;border-radius:5px;background:{{ q.modeBg }};color:{{ q.modeFg }}">{{ q.mode }}</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:5px">
+<div style="font-size:11.5px;color:#F5A623;letter-spacing:0.06em">{{ q.stars }}</div>
+<div style="font-size:12px;font-weight:600;color:#475569">{{ q.rating }}</div>
+</div>
+<div style="font-size:11.5px;color:#94A3B8;margin-top:4px">{{ q.evidence }}</div>
+</div>
+<div style="flex:none;text-align:right">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:23px;font-weight:600;letter-spacing:-0.03em;color:{{ q.priceFg }}">{{ q.price }}</div>
+<div style="font-size:11px;color:#94A3B8;margin-top:1px">{{ t.allInTotal }}</div>
+<div style="font-size:11.5px;color:{{ q.vsFg }};margin-top:4px;font-weight:600">{{ q.vsMarket }}</div>
+</div>
+</div>
+<div style="padding:13px 18px;border-top:1px solid #F1F5F9;display:flex;align-items:center;gap:18px;background:#FCFDFE;flex-wrap:wrap;white-space:nowrap">
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#94A3B8">{{ t.baseRate }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-top:3px">{{ q.base }}</div></div>
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#94A3B8">{{ t.fuelSurcharge }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-top:3px">{{ q.fuel }}</div></div>
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#94A3B8">{{ t.insurance }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-top:3px">{{ q.ins }}</div></div>
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#94A3B8">{{ t.transit }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-top:3px">{{ q.transit }}</div></div>
+<div style="flex:1"></div>
+<button onClick="{{ q.onBook }}" style="flex:none;padding:11px 20px;border-radius:9px;background:{{ q.btnBg }};color:#fff;font-size:13px;font-weight:600;min-height:44px;display:flex;align-items:center;gap:8px" style-hover="filter:brightness(1.08)">{{ bookLabel }}<span>›</span></button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{ noQuotes }}" hint-placeholder-val="{{ false }}">
+<div style="background:#fff;border:1px dashed #CBD5E1;border-radius:13px;padding:34px;text-align:center">
+<div style="font-size:24px;line-height:1">🔍</div>
+<div style="font-size:15px;font-weight:700;margin-top:12px">{{ t.noQuotesTitle }}</div>
+<div style="font-size:13px;color:#64748B;margin-top:7px;line-height:1.55;max-width:420px;margin-left:auto;margin-right:auto;text-wrap:pretty">{{ t.noQuotesBody }}</div>
+<button onClick="{{ resetFilter }}" style="margin-top:16px;padding:11px 18px;border-radius:9px;background:#2563EB;color:#fff;font-size:13px;font-weight:600;min-height:44px" style-hover="background:#1D4ED8">{{ t.showAllModes }}</button>
+</div>
+</sc-if>
+<div style="font-size:12px;color:#94A3B8;line-height:1.55;padding:2px 4px;text-wrap:pretty">{{ t.seedNote }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
+<div style="animation:ulxin .3s ease both;max-width:1080px">
+<button onClick="{{ backToResults }}" style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:#64748B;font-weight:600" style-hover="color:#2563EB"><span>‹</span>{{ t.backToResults }}</button>
+<div style="font-size:25px;font-weight:700;letter-spacing:-0.03em;margin-top:10px">{{ t.confirmBooking }}</div>
+<div style="font-size:13.5px;color:#64748B;margin-top:5px">{{ t.confirmSub }}</div>
+
+<div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:20px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;margin-bottom:18px">👤 {{ t.contactDetails }}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#64748B;margin-bottom:7px">{{ t.contactName }}</div><input value="{{ b.contact }}" onChange="{{ onContact }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#64748B;margin-bottom:7px">{{ t.companyName }}</div><input value="{{ b.company }}" onChange="{{ onCompanyB }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+</div>
+<div style="margin-top:16px"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#64748B;margin-bottom:7px">{{ t.emailAddress }}</div><input value="{{ b.email }}" onChange="{{ onEmailB }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#64748B;margin-bottom:7px">{{ t.phoneNumber }}</div><input value="{{ b.phone }}" onChange="{{ onPhoneB }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+<div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#64748B;margin-bottom:7px">{{ t.taxId }}</div><input value="{{ b.tax }}" onChange="{{ onTax }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;min-height:46px;background:#F8FAFC"></div>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:20px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;margin-bottom:16px">📄 {{ t.specialInstructions }}</div>
+<textarea value="{{ b.notes }}" onChange="{{ onNotes }}" rows="4" placeholder="{{ t.specialPh }}" style="width:100%;padding:12px 13px;border:1px solid #CBD5E1;border-radius:9px;font-size:14px;resize:vertical;background:#F8FAFC"></textarea>
+</div>
+</div>
+
+<div style="border:1.5px solid #F5A623;border-radius:13px;background:#fff;padding:18px;position:sticky;top:74px">
+<div style="display:inline-flex;padding:4px 10px;border-radius:20px;background:#FEF3C7;color:#92400E;font-size:10.5px;font-weight:700;letter-spacing:0.04em">⭐ {{ t.bestValueSelection }}</div>
+<div style="display:flex;align-items:center;gap:12px;margin-top:16px">
+<div style="width:42px;height:42px;border-radius:9px;background:{{ sel.logoBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none">{{ sel.initials }}</div>
+<div style="min-width:0"><div style="font-size:14px;font-weight:700">{{ sel.name }}</div><div style="display:flex;align-items:center;gap:7px;margin-top:3px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:2px 5px;border-radius:4px;background:{{ sel.modeBg }};color:{{ sel.modeFg }}">{{ sel.mode }}</span><span style="font-size:11.5px;color:#94A3B8">{{ sel.transit }}</span></div></div>
+</div>
+<div style="margin-top:18px;display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ sel.breakdown }}" as="bd" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px"><span style="color:#64748B">{{ bd.label }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600">{{ bd.value }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:15px;padding-top:15px;border-top:1px solid #E2E8F0">
+<span style="font-size:14px;font-weight:700">{{ t.total }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:23px;font-weight:600;color:#F5A623;letter-spacing:-0.02em">{{ sel.total }}</span>
+</div>
+<button onClick="{{ confirmBooking }}" style="width:100%;margin-top:16px;padding:14px;border-radius:9px;background:#16233F;color:#fff;font-size:14.5px;font-weight:700;min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px" style-hover="background:#1E2E52">✓ {{ t.confirmBooking }}</button>
+<div style="font-size:11px;color:#94A3B8;line-height:1.5;margin-top:11px;text-align:center;text-wrap:pretty">{{ t.bookingFinePrint }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isConfirmed }}" hint-placeholder-val="{{ false }}">
+<div style="animation:ulxin .3s ease both;max-width:620px;margin:24px auto 0">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:32px;box-shadow:0 1px 3px rgba(15,23,42,.05)">
+<div style="width:54px;height:54px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">✓</div>
+<div style="font-size:24px;font-weight:700;margin-top:20px;letter-spacing:-0.03em">{{ t.bookedTitle }}</div>
+<div style="font-size:14px;color:#64748B;margin-top:8px;line-height:1.6;text-wrap:pretty">{{ t.bookedSub }}</div>
+<div style="margin-top:22px;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden">
+<div style="padding:15px 17px;background:#F8FAFC;border-bottom:1px solid #E2E8F0">
+<div style="font-size:11.5px;color:#64748B">{{ t.bookingRef }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;letter-spacing:0.04em;margin-top:4px">{{ newRef }}</div>
+</div>
+<div style="padding:16px 17px;display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ bookedRows }}" as="r" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px"><span style="color:#64748B">{{ r.label }}</span><span style="font-weight:600;text-align:right">{{ r.value }}</span></div>
+</sc-for>
+</div>
+</div>
+<div style="margin-top:16px;padding:14px 16px;border-radius:11px;background:#F8FAFC;font-size:12.5px;color:#64748B;line-height:1.6;text-wrap:pretty">{{ t.settleNote }}</div>
+<div style="display:flex;gap:12px;margin-top:22px">
+<button onClick="{{ navDash }}" style="padding:13px 20px;border-radius:9px;border:1px solid #CBD5E1;background:#fff;font-size:14px;font-weight:600;color:#475569;min-height:48px">{{ t.backToDash }}</button>
+<button onClick="{{ navCabinet }}" style="flex:1;padding:13px;border-radius:9px;background:#2563EB;color:#fff;font-size:14px;font-weight:600;min-height:48px" style-hover="background:#1D4ED8">{{ t.openCabinet }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCabinet }}" hint-placeholder-val="{{ false }}">
+<div style="animation:ulxin .3s ease both;max-width:1320px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+<div>
+<div style="font-size:24px;font-weight:700;letter-spacing:-0.03em">{{ t.myCabinet }}</div>
+<div style="font-size:13.5px;color:#64748B;margin-top:5px">{{ t.myCabinetSub }}</div>
+</div>
+<button onClick="{{ exportActive }}" style="padding:11px 17px;border-radius:9px;background:#EFF6FF;color:#2563EB;font-size:13px;font-weight:600;min-height:44px" style-hover="background:#DBEAFE">↓ {{ t.exportCsv }}</button>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:17px"><div style="font-size:12.5px;color:#64748B">{{ t.totalSpend }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;margin-top:6px;letter-spacing:-0.03em">$11,853</div><div style="font-size:11.5px;color:#94A3B8;margin-top:3px">{{ t.totalSpendSub }}</div></div>
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:17px"><div style="font-size:12.5px;color:#64748B">{{ t.savedTotal }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;margin-top:6px;color:#059669;letter-spacing:-0.03em">$2,140</div><div style="font-size:11.5px;color:#94A3B8;margin-top:3px">{{ t.savedTotalSub }}</div></div>
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:17px"><div style="font-size:12.5px;color:#64748B">{{ t.quotesRun }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;margin-top:6px;letter-spacing:-0.03em">14</div><div style="font-size:11.5px;color:#94A3B8;margin-top:3px">{{ t.quotesRunSub }}</div></div>
+</div>
+
+<div style="display:flex;gap:4px;padding:4px;background:#E2E8F0;border-radius:10px;margin-top:18px;width:fit-content;max-width:100%;flex-wrap:wrap">
+<sc-for list="{{ cabTabs }}" as="tb" hint-placeholder-count="3">
+<button onClick="{{ tb.onPick }}" style="padding:9px 18px;border-radius:7px;font-size:13px;font-weight:600;background:{{ tb.bg }};color:{{ tb.fg }};min-height:40px">{{ tb.label }}</button>
+</sc-for>
+</div>
+
+<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;overflow:hidden;margin-top:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+<div style="display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E8F0;background:#F8FAFC;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;color:#94A3B8">
+<div style="flex:0 0 132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thQuoteId }}</div><div style="flex:1.4;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thRoute }}</div><div style="flex:0 0 52px">{{ t.thMode }}</div><div style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thCarrier }}</div><div style="flex:0 0 96px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.thStatus }}</div><div style="flex:0 0 76px;text-align:right;white-space:nowrap">{{ t.thAmount }}</div><div style="flex:0 0 70px"></div>
+</div>
+<sc-for list="{{ cabRows }}" as="r" hint-placeholder-count="6">
+<div style="display:flex;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid #F1F5F9">
+<div style="flex:0 0 132px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#475569;white-space:nowrap">{{ r.id }}</div>
+<div style="flex:1.4;min-width:0"><div style="font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.from }}</div><div style="font-size:11px;color:#94A3B8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">→ {{ r.to }}</div></div>
+<div style="flex:0 0 52px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:3px 6px;border-radius:5px;background:{{ r.modeBg }};color:{{ r.modeFg }}">{{ r.mode }}</span></div>
+<div style="flex:1;min-width:0;font-size:12px;color:#475569;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.carrier }}</div>
+<div style="flex:0 0 96px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:{{ r.statusFg }};min-width:0"><span style="width:6px;height:6px;border-radius:50%;background:{{ r.statusFg }};flex:none"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.status }}</span></div>
+<div style="flex:0 0 76px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;white-space:nowrap">{{ r.amount }}</div>
+<div style="flex:0 0 70px;text-align:right"><button onClick="{{ r.onAction }}" style="font-size:11.5px;color:#2563EB;font-weight:600;white-space:nowrap">{{ r.actionLabel }}</button></div>
+</div>
+</sc-for>
+<div style="padding:15px 20px;font-size:12px;color:#94A3B8;line-height:1.55;max-width:840px;text-wrap:pretty">{{ t.csvNote }}</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:120;background:#16233F;color:#fff;padding:13px 20px;border-radius:10px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:11px;box-shadow:0 12px 30px rgba(15,23,42,.28);animation:ulxin .22s ease both">
+<span style="width:18px;height:18px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none">✓</span>{{ toast }}
+</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:940},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;uz&quot;,&quot;ru&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+const I = {
+  en: {
+    heroLine1:'Ship Smarter.', heroLine2:'Compare. Book. Track.', heroLine1b:'Not Harder.',
+    heroSub:'Compare freight rates from trusted logistics providers, book the best option in minutes, and manage every shipment from one intelligent platform.',
+    heroFeat:[
+      {icon:'⚡', title:'Compare Every Carrier in Seconds', sub:'Instantly compare live freight quotes from multiple logistics providers — all in one place.'},
+      {icon:'📊', title:'Know You’re Paying the Right Price', sub:'Benchmark every quote against market rates to avoid overpaying and hidden costs.'},
+      {icon:'📦', title:'Book & Manage Without the Paperwork', sub:'Book your shipment, track cargo, and access shipping documents from a single platform.'}
+    ],
+    trustLine:'Trusted by 1,200+ SMEs across Central Asia & CIS',
+    guestMode:'Free calculator · no account', freeNoSignup:'Free · no signup required', ctaPrimary:'Get Instant Quote', ctaSecondary:'How It Works',
+    landingTitle:'Price a shipment in 30 seconds', landingSub:'Start with the route and the date. No account, no card, no sales call.',
+    originLabel:'Origin', destLabel:'Destination', dateLabel:'Shipment date', popularLanes:'POPULAR LANES', swap:'Swap',
+    assurances:['No card required','Rates in ~30 seconds','6 carriers compared'],
+    landingNote:'Next: mode, cargo type and dimensions. A free account is needed only at the last step, to reveal the carrier rates.',
+    signIn:'Sign In', createAccount:'Create Account', businessEmail:'Business Email', password:'Password', phone:'Phone', companyLabel:'Company name',
+    forgotPassword:'Forgot password?', signInCta:'Sign In to Dashboard', createCta:'Create Account & Book',
+    orCalc:'or skip the account', calcWithoutAccount:'Calculate freight without an account',
+    newHere:'New to U Logix?', createFree:'Create a free account', haveAccount:'Already have an account?', signInInstead:'Sign in instead',
+    termsPrefix:'By continuing, you agree to our', termsOfService:'Terms of Service', and:'and', privacyPolicy:'Privacy Policy',
+    oneStepLeft:'ONE STEP LEFT', gateTitle:'Create a free account to see your rates',
+    gateSub:'Your shipment is priced and ready. We ask for an account before showing carrier rates so your quotes are saved and bookable.',
+    gateBenefits:['See all 6 carrier rates with the full cost breakdown','Quotes saved and valid for 48 hours','Book in one click and track the shipment'],
+    keepComparing:'Back to the calculator', createAndSee:'Create account & see rates',
+    gateSummary:'YOUR SHIPMENT',
+    guestPanelTitle:'Comparing as a guest', guestPanelBody:'Rates, benchmarking and the breakdown are all free. You only need an account at the moment you book.',
+    navigation:'NAVIGATION', navDash:'Dashboard', navQuote:'New Quote', navCabinet:'My Cabinet', getQuote:'Get Quote',
+    crumbDash:'Dashboard', crumbQuote:'New Quote', crumbResults:'Quote Results', crumbBooking:'Confirm Booking', crumbConfirmed:'Booking Confirmed', crumbCabinet:'My Cabinet',
+    kpi1:'Active Shipments', kpi1sub:'1 in transit, 1 pending', kpi1pill:'+1 vs last week',
+    kpi2:'Quotes This Month', kpi2sub:'3 converted to bookings', kpi2pill:'+4 vs last month',
+    kpi3:'Saved This Month', kpi3sub:'vs. avg. market rate', kpi3pill:'↓ 14.2% avg cost',
+    kpi4:'Total Spend YTD', kpi4sub:'8 completed shipments', kpi4pill:'YTD',
+    recentShipments:'Recent Shipments', recentShipmentsSub:'Latest 5 of your quotes & bookings', viewAll:'View All',
+    thQuoteId:'QUOTE ID', thRoute:'ROUTE', thMode:'MODE', thStatus:'STATUS', thAmount:'AMOUNT', thCarrier:'CARRIER',
+    quickActions:'Quick Actions', qaQuote:'Get New Quote', qaQuoteSub:'Compare 6+ carriers instantly', qaCabinet:'My Cabinet', qaCabinetSub:'History, tracking & exports',
+    topCarriers:'Top Carriers Used', saveTip:'Save tip',
+    saveTipBody:'Shipping the same lane twice a month? FCL beats LTL on cost above 8 m³ — the wizard flags it for you at the mode step.',
+    stQuoted:'Quoted', stPending:'Pending', stBooked:'Booked', stTransit:'In Transit', stDelivered:'Delivered', stExpired:'Expired',
+    quoteTitle:'Freight Rate Calculator', quoteSub:'Answer five short steps and we price your shipment across every carrier on the lane.',
+    stepRoute:'Route', stepMode:'Transport Mode', stepCargo:'Cargo Type', stepDetails:'Details', stepReview:'Review',
+    s1Title:'Where is your cargo going?', origin:'ORIGIN', destination:'DESTINATION', shipDate:'ESTIMATED SHIP DATE',
+    laneDistance:'LANE DISTANCE', coverage:'6 carriers cover this lane',
+    s2Title:'How do you want to ship?', s2Sub:'Select the transport mode that fits your timeline and budget.',
+    s3Title:'What are you shipping?', s3Sub:'Pick the closest match — we set the freight class from it and your measured density.',
+    classNote:'Freight class is what carriers actually bill against. You never have to look it up: we derive it from your cargo type and the density we calculate in the next step.',
+    s4Title:'Cargo dimensions & weight', s4Sub:'Enter the total shipment measurements for accurate rate calculation.',
+    totalWeight:'TOTAL WEIGHT', pieces:'NUMBER OF PIECES', dims:'DIMENSIONS (PER PIECE, CM)', length:'Length', width:'Width', height:'Height',
+    calcMetrics:'CALCULATED METRICS', volume:'Volume', volWeight:'Vol. Weight', chargeable:'Chargeable', freightClass:'Freight Class',
+    cargoDesc:'CARGO DESCRIPTION (OPTIONAL)', cargoDescPh:'Brief description of goods, any special handling requirements…',
+    s5Title:'Review your shipment details',
+    lOrigin:'ORIGIN', lDest:'DESTINATION', lShipDate:'SHIP DATE', lMode:'TRANSPORT MODE', lCargo:'CARGO TYPE', lClass:'FREIGHT CLASS', lWeight:'WEIGHT', lDims:'DIMENSIONS',
+    readyTitle:'Ready to get quotes', readyBody:'We’ll query 6 carriers simultaneously. A free account is needed to see the rates and book — it takes one step.',
+    back:'Back', continue:'Continue', getCarrierQuotes:'Get Carrier Quotes', fetching:'Fetching rates from carriers…',
+    backToQuote:'Back to calculator', quotesFound:'Carrier Quotes Found', marketBenchmark:'MARKET BENCHMARK',
+    transportMode:'TRANSPORT MODE', allModes:'All Modes', airFreight:'Air Freight', ltlTrucking:'LTL Trucking', ftlTrucking:'FTL Trucking', fclOcean:'FCL Ocean',
+    noQuotesTitle:'No carrier covers that mode on this lane', noQuotesBody:'None of the six seeded carriers priced this shipment as the mode you picked. Switch back to all modes to see every option we found.', showAllModes:'Show all modes',
+    sortBy:'SORT BY', sortPrice:'Lowest Price', sortFast:'Fastest Transit', sortRated:'Highest Rated',
+    bestValue:'BEST VALUE · LOWEST ALL-IN COST', allInTotal:'all-in total', belowMarket:'below market', aboveMarket:'above market',
+    baseRate:'BASE RATE', fuelSurcharge:'FUEL SURCHARGE', insurance:'INSURANCE', transit:'TRANSIT', bookNow:'Book Now', bookSignUp:'Book — sign up',
+    seedNote:'Rates come from a seeded market dataset for this MVP, not a live carrier API. Every quote is indicative and valid for 48 hours.',
+    backToResults:'Back to results', confirmBooking:'Confirm Booking', confirmSub:'Review your selection and confirm contact details.',
+    contactDetails:'Contact Details', contactName:'CONTACT NAME', companyName:'COMPANY NAME', emailAddress:'EMAIL ADDRESS', phoneNumber:'PHONE NUMBER', taxId:'TAX / VAT ID',
+    specialInstructions:'Special Instructions', specialPh:'Any special handling, delivery instructions, or notes for the carrier…',
+    bestValueSelection:'YOUR SELECTION', trackingUpdates:'Tracking Updates', free:'Free', total:'Total',
+    bookingFinePrint:'By confirming, you agree to the carrier’s terms of service. You may cancel within 24 hours for a full refund.',
+    bookedTitle:'Booking confirmed.', bookedSub:'The carrier has your shipment. Track status and export the record from My Cabinet — no email chain needed.',
+    bookingRef:'BOOKING REFERENCE', backToDash:'Back to Dashboard', openCabinet:'Open My Cabinet',
+    settleNote:'Payment is arranged directly with the carrier against their invoice. In-app settlement is not part of this release.',
+    myCabinet:'My Cabinet', myCabinetSub:'Quote history, shipment tracking and cost exports.',
+    totalSpend:'Total Spend YTD', totalSpendSub:'8 completed shipments', savedTotal:'Saved vs Market', savedTotalSub:'14.2% average per booking', quotesRun:'Quote Requests', quotesRunSub:'this month',
+    tabAll:'All Records', tabShipments:'Shipments', tabQuotes:'Quotes', exportCsv:'Export CSV',
+    csvNote:'CSV export includes quote ID, route, mode, carrier, transit, all-in cost, market benchmark and saving for every row — the format your accountant asks for.',
+    requote:'Re-quote', track:'Track',
+    toastBooked:'Booking confirmed — shipment created', toastCsv:'CSV downloaded', toastRequote:'Request refilled from history', toastWelcome:'Account created — finishing your booking',
+    days:'days', reviews:'reviews', onTime:'on-time'
+  },
+  uz: {
+    heroLine1:'Aqlli yuboring.', heroLine2:'Solishtir. Bron qil. Kuzat.', heroLine1b:'Qiyin emas.',
+    heroSub:'Ishonchli logistika provayderlaridan narxlarni solishtiring, eng yaxshi variantni bir necha daqiqada bron qiling va barcha yuklarni bitta platformadan boshqaring.',
+    heroFeat:[
+      {icon:'⚡', title:'Har bir tashuvchini soniyalarda solishtiring', sub:'Bir nechta logistika provayderining jonli narxlarini bir joyda darhol solishtiring.'},
+      {icon:'📊', title:'To‘g‘ri narx to‘layotganingizni biling', sub:'Har bir narxni bozor tariflariga taqqoslab, ortiqcha va yashirin xarajatlardan qutuling.'},
+      {icon:'📦', title:'Qog‘ozbozliksiz bron va boshqaruv', sub:'Yukni bron qiling, kuzatib boring va hujjatlarga bitta platformadan kiring.'}
+    ],
+    trustLine:'Markaziy Osiyo va MDHda 1,200+ SME bizga ishonadi',
+    guestMode:'Bepul kalkulyator · akkauntsiz', freeNoSignup:'Bepul · ro‘yxatdan o‘tish shart emas', ctaPrimary:'Darhol narx olish', ctaSecondary:'Qanday ishlaydi',
+    landingTitle:'Yuk narxini 30 soniyada bilib oling', landingSub:'Yo‘nalish va sanadan boshlang. Akkaunt, karta va qo‘ng‘iroq kerak emas.',
+    originLabel:'Jo‘natish joyi', destLabel:'Yetkazish joyi', dateLabel:'Jo‘natish sanasi', popularLanes:'MASHHUR YO‘NALISHLAR', swap:'O‘rin almashtirish',
+    assurances:['Karta kerak emas','~30 soniyada narx','6 tashuvchi solishtiriladi'],
+    landingNote:'Keyin: tashuv usuli, yuk turi va o‘lchamlar. Bepul akkaunt faqat oxirgi qadamda — narxlarni ochish uchun kerak.',
+    signIn:'Kirish', createAccount:'Akkaunt yaratish', businessEmail:'Biznes email', password:'Parol', phone:'Telefon', companyLabel:'Kompaniya nomi',
+    forgotPassword:'Parolni unutdingizmi?', signInCta:'Panelga kirish', createCta:'Akkaunt yaratib bron qilish',
+    orCalc:'yoki akkauntsiz davom eting', calcWithoutAccount:'Akkauntsiz narx hisoblash',
+    newHere:'U Logix’da yangimisiz?', createFree:'Bepul akkaunt yaratish', haveAccount:'Akkauntingiz bormi?', signInInstead:'Kirish',
+    termsPrefix:'Davom etish orqali siz', termsOfService:'Xizmat shartlari', and:'va', privacyPolicy:'Maxfiylik siyosati',
+    oneStepLeft:'BIR QADAM QOLDI', gateTitle:'Narxlarni ko‘rish uchun bepul akkaunt yarating',
+    gateSub:'Yukingiz hisoblandi va tayyor. Narxlaringiz saqlanib, bron qilinadigan bo‘lishi uchun tashuvchi narxlarini ko‘rsatishdan oldin akkaunt so‘raymiz.',
+    gateBenefits:['6 tashuvchi narxini to‘liq tarkibi bilan ko‘rasiz','Narxlar saqlanadi va 48 soat amal qiladi','Bir bosishda bron qilib, yukni kuzatasiz'],
+    keepComparing:'Kalkulyatorga qaytish', createAndSee:'Akkaunt yaratib narxlarni ko‘rish',
+    gateSummary:'SIZNING YUKINGIZ',
+    guestPanelTitle:'Mehmon sifatida solishtirmoqdasiz', guestPanelBody:'Narxlar, benchmark va tarkib — hammasi bepul. Akkaunt faqat bron qilish paytida kerak bo‘ladi.',
+    navigation:'MENYU', navDash:'Boshqaruv paneli', navQuote:'Yangi so‘rov', navCabinet:'Mening kabinetim', getQuote:'Narx olish',
+    crumbDash:'Boshqaruv paneli', crumbQuote:'Yangi so‘rov', crumbResults:'Narx natijalari', crumbBooking:'Bronni tasdiqlash', crumbConfirmed:'Bron tasdiqlandi', crumbCabinet:'Mening kabinetim',
+    kpi1:'Faol yuklar', kpi1sub:'1 yo‘lda, 1 kutilmoqda', kpi1pill:'+1 o‘tgan haftaga',
+    kpi2:'Shu oydagi so‘rovlar', kpi2sub:'3 tasi bronga aylandi', kpi2pill:'+4 o‘tgan oyga',
+    kpi3:'Shu oyda tejaldi', kpi3sub:'o‘rtacha bozor narxiga nisbatan', kpi3pill:'↓ 14.2% xarajat',
+    kpi4:'Yil boshidan xarajat', kpi4sub:'8 ta yakunlangan yuk', kpi4pill:'YTD',
+    recentShipments:'So‘nggi yuklar', recentShipmentsSub:'So‘rov va bronlaringizdan oxirgi 5 tasi', viewAll:'Barchasi',
+    thQuoteId:'SO‘ROV ID', thRoute:'YO‘NALISH', thMode:'USUL', thStatus:'HOLAT', thAmount:'SUMMA', thCarrier:'TASHUVCHI',
+    quickActions:'Tezkor amallar', qaQuote:'Yangi narx olish', qaQuoteSub:'6+ tashuvchini bir zumda solishtir', qaCabinet:'Mening kabinetim', qaCabinetSub:'Tarix, kuzatish va eksport',
+    topCarriers:'Eng ko‘p ishlatilgan tashuvchilar', saveTip:'Tejash maslahati',
+    saveTipBody:'Bir yo‘nalishga oyda ikki marta jo‘natasizmi? 8 m³ dan yuqorida FCL narxda LTL dan arzon — wizard buni usul bosqichida belgilaydi.',
+    stQuoted:'Narx bor', stPending:'Kutilmoqda', stBooked:'Bron', stTransit:'Yo‘lda', stDelivered:'Yetkazildi', stExpired:'Eskirgan',
+    quoteTitle:'Yuk narxi kalkulyatori', quoteSub:'Besh qisqa bosqichga javob bering — yo‘nalishdagi barcha tashuvchilar narxini hisoblab beramiz.',
+    stepRoute:'Yo‘nalish', stepMode:'Tashuv usuli', stepCargo:'Yuk turi', stepDetails:'Tafsilotlar', stepReview:'Tekshirish',
+    s1Title:'Yuk qayerga boradi?', origin:'JO‘NATISH JOYI', destination:'YETKAZISH JOYI', shipDate:'TAXMINIY JO‘NATISH SANASI',
+    laneDistance:'MASOFA', coverage:'6 tashuvchi bu yo‘nalishda ishlaydi',
+    s2Title:'Qanday jo‘natmoqchisiz?', s2Sub:'Muddat va budjetingizga mos tashuv usulini tanlang.',
+    s3Title:'Nima jo‘natasiz?', s3Sub:'Eng yaqin variantni tanlang — freight class’ni shundan va o‘lchangan zichlikdan chiqaramiz.',
+    classNote:'Freight class — tashuvchilar aslida shu bo‘yicha hisob-kitob qiladi. Uni izlab yurishingiz shart emas: yuk turi va keyingi bosqichdagi zichlikdan o‘zimiz aniqlaymiz.',
+    s4Title:'Yuk o‘lchamlari va og‘irligi', s4Sub:'Aniq narx uchun yukning umumiy o‘lchamlarini kiriting.',
+    totalWeight:'UMUMIY OG‘IRLIK', pieces:'JOYLAR SONI', dims:'O‘LCHAMLAR (BIR JOY, SM)', length:'Uzunlik', width:'Kenglik', height:'Balandlik',
+    calcMetrics:'HISOBLANGAN KO‘RSATKICHLAR', volume:'Hajm', volWeight:'Hajm og‘irligi', chargeable:'Hisob og‘irligi', freightClass:'Freight class',
+    cargoDesc:'YUK TAVSIFI (MAJBURIY EMAS)', cargoDescPh:'Mahsulot haqida qisqa ma’lumot, maxsus talablar…',
+    s5Title:'Yuk ma’lumotlarini tekshiring',
+    lOrigin:'JO‘NATISH', lDest:'YETKAZISH', lShipDate:'JO‘NATISH SANASI', lMode:'TASHUV USULI', lCargo:'YUK TURI', lClass:'FREIGHT CLASS', lWeight:'OG‘IRLIK', lDims:'O‘LCHAMLAR',
+    readyTitle:'Narx olishga tayyor', readyBody:'6 tashuvchiga bir vaqtda so‘rov yuboramiz. Narxlarni ko‘rish va bron qilish uchun bepul akkaunt kerak — bitta qadam.',
+    back:'Orqaga', continue:'Davom etish', getCarrierQuotes:'Tashuvchi narxlarini olish', fetching:'Tashuvchilardan narx olinmoqda…',
+    backToQuote:'Kalkulyatorga qaytish', quotesFound:'Tashuvchi narxi topildi', marketBenchmark:'BOZOR BENCHMARKI',
+    transportMode:'TASHUV USULI', allModes:'Barcha usullar', airFreight:'Havo yo‘li', ltlTrucking:'LTL yuk mashinasi', ftlTrucking:'FTL yuk mashinasi', fclOcean:'FCL dengiz',
+    noQuotesTitle:'Bu yo‘nalishda shu usulda tashuvchi yo‘q', noQuotesBody:'Oltita tashuvchidan hech biri bu yukni siz tanlagan usulda narxlamadi. Barcha variantlarni ko‘rish uchun «barcha usullar»ga qayting.', showAllModes:'Barcha usullarni ko‘rish',
+    sortBy:'TARTIBLASH', sortPrice:'Eng arzon narx', sortFast:'Eng tez muddat', sortRated:'Eng yuqori reyting',
+    bestValue:'ENG YAXSHI · ENG ARZON ALL-IN', allInTotal:'all-in jami', belowMarket:'bozordan past', aboveMarket:'bozordan yuqori',
+    baseRate:'ASOSIY TARIF', fuelSurcharge:'YOQILG‘I QO‘SHIMCHASI', insurance:'SUG‘URTA', transit:'MUDDAT', bookNow:'Bron qilish', bookSignUp:'Bron — ro‘yxatdan o‘tish',
+    seedNote:'Bu MVP’da narxlar jonli carrier API emas, seeded bozor ma’lumotlaridan olinadi. Har bir narx indikativ va 48 soat amal qiladi.',
+    backToResults:'Natijalarga qaytish', confirmBooking:'Bronni tasdiqlash', confirmSub:'Tanlovingizni va aloqa ma’lumotlarini tekshiring.',
+    contactDetails:'Aloqa ma’lumotlari', contactName:'ALOQA SHAXSI', companyName:'KOMPANIYA NOMI', emailAddress:'EMAIL MANZIL', phoneNumber:'TELEFON RAQAM', taxId:'STIR / QQS ID',
+    specialInstructions:'Maxsus ko‘rsatmalar', specialPh:'Maxsus ishlov, yetkazish shartlari yoki tashuvchi uchun izoh…',
+    bestValueSelection:'SIZNING TANLOVINGIZ', trackingUpdates:'Kuzatuv xabarlari', free:'Bepul', total:'Jami',
+    bookingFinePrint:'Tasdiqlash bilan tashuvchi xizmat shartlariga rozilik bildirasiz. 24 soat ichida to‘liq qaytarish bilan bekor qilish mumkin.',
+    bookedTitle:'Bron tasdiqlandi.', bookedSub:'Tashuvchi yukingizni oldi. Holatni kuzating va yozuvni «Mening kabinetim»dan eksport qiling.',
+    bookingRef:'BRON RAQAMI', backToDash:'Panelga qaytish', openCabinet:'Kabinetni ochish',
+    settleNote:'To‘lov tashuvchi bilan to‘g‘ridan-to‘g‘ri, uning hisob-fakturasi asosida. Ilova ichida to‘lov bu versiyaga kirmaydi.',
+    myCabinet:'Mening kabinetim', myCabinetSub:'Narx tarixi, yuk kuzatuvi va xarajat eksporti.',
+    totalSpend:'Yil boshidan xarajat', totalSpendSub:'8 ta yakunlangan yuk', savedTotal:'Bozorga nisbatan tejov', savedTotalSub:'har bronda o‘rtacha 14.2%', quotesRun:'Narx so‘rovlari', quotesRunSub:'shu oyda',
+    tabAll:'Barcha yozuvlar', tabShipments:'Yuklar', tabQuotes:'Narxlar', exportCsv:'CSV yuklab olish',
+    csvNote:'CSV faylda har bir satr uchun so‘rov ID, yo‘nalish, usul, tashuvchi, muddat, all-in narx, bozor benchmarki va tejov bo‘ladi.',
+    requote:'Qayta so‘rash', track:'Kuzatish',
+    toastBooked:'Bron tasdiqlandi — yuk yaratildi', toastCsv:'CSV yuklab olindi', toastRequote:'So‘rov tarixdan to‘ldirildi', toastWelcome:'Akkaunt yaratildi — bron yakunlanmoqda',
+    days:'kun', reviews:'sharh', onTime:'o‘z vaqtida'
+  },
+  ru: {
+    heroLine1:'Возите умнее.', heroLine2:'Сравни. Забронируй. Отследи.', heroLine1b:'Не сложнее.',
+    heroSub:'Сравнивайте ставки проверенных логистических провайдеров, бронируйте лучший вариант за минуты и ведите все отправки на одной умной платформе.',
+    heroFeat:[
+      {icon:'⚡', title:'Сравните всех перевозчиков за секунды', sub:'Мгновенно сравнивайте актуальные ставки нескольких логистических провайдеров в одном месте.'},
+      {icon:'📊', title:'Знайте, что платите правильную цену', sub:'Сверяйте каждую ставку с рынком, чтобы не переплачивать и избежать скрытых расходов.'},
+      {icon:'📦', title:'Бронируйте и ведите отправки без бумаг', sub:'Бронируйте, отслеживайте груз и открывайте документы на одной платформе.'}
+    ],
+    trustLine:'Нам доверяют 1 200+ SME в Центральной Азии и СНГ',
+    guestMode:'Бесплатный расчёт · без аккаунта', freeNoSignup:'Бесплатно · без регистрации', ctaPrimary:'Получить ставку сейчас', ctaSecondary:'Как это работает',
+    landingTitle:'Посчитайте отправку за 30 секунд', landingSub:'Начните с маршрута и даты. Без аккаунта, карты и звонка менеджера.',
+    originLabel:'Отправление', destLabel:'Назначение', dateLabel:'Дата отправки', popularLanes:'ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ', swap:'Поменять',
+    assurances:['Без карты','Ставки за ~30 секунд','6 перевозчиков'],
+    landingNote:'Далее: способ, тип груза и габариты. Бесплатный аккаунт нужен только на последнем шаге — чтобы открыть ставки.',
+    signIn:'Войти', createAccount:'Создать аккаунт', businessEmail:'Рабочий email', password:'Пароль', phone:'Телефон', companyLabel:'Название компании',
+    forgotPassword:'Забыли пароль?', signInCta:'Войти в панель', createCta:'Создать аккаунт и забронировать',
+    orCalc:'или без аккаунта', calcWithoutAccount:'Посчитать фрахт без аккаунта',
+    newHere:'Впервые в U Logix?', createFree:'Создать бесплатный аккаунт', haveAccount:'Уже есть аккаунт?', signInInstead:'Войти',
+    termsPrefix:'Продолжая, вы соглашаетесь с', termsOfService:'Условиями сервиса', and:'и', privacyPolicy:'Политикой конфиденциальности',
+    oneStepLeft:'ОСТАЛСЯ ОДИН ШАГ', gateTitle:'Создайте бесплатный аккаунт, чтобы увидеть ставки',
+    gateSub:'Отправка посчитана. Мы просим аккаунт перед показом ставок перевозчиков, чтобы ваши ставки сохранились и были готовы к бронированию.',
+    gateBenefits:['Все 6 ставок перевозчиков с полным составом стоимости','Ставки сохраняются и действуют 48 часов','Бронирование в один клик и трекинг отправки'],
+    keepComparing:'Назад к калькулятору', createAndSee:'Создать аккаунт и увидеть ставки',
+    gateSummary:'ВАША ОТПРАВКА',
+    guestPanelTitle:'Вы сравниваете как гость', guestPanelBody:'Ставки, бенчмарк и состав стоимости — бесплатно. Аккаунт нужен только в момент бронирования.',
+    navigation:'НАВИГАЦИЯ', navDash:'Панель', navQuote:'Новый запрос', navCabinet:'Мой кабинет', getQuote:'Получить ставку',
+    crumbDash:'Панель', crumbQuote:'Новый запрос', crumbResults:'Результаты ставок', crumbBooking:'Подтверждение брони', crumbConfirmed:'Бронь подтверждена', crumbCabinet:'Мой кабинет',
+    kpi1:'Активные отправки', kpi1sub:'1 в пути, 1 в ожидании', kpi1pill:'+1 к прошлой неделе',
+    kpi2:'Запросов за месяц', kpi2sub:'3 стали бронированиями', kpi2pill:'+4 к прошлому месяцу',
+    kpi3:'Сэкономлено за месяц', kpi3sub:'к средней рыночной ставке', kpi3pill:'↓ 14.2% расходов',
+    kpi4:'Расходы с начала года', kpi4sub:'8 завершённых отправок', kpi4pill:'YTD',
+    recentShipments:'Последние отправки', recentShipmentsSub:'Последние 5 из ваших ставок и броней', viewAll:'Все',
+    thQuoteId:'ID ЗАПРОСА', thRoute:'НАПРАВЛЕНИЕ', thMode:'СПОСОБ', thStatus:'СТАТУС', thAmount:'СУММА', thCarrier:'ПЕРЕВОЗЧИК',
+    quickActions:'Быстрые действия', qaQuote:'Получить ставку', qaQuoteSub:'Сравните 6+ перевозчиков сразу', qaCabinet:'Мой кабинет', qaCabinetSub:'История, трекинг и экспорт',
+    topCarriers:'Частые перевозчики', saveTip:'Совет по экономии',
+    saveTipBody:'Отправляете одно направление дважды в месяц? Выше 8 м³ FCL дешевле LTL — мастер отметит это на шаге способа.',
+    stQuoted:'Ставка', stPending:'В ожидании', stBooked:'Бронь', stTransit:'В пути', stDelivered:'Доставлено', stExpired:'Истекла',
+    quoteTitle:'Калькулятор ставок', quoteSub:'Пять коротких шагов — и мы посчитаем отправку у всех перевозчиков направления.',
+    stepRoute:'Маршрут', stepMode:'Способ', stepCargo:'Тип груза', stepDetails:'Детали', stepReview:'Проверка',
+    s1Title:'Куда едет ваш груз?', origin:'ОТПРАВЛЕНИЕ', destination:'НАЗНАЧЕНИЕ', shipDate:'ПРЕДПОЛАГАЕМАЯ ДАТА ОТПРАВКИ',
+    laneDistance:'РАССТОЯНИЕ', coverage:'6 перевозчиков на направлении',
+    s2Title:'Каким способом отправляем?', s2Sub:'Выберите способ, подходящий по срокам и бюджету.',
+    s3Title:'Что вы отправляете?', s3Sub:'Выберите ближайшее — класс груза определим из него и измеренной плотности.',
+    classNote:'Класс груза — то, по чему перевозчики реально считают. Искать его не нужно: мы выводим его из типа груза и плотности на следующем шаге.',
+    s4Title:'Габариты и вес груза', s4Sub:'Укажите общие размеры отправки для точного расчёта ставки.',
+    totalWeight:'ОБЩИЙ ВЕС', pieces:'КОЛИЧЕСТВО МЕСТ', dims:'РАЗМЕРЫ (ЗА МЕСТО, СМ)', length:'Длина', width:'Ширина', height:'Высота',
+    calcMetrics:'РАСЧЁТНЫЕ ПОКАЗАТЕЛИ', volume:'Объём', volWeight:'Объёмный вес', chargeable:'Оплачиваемый', freightClass:'Класс груза',
+    cargoDesc:'ОПИСАНИЕ ГРУЗА (НЕОБЯЗАТЕЛЬНО)', cargoDescPh:'Краткое описание товара, особые требования к обработке…',
+    s5Title:'Проверьте детали отправки',
+    lOrigin:'ОТПРАВЛЕНИЕ', lDest:'НАЗНАЧЕНИЕ', lShipDate:'ДАТА ОТПРАВКИ', lMode:'СПОСОБ', lCargo:'ТИП ГРУЗА', lClass:'КЛАСС ГРУЗА', lWeight:'ВЕС', lDims:'РАЗМЕРЫ',
+    readyTitle:'Готово к запросу ставок', readyBody:'Запросим 6 перевозчиков одновременно. Чтобы увидеть ставки и забронировать, нужен бесплатный аккаунт — это один шаг.',
+    back:'Назад', continue:'Продолжить', getCarrierQuotes:'Получить ставки', fetching:'Получаем ставки у перевозчиков…',
+    backToQuote:'Назад к калькулятору', quotesFound:'ставок перевозчиков найдено', marketBenchmark:'БЕНЧМАРК РЫНКА',
+    transportMode:'СПОСОБ', allModes:'Все способы', airFreight:'Авиа', ltlTrucking:'LTL авто', ftlTrucking:'FTL авто', fclOcean:'FCL море',
+    noQuotesTitle:'Ни один перевозчик не даёт этот способ', noQuotesBody:'Никто из шести перевозчиков не посчитал отправку выбранным способом. Вернитесь ко всем способам, чтобы увидеть все варианты.', showAllModes:'Показать все способы',
+    sortBy:'СОРТИРОВКА', sortPrice:'Ниже цена', sortFast:'Быстрее срок', sortRated:'Выше рейтинг',
+    bestValue:'ЛУЧШИЙ ВАРИАНТ · МИНИМУМ ALL-IN', allInTotal:'итого all-in', belowMarket:'ниже рынка', aboveMarket:'выше рынка',
+    baseRate:'БАЗОВАЯ СТАВКА', fuelSurcharge:'ТОПЛИВНЫЙ СБОР', insurance:'СТРАХОВАНИЕ', transit:'СРОК', bookNow:'Забронировать', bookSignUp:'Бронь — регистрация',
+    seedNote:'Ставки берутся из тестового набора рыночных данных, а не через живой API. Каждая ставка индикативна и действует 48 часов.',
+    backToResults:'Назад к результатам', confirmBooking:'Подтвердить бронь', confirmSub:'Проверьте выбор и контактные данные.',
+    contactDetails:'Контактные данные', contactName:'КОНТАКТНОЕ ЛИЦО', companyName:'НАЗВАНИЕ КОМПАНИИ', emailAddress:'EMAIL', phoneNumber:'ТЕЛЕФОН', taxId:'ИНН / НДС',
+    specialInstructions:'Особые указания', specialPh:'Особая обработка, условия доставки или комментарий перевозчику…',
+    bestValueSelection:'ВАШ ВЫБОР', trackingUpdates:'Уведомления о трекинге', free:'Бесплатно', total:'Итого',
+    bookingFinePrint:'Подтверждая, вы соглашаетесь с условиями перевозчика. Отмена в течение 24 часов — с полным возвратом.',
+    bookedTitle:'Бронь подтверждена.', bookedSub:'Перевозчик получил отправку. Отслеживайте статус и выгружайте запись в «Моём кабинете».',
+    bookingRef:'НОМЕР БРОНИРОВАНИЯ', backToDash:'На панель', openCabinet:'Открыть кабинет',
+    settleNote:'Оплата напрямую перевозчику по его счёту. Оплата внутри платформы в этот релиз не входит.',
+    myCabinet:'Мой кабинет', myCabinetSub:'История ставок, трекинг отправок и экспорт расходов.',
+    totalSpend:'Расходы с начала года', totalSpendSub:'8 завершённых отправок', savedTotal:'Экономия к рынку', savedTotalSub:'в среднем 14.2% на бронь', quotesRun:'Запросов ставок', quotesRunSub:'за этот месяц',
+    tabAll:'Все записи', tabShipments:'Отправки', tabQuotes:'Ставки', exportCsv:'Экспорт CSV',
+    csvNote:'В CSV попадают ID запроса, направление, способ, перевозчик, срок, стоимость all-in, бенчмарк рынка и экономия по каждой строке.',
+    requote:'Пересчитать', track:'Трекинг',
+    toastBooked:'Бронирование подтверждено — отправка создана', toastCsv:'CSV скачан', toastRequote:'Запрос заполнен из истории', toastWelcome:'Аккаунт создан — завершаем бронирование',
+    days:'дн.', reviews:'отзывов', onTime:'в срок'
+  }
+};
+
+const PLACES = {TAS:'Tashkent, UZ',SKD:'Samarkand, UZ',ALA:'Almaty, KZ',IST:'Istanbul, TR',PVG:'Shanghai, CN',ICN:'Seoul, KR',HAM:'Hamburg, DE',BER:'Berlin, DE',RTM:'Rotterdam, NL',FRA:'Frankfurt, DE',JFK:'New York, US',LAX:'Los Angeles, US'};
+const KM = {TAS:0,SKD:270,ALA:850,IST:3050,PVG:4700,ICN:5100,HAM:5100,BER:4800,RTM:5300,FRA:4900,JFK:10800,LAX:11600};
+const MODE_CHIP = {AIR:{bg:'#DBEAFE',fg:'#1D4ED8'},LTL:{bg:'#EDE9FE',fg:'#6D28D9'},FTL:{bg:'#D1FAE5',fg:'#047857'},FCL:{bg:'#CFFAFE',fg:'#0E7490'},ALL:{bg:'#F1F5F9',fg:'#475569'}};
+
+const CARRIERS = [
+  {id:'MSK',name:'Maersk Line',    logo:'#1D4ED8', rating:4.5, reviews:3200, ontime:88, pf:0.86, sf:1.00, modes:['FCL','LTL','FTL']},
+  {id:'DBS',name:'DB Schenker',    logo:'#DC2626', rating:4.4, reviews:980,  ontime:89, pf:0.97, sf:0.90, modes:['FTL','LTL','AIR','FCL']},
+  {id:'FDX',name:'FedEx Freight',  logo:'#6D28D9', rating:4.6, reviews:1820, ontime:91, pf:1.03, sf:0.84, modes:['LTL','AIR','FTL']},
+  {id:'DHL',name:'DHL Express',    logo:'#F5A623', rating:4.7, reviews:4100, ontime:95, pf:1.18, sf:0.72, modes:['AIR','LTL']},
+  {id:'KNL',name:'Kuehne + Nagel', logo:'#0E7490', rating:4.3, reviews:1240, ontime:87, pf:0.92, sf:1.08, modes:['FCL','FTL','AIR','LTL']},
+  {id:'CMA',name:'CMA CGM',        logo:'#0F766E', rating:4.1, reviews:760,  ontime:84, pf:0.81, sf:1.28, modes:['FCL','FTL']}
+];
+const DENSITY_CLASS = [[480,50],[384,55],[288,60],[224,65],[176,70],[128,85],[96,92.5],[64,100],[48,125],[32,175],[16,250],[0,400]];
+
+const CARGO_TYPES = [
+  {v:'textiles',  icon:'🧵', base:60,  l:{en:'Textiles & Apparel',uz:'To‘qimachilik va kiyim',ru:'Текстиль и одежда'}, h:{en:'Garments, fabric rolls, home textiles',uz:'Kiyim, mato rulonlari, uy to‘qimachiligi',ru:'Одежда, рулоны ткани, текстиль'}},
+  {v:'machinery', icon:'⚙️', base:50,  l:{en:'Machinery & Parts',uz:'Mashina va qismlar',ru:'Оборудование и запчасти'}, h:{en:'Dense, palletised industrial goods',uz:'Zich, palletlangan sanoat mahsuloti',ru:'Плотные паллетированные грузы'}},
+  {v:'electronics',icon:'💻', base:85, l:{en:'Electronics',uz:'Elektronika',ru:'Электроника'}, h:{en:'High-value, insurance-sensitive',uz:'Qimmat, sug‘urtaga sezgir',ru:'Дорогие, важна страховка'}},
+  {v:'food',      icon:'🌾', base:70,  l:{en:'Food & Agriculture',uz:'Oziq-ovqat va agro',ru:'Продукты и агро'}, h:{en:'Non-perishable only in this release',uz:'Bu versiyada faqat tez buzilmaydigan',ru:'Только нескоропортящееся'}},
+  {v:'furniture', icon:'🪑', base:125, l:{en:'Furniture',uz:'Mebel',ru:'Мебель'}, h:{en:'Bulky and light — volume drives price',uz:'Katta va yengil — narxni hajm belgilaydi',ru:'Объёмная и лёгкая — цена по объёму'}},
+  {v:'other',     icon:'📦', base:100, l:{en:'Something Else',uz:'Boshqa',ru:'Другое'}, h:{en:'Priced on measured density alone',uz:'Faqat o‘lchangan zichlik bo‘yicha',ru:'Только по измеренной плотности'}}
+];
+
+const SEED = [
+  {id:'ULQ-2024-001847', from:'TAS', to:'JFK', mode:'AIR', carrier:'DHL Express',   status:'transit',   amount:1488, kind:'shipment'},
+  {id:'ULQ-2024-001821', from:'ALA', to:'BER', mode:'FTL', carrier:'DB Schenker',   status:'delivered', amount:1069, kind:'shipment'},
+  {id:'ULQ-2024-001799', from:'TAS', to:'RTM', mode:'FCL', carrier:'Maersk Line',   status:'delivered', amount:781,  kind:'shipment'},
+  {id:'ULQ-2024-001756', from:'IST', to:'LAX', mode:'LTL', carrier:'FedEx Freight', status:'pending',   amount:1176, kind:'shipment'},
+  {id:'ULQ-2024-001743', from:'ICN', to:'FRA', mode:'AIR', carrier:'DHL Express',   status:'delivered', amount:2340, kind:'shipment'},
+  {id:'ULQ-2024-001718', from:'TAS', to:'IST', mode:'LTL', carrier:'—',             status:'expired',   amount:1640, kind:'quote'},
+  {id:'ULQ-2024-001702', from:'SKD', to:'PVG', mode:'FCL', carrier:'—',             status:'quoted',    amount:2110, kind:'quote'}
+];
+
+class Component extends DCLogic {
+  state = {
+    lang:'en', screen:'landing', guest:true, step:1, fetching:false,
+    f:{origin:'TAS', dest:'ALA', date:'2026-08-27', mode:'LTL', cargo:'textiles', weight:850, unit:'kg', pieces:12, len:120, wid:80, hei:95, desc:''},
+    a:{company:'', phone:'', email:'', pass:''},
+    b:{contact:'Alisher Nazarov', company:'Nazarov Trading LLC', email:'alisher@nazarov-trading.uz', phone:'+998 90 123 4567', tax:'302574810', notes:''},
+    modeFilter:'ALL', sort:'price', selCarrier:null, bookedRef:null, records:SEED.slice(), cabTab:'all', toast:null
+  };
+  componentDidMount(){ if(this.props.defaultLang) this.setState({lang:this.props.defaultLang}); }
+  t(){ return I[this.state.lang]||I.en; }
+  money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
+  km(){ const f=this.state.f; return Math.max(180, Math.abs((KM[f.dest]||0)-(KM[f.origin]||0)) || (KM[f.dest]||600)); }
+
+  cargo(){
+    const f=this.state.f, pieces=Math.max(1,+f.pieces||1);
+    const kg = f.unit==='lb' ? (+f.weight||1)*0.4536 : (+f.weight||1);
+    const vol = pieces*((+f.len||1)*(+f.wid||1)*(+f.hei||1))/1e6;
+    const weight = Math.max(1,kg), density = weight/Math.max(0.001,vol);
+    const volWeight = vol*1e6/6000, chargeable = Math.max(weight, volWeight);
+    let dclass=400; for(const [d,c] of DENSITY_CLASS){ if(density>=d){dclass=c;break;} }
+    const ct = CARGO_TYPES.find(x=>x.v===f.cargo)||CARGO_TYPES[5];
+    return {pieces,vol,weight,density,volWeight,chargeable,fclass:Math.round((dclass+ct.base)/2*10)/10,containers:Math.max(1,Math.ceil(vol/58))};
+  }
+
+  computeQuotes(){
+    const f=this.state.f, c=this.cargo(), km=this.km(), cm=1+(c.fclass-50)/240, out=[];
+    CARRIERS.forEach(car=>{
+      car.modes.forEach(mode=>{
+        let base, days;
+        if(mode==='AIR'){ base=Math.max(340,c.chargeable*(1.85+km/2600)+c.pieces*2.2); days=2+km/4200; }
+        else if(mode==='LTL'){ base=Math.max(280,380+c.weight*(0.26+km/9200)*cm+c.vol*46+c.pieces*2.4); days=5+km/900; }
+        else if(mode==='FTL'){ base=460+km*0.58; days=3+km/760; }
+        else { base=c.containers*(1280+km*0.13); days=13+km/440; }
+        base*=car.pf;
+        const fuel=base*(mode==='AIR'?0.17:0.14), ins=Math.max(18,base*0.042), thc=mode==='AIR'?145:mode==='FCL'?320:120;
+        out.push({...car, mode, base, fuel, ins, thc, allIn:base+fuel+ins+thc, days:Math.max(1,Math.round(days*car.sf))});
+      });
+    });
+    return {list:out, median: out.reduce((s,q)=>s+q.allIn,0)/out.length*1.16};
+  }
+
+  set(k,v){ this.setState(s=>({f:{...s.f,[k]:v}})); }
+  seta(k,v){ this.setState(s=>({a:{...s.a,[k]:v}})); }
+  setb(k,v){ this.setState(s=>({b:{...s.b,[k]:v}})); }
+  flash(m){ this.setState({toast:m}); clearTimeout(this._t); this._t=setTimeout(()=>this.setState({toast:null}),2600); }
+  go(screen){ this.setState({screen}); if(typeof window!=='undefined') window.scrollTo(0,0); }
+  fetchRates(){
+    this.setState({fetching:true});
+    clearTimeout(this._l);
+    this._l=setTimeout(()=>{ this.setState({fetching:false, screen:'results', modeFilter:'ALL', sort:'price'}); if(typeof window!=='undefined') window.scrollTo(0,0); }, 1600);
+  }
+  download(name, rows){
+    const csv=rows.map(r=>r.map(x=>{const s=String(x==null?'':x); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(',')).join('\n');
+    const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+    const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click();
+    setTimeout(()=>{document.body.removeChild(a); URL.revokeObjectURL(url);},400);
+    this.flash(this.t().toastCsv);
+  }
+  statusMeta(st){
+    const t=this.t();
+    return ({quoted:{label:t.stQuoted,fg:'#2563EB'},pending:{label:t.stPending,fg:'#D97706'},booked:{label:t.stBooked,fg:'#2563EB'},transit:{label:t.stTransit,fg:'#2563EB'},delivered:{label:t.stDelivered,fg:'#059669'},expired:{label:t.stExpired,fg:'#DC2626'}})[st]||{label:st,fg:'#64748B'};
+  }
+
+  renderVals(){
+    const s=this.state, t=this.t(), f=s.f, c=this.cargo(), km=this.km();
+    const authScreens = {login:1, signup:1, gate:1};
+    const isLanding = s.screen==='landing';
+    const isAuthCard = !!authScreens[s.screen];
+    const laneFull = PLACES[f.origin]+'  →  '+PLACES[f.dest];
+    const dayw = t.days;
+
+    const navBg = k => (!s.guest && s.screen===k) ? '#24365C' : 'transparent';
+    const navFg = k => (!s.guest && s.screen===k) ? '#fff' : '#8FA0BF';
+
+    const kpis=[
+      {icon:'🚚', iconBg:'#EFF6FF', pill:t.kpi1pill, pillBg:'#D1FAE5', pillFg:'#047857', value:'2', label:t.kpi1, sub:t.kpi1sub},
+      {icon:'📄', iconBg:'#F5F3FF', pill:t.kpi2pill, pillBg:'#D1FAE5', pillFg:'#047857', value:'14', label:t.kpi2, sub:t.kpi2sub},
+      {icon:'📈', iconBg:'#ECFDF5', pill:t.kpi3pill, pillBg:'#D1FAE5', pillFg:'#047857', value:'$2,140', label:t.kpi3, sub:t.kpi3sub},
+      {icon:'💲', iconBg:'#FFFBEB', pill:t.kpi4pill, pillBg:'#F1F5F9', pillFg:'#475569', value:'$11,853', label:t.kpi4, sub:t.kpi4sub}
+    ];
+    const mkRow = r => {
+      const m=this.statusMeta(r.status), ch=MODE_CHIP[r.mode]||MODE_CHIP.ALL;
+      return {id:r.id, from:PLACES[r.from], to:PLACES[r.to], mode:r.mode, modeBg:ch.bg, modeFg:ch.fg,
+        status:m.label, statusFg:m.fg, amount:this.money(r.amount), carrier:r.carrier,
+        actionLabel: r.kind==='quote' ? t.requote : t.track,
+        onAction: r.kind==='quote'
+          ? ()=>{ this.setState(st=>({f:{...st.f, origin:r.from, dest:r.to, mode:r.mode}, screen:'quote', step:5})); this.flash(t.toastRequote); }
+          : ()=>this.flash(r.id+' · '+m.label)};
+    };
+
+    const stepLabels=[t.stepRoute,t.stepMode,t.stepCargo,t.stepDetails,t.stepReview];
+    const steps=stepLabels.map((label,i)=>{
+      const n=i+1, done=s.step>n, cur=s.step===n;
+      return {label, mark: done?'✓':String(n), flex: i===4?'none':'1',
+        bg: done?'#10B981' : cur?'#2563EB' : '#E2E8F0', fg:(done||cur)?'#fff':'#94A3B8',
+        tc: cur?'#2563EB' : done?'#334155':'#94A3B8', weight: cur?'700':'500',
+        line: done?'#10B981':'#E2E8F0', lineDisplay: i===4?'none':'block'};
+    });
+    const dots=[1,2,3,4,5].map(n=>({w: s.step===n?'22px':'6px', bg: s.step===n?'#2563EB' : s.step>n?'#10B981':'#CBD5E1'}));
+
+    const modeDefs=[
+      {code:'AIR', icon:'✈️', title:{en:'Air Freight',uz:'Havo yo‘li',ru:'Авиа'}, desc:{en:'Fast, premium, time-sensitive cargo',uz:'Tez, premium, shoshilinch yuk',ru:'Быстро, премиум, срочный груз'}, days:'3–7 '+dayw, note:{en:'Premium rates',uz:'Premium tarif',ru:'Премиум-ставки'}},
+      {code:'LTL', icon:'🚛', title:{en:'LTL Trucking',uz:'LTL yuk mashinasi',ru:'LTL авто'}, desc:{en:'Less-than-truckload, shared space',uz:'To‘liq bo‘lmagan yuk, umumiy joy',ru:'Догруз, общее пространство'}, days:'5–10 '+dayw, note:{en:'Mid-range',uz:'O‘rta narx',ru:'Средний уровень'}},
+      {code:'FTL', icon:'🏭', title:{en:'FTL Trucking',uz:'FTL yuk mashinasi',ru:'FTL авто'}, desc:{en:'Full truckload, dedicated vehicle',uz:'To‘liq yuk, alohida mashina',ru:'Полная загрузка, отдельная машина'}, days:'7–14 '+dayw, note:{en:'Volume savings',uz:'Hajmda tejov',ru:'Экономия на объёме'}},
+      {code:'FCL', icon:'🚢', title:{en:'FCL Ocean',uz:'FCL dengiz',ru:'FCL море'}, desc:{en:'Full container load, sea freight',uz:'To‘liq konteyner, dengiz tashuvi',ru:'Полный контейнер, море'}, days:'18–30 '+dayw, note:{en:'Most economical',uz:'Eng tejamkor',ru:'Самый экономичный'}}
+    ];
+    const modeOpts=modeDefs.map(m=>{
+      const on=f.mode===m.code, ch=MODE_CHIP[m.code];
+      return {code:m.code, icon:m.icon, title:m.title[s.lang]||m.title.en, desc:m.desc[s.lang]||m.desc.en, days:m.days, note:m.note[s.lang]||m.note.en,
+        chipBg:ch.bg, chipFg:ch.fg,
+        border: on?'1.5px solid #2563EB':'1px solid #E2E8F0', bg: on?'#F5F9FF':'#fff',
+        radioBorder: on?'5px solid #2563EB':'1.5px solid #CBD5E1',
+        onPick: ()=>this.set('mode', m.code)};
+    });
+    const cargoOpts=CARGO_TYPES.map(o=>{
+      const on=f.cargo===o.v;
+      return {icon:o.icon, label:o.l[s.lang]||o.l.en, hint:o.h[s.lang]||o.h.en,
+        classLabel:'~ Class '+o.base, classFg: on?'#2563EB':'#94A3B8',
+        border: on?'1.5px solid #2563EB':'1px solid #E2E8F0', bg: on?'#F5F9FF':'#fff',
+        onPick: ()=>this.set('cargo', o.v)};
+    });
+
+    const ctype=CARGO_TYPES.find(x=>x.v===f.cargo)||CARGO_TYPES[5];
+    const reviewCards=[
+      {icon:'📍', label:t.lOrigin, value:PLACES[f.origin]},
+      {icon:'🏁', label:t.lDest, value:PLACES[f.dest]},
+      {icon:'📅', label:t.lShipDate, value:f.date},
+      {icon:'🚚', label:t.lMode, value:f.mode},
+      {icon:'📦', label:t.lCargo, value:ctype.l[s.lang]||ctype.l.en},
+      {icon:'🏷️', label:t.lClass, value:'Class '+c.fclass},
+      {icon:'⚖️', label:t.lWeight, value:(+f.weight||0)+' '+f.unit},
+      {icon:'📐', label:t.lDims, value:f.len+'×'+f.wid+'×'+f.hei+' cm'}
+    ];
+
+    const qq=this.computeQuotes();
+    const perCarrier={}; qq.list.forEach(q=>{ if(!perCarrier[q.id] || q.allIn<perCarrier[q.id].allIn) perCarrier[q.id]=q; });
+    let list = s.modeFilter==='ALL' ? Object.keys(perCarrier).map(k=>perCarrier[k]) : qq.list.filter(q=>q.mode===s.modeFilter);
+    const bestId = list.length ? list.slice().sort((a,b)=>a.allIn-b.allIn)[0] : null;
+    if(s.sort==='price') list.sort((a,b)=>a.allIn-b.allIn);
+    else if(s.sort==='fast') list.sort((a,b)=>a.days-b.days||a.allIn-b.allIn);
+    else list.sort((a,b)=>b.rating-a.rating||a.allIn-b.allIn);
+    const median = list.length ? list.reduce((acc,q)=>acc+q.allIn,0)/list.length*1.16 : qq.median;
+    const stars = r => { const full=Math.round(r); return '★★★★★'.slice(0,full)+'☆☆☆☆☆'.slice(0,5-full); };
+
+    const quotes=list.map(q=>{
+      const isBest = bestId && q.id===bestId.id && q.mode===bestId.mode;
+      const vs = Math.round((q.allIn-median)/median*100), ch = MODE_CHIP[q.mode];
+      return {initials:q.id, name:q.name, logoBg:q.logo, mode:q.mode, modeBg:ch.bg, modeFg:ch.fg,
+        stars:stars(q.rating), rating:q.rating.toFixed(1),
+        evidence:q.reviews.toLocaleString('en-US')+' '+t.reviews+' · '+q.ontime+'% '+t.onTime,
+        price:this.money(q.allIn), priceFg: isBest?'#F5A623':'#0F172A',
+        vsMarket: Math.abs(vs)+'% '+(vs<=0?t.belowMarket:t.aboveMarket), vsFg: vs<=0?'#059669':'#D97706',
+        base:this.money(q.base), fuel:this.money(q.fuel), ins:this.money(q.ins), transit:q.days+' '+dayw,
+        border: isBest?'1.5px solid #F5A623':'1px solid #E2E8F0',
+        ribbonDisplay: isBest?'block':'none', btnBg: isBest?'#F5A623':'#16233F',
+        onBook: ()=>{ this.setState({selCarrier:q.id+'|'+q.mode}); this.go('booking'); }};
+    });
+    const best = bestId || qq.list.slice().sort((a,b)=>a.allIn-b.allIn)[0];
+    const bench={median:this.money(median),
+      line:(s.lang==='ru'?'средняя рыночная · экономия до ':s.lang==='uz'?'o‘rtacha bozor · tejov ':'avg. market rate · save up to ')+this.money(Math.max(0,median-best.allIn))};
+
+    const modeFilters=[{v:'ALL',code:'ALL',label:t.allModes},{v:'AIR',code:'AIR',label:t.airFreight},{v:'LTL',code:'LTL',label:t.ltlTrucking},{v:'FTL',code:'FTL',label:t.ftlTrucking},{v:'FCL',code:'FCL',label:t.fclOcean}].map(x=>{
+      const on=s.modeFilter===x.v, ch=MODE_CHIP[x.v]||MODE_CHIP.ALL;
+      const n = x.v==='ALL' ? Object.keys(perCarrier).length : qq.list.filter(q=>q.mode===x.v).length;
+      return {code:x.code, label:x.label, chipBg:ch.bg, chipFg:ch.fg, count:String(n),
+        bg: on?'#EFF6FF':'transparent', fg: on?'#2563EB':'#475569', onPick: ()=>this.setState({modeFilter:x.v})};
+    });
+    const sortOpts=[{v:'price',label:t.sortPrice},{v:'fast',label:t.sortFast},{v:'rated',label:t.sortRated}].map(x=>{
+      const on=s.sort===x.v;
+      return {label:x.label, bg:on?'#EFF6FF':'transparent', fg:on?'#2563EB':'#475569', dot:on?'#2563EB':'#CBD5E1', onPick:()=>this.setState({sort:x.v})};
+    });
+
+    const selKey=(s.selCarrier||'').split('|');
+    const selRaw=qq.list.find(q=>q.id===selKey[0]&&q.mode===selKey[1])||best;
+    const ch2=MODE_CHIP[selRaw.mode];
+    const sel={initials:selRaw.id, name:selRaw.name, logoBg:selRaw.logo, mode:selRaw.mode, modeBg:ch2.bg, modeFg:ch2.fg,
+      transit:selRaw.days+' '+dayw, total:this.money(selRaw.allIn),
+      breakdown:[
+        {label:t.baseRate.charAt(0)+t.baseRate.slice(1).toLowerCase(), value:this.money(selRaw.base)},
+        {label:t.fuelSurcharge.charAt(0)+t.fuelSurcharge.slice(1).toLowerCase(), value:this.money(selRaw.fuel)},
+        {label:t.insurance.charAt(0)+t.insurance.slice(1).toLowerCase(), value:this.money(selRaw.ins)},
+        {label:t.trackingUpdates, value:t.free}
+      ]};
+
+    const cabFiltered = s.records.filter(r=> s.cabTab==='all' ? true : s.cabTab==='shipments' ? r.kind==='shipment' : r.kind==='quote');
+    const cabTabs=[{v:'all',label:t.tabAll},{v:'shipments',label:t.tabShipments},{v:'quotes',label:t.tabQuotes}].map(x=>({
+      label:x.label, bg: s.cabTab===x.v?'#fff':'transparent', fg: s.cabTab===x.v?'#16233F':'#64748B', onPick: ()=>this.setState({cabTab:x.v})}));
+
+    const showHero = isAuthCard || isLanding;
+    const showRail = !s.guest && !isAuthCard && !isLanding;
+    const contentPad = (isAuthCard||isLanding) ? '30px 34px' : '22px 24px 56px';
+
+    return {
+      t, guest:s.guest, f, a:s.a, b:s.b,
+      showHero, showRail, showTopbar: showRail, showGuestBar: s.guest && !isAuthCard && !isLanding, contentPad,
+      showGuestInline: false, isLanding,
+      startCalc: ()=>{ this.setState({screen:'quote', step:2}); if(typeof window!=='undefined') window.scrollTo(0,0); },
+      swapRoute: ()=>this.setState(st=>({f:{...st.f, origin:st.f.dest, dest:st.f.origin}})),
+      landingAssurances: t.assurances,
+      quickLanes: [['TAS','PVG'],['TAS','RTM'],['TAS','IST'],['ALA','BER']].map(([o,d])=>{
+        const on = f.origin===o && f.dest===d;
+        return {label:(PLACES[o]||'').split(',')[0]+' → '+(PLACES[d]||'').split(',')[0],
+          border: on?'1.5px solid #2563EB':'1px solid #E2E8F0', bg: on?'#EFF6FF':'#fff', fg: on?'#1D4ED8':'#475569',
+          onPick: ()=>this.setState(st=>({f:{...st.f, origin:o, dest:d}}))};
+      }),
+      isAuthCard, isGate:s.screen==='gate', isPlainAuth: s.screen==='login'||s.screen==='signup',
+      needsCompany: s.screen==='signup'||s.screen==='gate', showEmailField: s.screen!=='gate',
+      isDash:s.screen==='dashboard', isQuote:s.screen==='quote', isResults:s.screen==='results',
+      isBooking:s.screen==='booking', isConfirmed:s.screen==='confirmed', isCabinet:s.screen==='cabinet',
+      crumb:{dashboard:t.crumbDash,quote:t.crumbQuote,results:t.crumbResults,booking:t.crumbBooking,confirmed:t.crumbConfirmed,cabinet:t.crumbCabinet}[s.screen]||'',
+      wizardMax: '900px',
+      heroFeatures:t.heroFeat, gateBenefits:t.gateBenefits, gateLane:laneFull,
+      gateChips:[f.mode, Math.round(c.weight)+' kg', c.vol.toFixed(2)+' m³', 'Class '+c.fclass],
+      gateCount:String(Object.keys(perCarrier).length),
+
+      setEn:()=>this.setState({lang:'en'}), setUz:()=>this.setState({lang:'uz'}), setRu:()=>this.setState({lang:'ru'}),
+      lgEn:s.lang==='en'?'#2563EB':'transparent', lfEn:s.lang==='en'?'#fff':'#8FA0BF',
+      lgUz:s.lang==='uz'?'#2563EB':'transparent', lfUz:s.lang==='uz'?'#fff':'#8FA0BF',
+      lgRu:s.lang==='ru'?'#2563EB':'transparent', lfRu:s.lang==='ru'?'#fff':'#8FA0BF',
+      inlineEnBg:s.lang==='en'?'#fff':'transparent', inlineEnFg:s.lang==='en'?'#16233F':'#64748B',
+      inlineUzBg:s.lang==='uz'?'#fff':'transparent', inlineUzFg:s.lang==='uz'?'#16233F':'#64748B',
+      inlineRuBg:s.lang==='ru'?'#fff':'transparent', inlineRuFg:s.lang==='ru'?'#16233F':'#64748B',
+
+      goLogin:()=>this.go('login'), goSignup:()=>this.go('signup'),
+      startGuest:()=>this.setState({guest:true, screen:'landing', step:1}),
+      guestHome:()=>this.setState({screen:'landing'}),
+      switchPrompt: s.screen==='signup'?t.haveAccount:t.newHere,
+      switchCta: s.screen==='signup'?t.signInInstead:t.createFree,
+      switchAuth: ()=>this.go(s.screen==='signup'?'login':'signup'),
+      tabLoginBg: s.screen==='login'?'#fff':'transparent', tabLoginFg: s.screen==='login'?'#16233F':'#64748B',
+      tabSignupBg: s.screen==='signup'?'#fff':'transparent', tabSignupFg: s.screen==='signup'?'#16233F':'#64748B',
+      tabLoginShadow: s.screen==='login'?'0 1px 2px rgba(15,23,42,.08)':'none',
+      tabSignupShadow: s.screen==='signup'?'0 1px 2px rgba(15,23,42,.08)':'none',
+      authCta: s.screen==='gate' ? t.createAndSee : s.screen==='signup' ? t.createAccount : t.signInCta,
+      authCtaBg: s.screen==='gate' ? '#F5A623' : '#16233F',
+      forgotVis: s.screen==='login' ? 'visible' : 'hidden',
+      onCompany:e=>this.seta('company',e.target.value), onAPhone:e=>this.seta('phone',e.target.value),
+      onEmail:e=>this.seta('email',e.target.value), onPass:e=>this.seta('pass',e.target.value),
+      doAuth: ()=>{
+        const co = s.a.company || s.b.company;
+        if(s.screen==='gate'){
+          this.setState(st=>({guest:false, b:{...st.b, company:co, email: st.a.email||st.b.email, phone: st.a.phone||st.b.phone}}));
+          this.flash(t.toastWelcome);
+          this.fetchRates();
+        } else {
+          this.setState(st=>({guest:false, screen:'dashboard', b:{...st.b, company:co||st.b.company}}));
+        }
+        if(typeof window!=='undefined') window.scrollTo(0,0);
+      },
+      logout:()=>this.setState({guest:true, screen:'landing', step:1}),
+      userInitials:'AN', userName:'Alisher Nazarov', userCompany:s.b.company,
+
+      navDash:()=>this.go('dashboard'), navQuote:()=>this.setState({screen:'quote', step:1}), navCabinet:()=>this.go('cabinet'),
+      navDashBg:navBg('dashboard'), navDashFg:navFg('dashboard'),
+      navQuoteBg:navBg('quote'), navQuoteFg:navFg('quote'),
+      navCabBg:navBg('cabinet'), navCabFg:navFg('cabinet'),
+
+      kpis, recent:s.records.filter(r=>r.kind==='shipment').slice(0,5).map(mkRow),
+      topCarriers:[
+        {name:'Maersk Line', count:'3 '+(s.lang==='ru'?'отправки':s.lang==='uz'?'yuk':'shipments'), color:'#1D4ED8', pct:'86%'},
+        {name:'DB Schenker', count:'2 '+(s.lang==='ru'?'отправки':s.lang==='uz'?'yuk':'shipments'), color:'#DC2626', pct:'58%'},
+        {name:'DHL Express', count:'1 '+(s.lang==='ru'?'отправка':s.lang==='uz'?'yuk':'shipment'), color:'#F5A623', pct:'30%'}
+      ],
+
+      steps, dots,
+      isStep1:s.step===1, isStep2:s.step===2, isStep3:s.step===3, isStep4:s.step===4, isStep5:s.step===5,
+      backVis: (s.step>1 || s.guest) ? 'visible':'hidden',
+      nextLabel: s.fetching ? t.fetching : s.step===5 ? t.getCarrierQuotes : t.continue,
+      nextBg: s.fetching ? '#94A3B8' : s.step===5 ? '#F5A623' : '#2563EB',
+      spinnerDisplay: s.fetching ? 'block':'none',
+      chevDisplay: (s.fetching||s.step===5) ? 'none':'inline',
+      nextStep: ()=>{ if(s.fetching) return; if(s.step===5){ if(s.guest) return this.go('gate'); return this.fetchRates(); } this.setState({step:s.step+1}); },
+      prevStep: ()=>{ if(s.step===1 && s.guest) return this.setState({screen:'landing'}); this.setState({step:Math.max(1,s.step-1)}); },
+      onOrigin:e=>this.set('origin',e.target.value), onDest:e=>this.set('dest',e.target.value), onDate:e=>this.set('date',e.target.value),
+      onWeight:e=>this.set('weight',e.target.value), onUnit:e=>this.set('unit',e.target.value), onPieces:e=>this.set('pieces',e.target.value),
+      onLen:e=>this.set('len',e.target.value), onWid:e=>this.set('wid',e.target.value), onHei:e=>this.set('hei',e.target.value), onDesc:e=>this.set('desc',e.target.value),
+      laneKm: km.toLocaleString('en-US')+' km',
+      modeOpts, cargoOpts, reviewCards,
+      calc:{volume:c.vol.toFixed(3)+' m³', volWeight:c.volWeight.toFixed(1)+' kg', chargeable:c.chargeable.toFixed(1)+' kg', fclass:'Class '+c.fclass},
+
+      resultsTitle: quotes.length+' '+t.quotesFound, laneFull, bench,
+      modeFilters, sortOpts, quotes, noQuotes: quotes.length===0,
+      bookLabel: t.bookNow,
+      resetFilter: ()=>this.setState({modeFilter:'ALL'}),
+      backToQuote:()=>this.setState({screen:'quote', step:5}),
+      isGuestQuote: s.guest && s.screen==='quote',
+      backToResults:()=>this.go('results'),
+
+      sel,
+      onContact:e=>this.setb('contact',e.target.value), onCompanyB:e=>this.setb('company',e.target.value),
+      onEmailB:e=>this.setb('email',e.target.value), onPhoneB:e=>this.setb('phone',e.target.value),
+      onTax:e=>this.setb('tax',e.target.value), onNotes:e=>this.setb('notes',e.target.value),
+      confirmBooking: ()=>{
+        const ref='ULQ-2024-00'+(1848+s.records.length);
+        this.setState(st=>({records:[{id:ref,from:f.origin,to:f.dest,mode:selRaw.mode,carrier:selRaw.name,status:'booked',amount:Math.round(selRaw.allIn),kind:'shipment'},...st.records], bookedRef:ref, screen:'confirmed'}));
+        this.flash(t.toastBooked);
+        if(typeof window!=='undefined') window.scrollTo(0,0);
+      },
+      newRef:s.bookedRef||'',
+      bookedRows:[
+        {label:t.thCarrier, value:selRaw.name},
+        {label:t.lMode, value:selRaw.mode},
+        {label:t.lOrigin, value:PLACES[f.origin]},
+        {label:t.lDest, value:PLACES[f.dest]},
+        {label:t.lShipDate, value:f.date},
+        {label:t.transit, value:selRaw.days+' '+dayw},
+        {label:t.total, value:this.money(selRaw.allIn)}
+      ],
+
+      cabTabs, cabRows:cabFiltered.map(mkRow),
+      exportActive: ()=>this.download('ulogix-cabinet.csv', [
+        ['Quote ID','Origin','Destination','Mode','Carrier','Status','All-in USD','Market benchmark USD','Saving USD'],
+        ...cabFiltered.map(r=>[r.id,PLACES[r.from],PLACES[r.to],r.mode,r.carrier,r.status,r.amount,Math.round(r.amount*1.16),Math.round(r.amount*0.16)])
+      ]),
+      toast:s.toast
+    };
+  }
+}
+
+</script>
+</body>
+</html>
