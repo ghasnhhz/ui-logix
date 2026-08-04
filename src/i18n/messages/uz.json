@@ -9,7 +9,8 @@
     "total": "Jami",
     "viewAll": "Barchasi",
     "swap": "O‘rin almashtirish",
-    "language": "Til"
+    "language": "Til",
+    "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring."
   },
   "landing": {
     "heroLine1": "Aqlli yuboring.",

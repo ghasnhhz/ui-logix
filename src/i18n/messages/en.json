@@ -9,7 +9,8 @@
     "total": "Total",
     "viewAll": "View All",
     "swap": "Swap",
-    "language": "Language"
+    "language": "Language",
+    "genericError": "Something went wrong. Please try again."
   },
   "landing": {
     "heroLine1": "Ship Smarter.",

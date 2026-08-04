@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { STEP_COUNT } from "@/lib/wizard/spec";
+import { Spinner } from "@/components/ui/spinner";
+import { isError } from "@/lib/ui/api-client";
+import { createQuote } from "@/lib/ui/quote-request";
+import { specToParams, STEP_COUNT } from "@/lib/wizard/spec";
 import { StepCargo } from "./step-cargo";
 import { StepDetails } from "./step-details";
 import { StepMode } from "./step-mode";
@@ -15,21 +19,53 @@ import { useWizard } from "./wizard-provider";
 const CARD =
   "rounded-[13px] border border-border bg-surface shadow-[0_1px_2px_rgba(15,23,42,.04)]";
 
-export function Wizard() {
+export function Wizard({ signedIn }: { signedIn: boolean }) {
   const t = useTranslations("wizard");
   const tc = useTranslations("common");
   const router = useRouter();
-  const { step, fromLanding, goStep } = useWizard();
+  const { spec, step, fromLanding, goStep } = useWizard();
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const last = step === STEP_COUNT;
   const showBack = step > 1 || fromLanding;
 
-  const onBack = () => (step === 1 ? router.push("/") : goStep(step - 1));
-  // Feature 4 replaces the gate with the real signup-and-price handoff.
-  const onNext = () => (last ? router.push("/gate") : goStep(step + 1));
+  // Back to the landing page carries the route, so the quick-quote card shows
+  // what the user picked rather than snapping to the defaults.
+  const onBack = () =>
+    step === 1
+      ? router.push(
+          `/?origin=${spec.origin}&dest=${spec.destination}&date=${spec.date}`
+        )
+      : goStep(step - 1);
 
+  // A guest is sent to the gate to create an account; a signed-in user already
+  // has one, so the quote is priced and persisted straight away.
+  async function onNext() {
+    if (pending) return;
+    if (!last) return goStep(step + 1);
+
+    if (!signedIn) {
+      router.push(`/gate?${specToParams(spec)}`);
+      return;
+    }
+
+    setPending(true);
+    setError(null);
+    const quote = await createQuote(spec, tc("genericError"));
+    if (isError(quote)) {
+      setError(quote.error.message);
+      setPending(false);
+      return;
+    }
+    router.replace(`/results?id=${quote.data.id}`);
+    router.refresh();
+  }
+
+  // A div, not a main — the guest bar and the signed-in shell each supply their
+  // own landmark around this.
   return (
-    <main className="enter mx-auto w-full max-w-[900px] px-4 pb-14 pt-[22px] sm:px-6">
+    <div className="mx-auto w-full max-w-[900px]">
       <h1 className="text-[25px] font-bold tracking-[-0.03em]">{t("title")}</h1>
       <p className="mt-[6px] text-pretty text-[13.5px] text-ink-500">{t("sub")}</p>
 
@@ -71,14 +107,22 @@ export function Wizard() {
         <button
           type="button"
           onClick={onNext}
-          className={`flex min-h-[46px] cursor-pointer items-center gap-2 rounded-control px-[22px] text-[13.5px] font-semibold transition-[filter] duration-150 hover:brightness-105 ${
+          disabled={pending}
+          className={`flex min-h-[46px] cursor-pointer items-center gap-2 rounded-control px-[22px] text-[13.5px] font-semibold transition-[filter] duration-150 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 ${
             last ? "bg-amber text-amber-ink" : "bg-blue text-white"
           }`}
         >
-          {last ? t("getCarrierQuotes") : tc("continue")}
+          {pending && <Spinner />}
+          {pending ? t("fetching") : last ? t("getCarrierQuotes") : tc("continue")}
           {!last && <ChevronRight className="size-4" aria-hidden="true" />}
         </button>
       </div>
-    </main>
+
+      {error && (
+        <p role="alert" className="mt-3 text-right text-[12.5px] text-danger-ink">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

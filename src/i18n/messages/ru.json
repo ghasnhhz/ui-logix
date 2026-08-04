@@ -9,7 +9,8 @@
     "total": "Итого",
     "viewAll": "Все",
     "swap": "Поменять",
-    "language": "Язык"
+    "language": "Язык",
+    "genericError": "Что-то пошло не так. Попробуйте ещё раз."
   },
   "landing": {
     "heroLine1": "Возите умнее.",

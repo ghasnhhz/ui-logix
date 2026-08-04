@@ -11,6 +11,7 @@ type FieldError = { message: string; field?: string };
 
 export function AuthCard({ mode }: { mode: Mode }) {
   const t = useTranslations("auth");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [error, setError] = useState<FieldError | null>(null);
   const [pending, setPending] = useState(false);
@@ -35,7 +36,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
 
     if (!response.ok) {
       const payload = await response.json().catch(() => null);
-      setError(payload?.error ?? { message: "Something went wrong" });
+      setError(payload?.error ?? { message: tc("genericError") });
       setPending(false);
       return;
     }
