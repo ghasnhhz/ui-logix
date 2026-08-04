@@ -208,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Назад к калькулятору",
-    "quotesFound": "ставок перевозчиков найдено",
+    "quotesFound": "{n} ставок перевозчиков найдено",
+    "benchSaveUpTo": "средняя рыночная · экономия до {amount}",
     "marketBenchmark": "БЕНЧМАРК РЫНКА",
     "transportMode": "СПОСОБ",
     "allModes": "Все способы",

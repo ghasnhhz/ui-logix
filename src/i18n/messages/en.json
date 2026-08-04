@@ -208,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Back to calculator",
-    "quotesFound": "Carrier Quotes Found",
+    "quotesFound": "{n} Carrier Quotes Found",
+    "benchSaveUpTo": "avg. market rate · save up to {amount}",
     "marketBenchmark": "MARKET BENCHMARK",
     "transportMode": "TRANSPORT MODE",
     "allModes": "All Modes",

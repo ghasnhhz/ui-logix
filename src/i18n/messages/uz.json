@@ -208,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Kalkulyatorga qaytish",
-    "quotesFound": "Tashuvchi narxi topildi",
+    "quotesFound": "{n} ta tashuvchi narxi topildi",
+    "benchSaveUpTo": "o‘rtacha bozor · tejov {amount}",
     "marketBenchmark": "BOZOR BENCHMARKI",
     "transportMode": "TASHUV USULI",
     "allModes": "Barcha usullar",
