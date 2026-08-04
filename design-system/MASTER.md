@@ -170,6 +170,9 @@ every user. Replace on sight using this mapping:
 | ⚡ | `Zap` | hero feature |
 | 📊 | `BarChart3` | hero feature |
 | ★ | `Star` | carrier rating |
+| 🕐 | `Clock` | transit days on a mode card |
+| ⇅ | `ArrowUpDown` | swap origin and destination |
+| ✓ | `Check` | assurance lines, completed step |
 
 Inline icons 16–20px, decorative icons 24px maximum. Decorative icons get
 `aria-hidden="true"`; icon-only buttons get `aria-label`.

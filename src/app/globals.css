@@ -75,6 +75,22 @@
   }
 }
 
+/* MASTER §3 entry animation. Disabled wholesale by the reduced-motion block. */
+@keyframes ulx-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility enter {
+  animation: ulx-enter 0.2s ease both;
+}
+
 /* The signature treatment from MASTER §2 — field labels, eyebrows, reference
    numbers. Never body copy. */
 @utility micro-label {
