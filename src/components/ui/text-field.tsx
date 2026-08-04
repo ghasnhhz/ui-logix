@@ -1,14 +1,20 @@
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   error?: string;
+  /** Uppercase mono label, matching the wizard's and the booking form's fields. */
+  micro?: boolean;
 };
 
-export function TextField({ label, error, id, ...input }: Props) {
+export function TextField({ label, error, micro, id, ...input }: Props) {
   return (
     <div>
       <label
         htmlFor={id}
-        className="mb-[7px] block text-[12.5px] font-semibold text-[#334155]"
+        className={
+          micro
+            ? "micro-label mb-2 block text-[10.5px] text-ink-500"
+            : "mb-[7px] block text-[12.5px] font-semibold text-[#334155]"
+        }
       >
         {label}
       </label>

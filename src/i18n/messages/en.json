@@ -264,6 +264,7 @@
     "taxId": "TAX / VAT ID",
     "specialInstructions": "Special Instructions",
     "specialPh": "Any special handling, delivery instructions, or notes for the carrier…",
+    "terminalHandling": "TERMINAL HANDLING",
     "selection": "YOUR SELECTION",
     "trackingUpdates": "Tracking Updates",
     "finePrint": "By confirming, you agree to the carrier’s terms of service. You may cancel within 24 hours for a full refund."
