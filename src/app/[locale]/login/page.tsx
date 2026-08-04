@@ -1,5 +1,5 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PlaceholderScreen } from "@/components/placeholder-screen";
+import { setRequestLocale } from "next-intl/server";
+import { AuthCard } from "@/components/auth/auth-card";
 import type { Locale } from "@/i18n/routing";
 
 export default async function LoginPage({
@@ -9,6 +9,5 @@ export default async function LoginPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("auth");
-  return <PlaceholderScreen title={t("signIn")} />;
+  return <AuthCard mode="login" />;
 }
