@@ -113,14 +113,15 @@ export function AuthCard({ mode }: { mode: Mode }) {
               required
               error={error?.field === "password" ? error.message : undefined}
             />
+            {/* Inert, as in the comp — password reset is not in this release. */}
             {!isSignup && (
               <div className="mt-[9px] flex justify-end">
-                <Link
-                  href="/login"
-                  className="text-[12.5px] font-semibold text-blue hover:text-blue-hover"
+                <a
+                  href="#"
+                  className="cursor-pointer text-[12.5px] font-semibold text-blue hover:text-blue-hover"
                 >
                   {t("forgotPassword")}
-                </Link>
+                </a>
               </div>
             )}
           </div>
@@ -160,7 +161,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
           {isSignup ? t("haveAccount") : t("newHere")}{" "}
           <Link
             href={isSignup ? "/login" : "/signup"}
-            className="font-semibold text-blue hover:text-blue-hover"
+            className="cursor-pointer font-semibold text-blue hover:text-blue-hover"
           >
             {isSignup ? t("signInInstead") : t("createFree")}
           </Link>
@@ -169,11 +170,11 @@ export function AuthCard({ mode }: { mode: Mode }) {
 
       <p className="mt-[22px] max-w-[404px] text-center text-[12px] leading-normal text-ink-400">
         {t("termsPrefix")}{" "}
-        <a href="#" className="underline">
+        <a href="#" className="cursor-pointer underline">
           {t("termsOfService")}
         </a>{" "}
         {t("and")}{" "}
-        <a href="#" className="underline">
+        <a href="#" className="cursor-pointer underline">
           {t("privacyPolicy")}
         </a>
       </p>
