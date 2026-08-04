@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  company   String
+  phone     String?
+  createdAt DateTime @default(now())
+  quotes    Quote[]
+  bookings  Booking[]
+}
+
+model Quote {
+  id        String @id @default(cuid())
+  reference String @unique
+  userId    String
+  user      User   @relation(fields: [userId], references: [id])
+
+  origin      String
+  destination String
+  shipDate    DateTime
+  mode        String
+  cargoType   String
+  weightKg    Float
+  pieces      Int
+  lengthCm    Float
+  widthCm     Float
+  heightCm    Float
+  description String?
+
+  // Derived values are stored, not recomputed. If a coefficient changes after
+  // launch, a saved quote must still show the number the customer was shown.
+  volumeM3        Float
+  chargeableKg    Float
+  freightClass    Float
+  results         Json
+  benchmarkMedian Float
+
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  booking   Booking?
+}
+
+model Booking {
+  id        String @id @default(cuid())
+  reference String @unique
+  quoteId   String @unique
+  quote     Quote  @relation(fields: [quoteId], references: [id])
+  userId    String
+  user      User   @relation(fields: [userId], references: [id])
+
+  carrierId   String
+  mode        String
+  allIn       Float
+  transitDays Int
+
+  contactName String
+  company     String
+  email       String
+  phone       String
+  taxId       String?
+  notes       String?
+
+  status      String   @default("booked")
+  lastUpdated DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
