@@ -4,13 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/verify-messages.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "db:generate": "prisma generate",
-    "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
-    "db:deploy": "dotenv -e .env.local -- prisma migrate deploy",
-    "db:studio": "dotenv -e .env.local -- prisma studio"
+    "lint": "eslint"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
