@@ -12,6 +12,22 @@
     "language": "Language",
     "genericError": "Something went wrong. Please try again."
   },
+  "errors": {
+    "required": "Required",
+    "invalidEmail": "Enter a valid email address",
+    "invalidDate": "Enter a valid date",
+    "tooShort": "Too short",
+    "tooLong": "Too long",
+    "outOfRange": "Enter a valid number",
+    "invalidOption": "Choose one of the listed options",
+    "invalid": "Check this value",
+    "emailTaken": "An account with this email already exists",
+    "quoteExpired": "This quote has expired. Price the shipment again.",
+    "alreadyBooked": "This quote is already booked.",
+    "carrierUnavailable": "That carrier is no longer part of this quote.",
+    "notYourQuote": "This quote belongs to another account.",
+    "cargoDetails": "Check the cargo details in the calculator and try again."
+  },
   "landing": {
     "heroLine1": "Ship Smarter.",
     "heroLine1b": "Not Harder.",
@@ -248,6 +264,7 @@
     "taxId": "TAX / VAT ID",
     "specialInstructions": "Special Instructions",
     "specialPh": "Any special handling, delivery instructions, or notes for the carrier…",
+    "terminalHandling": "TERMINAL HANDLING",
     "selection": "YOUR SELECTION",
     "trackingUpdates": "Tracking Updates",
     "finePrint": "By confirming, you agree to the carrier’s terms of service. You may cancel within 24 hours for a full refund."
@@ -255,6 +272,7 @@
   "confirmed": {
     "title": "Booking confirmed.",
     "sub": "The carrier has your shipment. Track status and export the record from My Cabinet — no email chain needed.",
+    "carrier": "CARRIER",
     "bookingRef": "BOOKING REFERENCE",
     "backToDash": "Back to Dashboard",
     "openCabinet": "Open My Cabinet",

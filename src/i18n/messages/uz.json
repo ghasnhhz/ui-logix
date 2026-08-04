@@ -12,6 +12,22 @@
     "language": "Til",
     "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring."
   },
+  "errors": {
+    "required": "Majburiy maydon",
+    "invalidEmail": "To‘g‘ri e-pochta manzilini kiriting",
+    "invalidDate": "To‘g‘ri sanani kiriting",
+    "tooShort": "Juda qisqa",
+    "tooLong": "Juda uzun",
+    "outOfRange": "To‘g‘ri son kiriting",
+    "invalidOption": "Ro‘yxatdagi variantlardan birini tanlang",
+    "invalid": "Bu qiymatni tekshiring",
+    "emailTaken": "Bu e-pochta bilan hisob allaqachon mavjud",
+    "quoteExpired": "Bu hisob-kitob muddati tugagan. Yuklamani qaytadan hisoblang.",
+    "alreadyBooked": "Bu hisob-kitob bo‘yicha buyurtma allaqachon rasmiylashtirilgan.",
+    "carrierUnavailable": "Bu tashuvchi endi bu hisob-kitob tarkibida emas.",
+    "notYourQuote": "Bu hisob-kitob boshqa hisobga tegishli.",
+    "cargoDetails": "Kalkulyatordagi yuk ma’lumotlarini tekshirib, qayta urinib ko‘ring."
+  },
   "landing": {
     "heroLine1": "Aqlli yuboring.",
     "heroLine1b": "Qiyin emas.",
@@ -248,6 +264,7 @@
     "taxId": "STIR / QQS ID",
     "specialInstructions": "Maxsus ko‘rsatmalar",
     "specialPh": "Maxsus ishlov, yetkazish shartlari yoki tashuvchi uchun izoh…",
+    "terminalHandling": "TERMINALDA QAYTA ISHLASH",
     "selection": "SIZNING TANLOVINGIZ",
     "trackingUpdates": "Kuzatuv xabarlari",
     "finePrint": "Tasdiqlash bilan tashuvchi xizmat shartlariga rozilik bildirasiz. 24 soat ichida to‘liq qaytarish bilan bekor qilish mumkin."
@@ -255,6 +272,7 @@
   "confirmed": {
     "title": "Bron tasdiqlandi.",
     "sub": "Tashuvchi yukingizni oldi. Holatni kuzating va yozuvni «Mening kabinetim»dan eksport qiling.",
+    "carrier": "TASHUVCHI",
     "bookingRef": "BRON RAQAMI",
     "backToDash": "Panelga qaytish",
     "openCabinet": "Kabinetni ochish",

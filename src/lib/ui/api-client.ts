@@ -1,4 +1,8 @@
-export type ApiError = { message: string; field?: string };
+import type { ErrorCode } from "@/lib/validation/error-codes";
+
+// `message` is the handler's English text and only a last resort — anything with
+// a `code` renders through the `errors` namespace instead (see form-error.ts).
+export type ApiError = { message: string; field?: string; code?: ErrorCode };
 export type ApiResult<T> = { data: T } | { error: ApiError };
 
 export const isError = <T>(result: ApiResult<T>): result is { error: ApiError } =>

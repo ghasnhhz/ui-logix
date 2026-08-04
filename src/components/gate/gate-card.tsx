@@ -7,22 +7,30 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { Spinner } from "@/components/ui/spinner";
 import { TextField } from "@/components/ui/text-field";
 import { isError, post, type ApiError } from "@/lib/ui/api-client";
+import { fieldError, resolveError } from "@/lib/ui/form-error";
 import { createQuote } from "@/lib/ui/quote-request";
 import { specToParams, type WizardSpec } from "@/lib/wizard/spec";
 import { GateSummary } from "./gate-summary";
 
 const BENEFITS = ["benefitRates", "benefitSaved", "benefitBook"] as const;
 
+const FIELDS = ["company", "phone", "email", "password"] as const;
+
 export function GateCard({ spec }: { spec: WizardSpec }) {
   const t = useTranslations("gate");
   const ta = useTranslations("auth");
   const tc = useTranslations("common");
+  const te = useTranslations("errors");
   const tw = useTranslations("wizard");
   const router = useRouter();
   const [error, setError] = useState<ApiError | null>(null);
   const [pending, setPending] = useState(false);
 
   const backHref = `/quote?${specToParams(spec, { step: "5" })}`;
+
+  // The quote posts alongside the account, so a rejected cargo value arrives here
+  // named after an input that lives four steps back in the wizard.
+  const shown = resolveError(error, { fields: FIELDS, t: te, foreign: te("cargoDetails") });
 
   // The order is the product promise: the account exists, then the session
   // exists, then the quote is in Postgres — and only then does a price render.
@@ -65,7 +73,7 @@ export function GateCard({ spec }: { spec: WizardSpec }) {
           placeholder="Nazarov Trading LLC"
           autoComplete="organization"
           required
-          error={error?.field === "company" ? error.message : undefined}
+          error={fieldError(shown, "company")}
         />
         <TextField
           id="gate-phone"
@@ -74,7 +82,7 @@ export function GateCard({ spec }: { spec: WizardSpec }) {
           label={ta("phone")}
           placeholder="+998 90 123 4567"
           autoComplete="tel"
-          error={error?.field === "phone" ? error.message : undefined}
+          error={fieldError(shown, "phone")}
         />
         {/* DESIGN.md § Gate lists only company, phone and password, but an
             account needs an email to sign back in — and the comp renders the
@@ -87,7 +95,7 @@ export function GateCard({ spec }: { spec: WizardSpec }) {
           placeholder="alisher@company.uz"
           autoComplete="email"
           required
-          error={error?.field === "email" ? error.message : undefined}
+          error={fieldError(shown, "email")}
         />
         <TextField
           id="gate-password"
@@ -97,12 +105,12 @@ export function GateCard({ spec }: { spec: WizardSpec }) {
           placeholder="••••••••"
           autoComplete="new-password"
           required
-          error={error?.field === "password" ? error.message : undefined}
+          error={fieldError(shown, "password")}
         />
 
-        {error && !error.field && (
+        {shown && !shown.field && (
           <p role="alert" className="text-[12.5px] text-danger-ink">
-            {error.message}
+            {shown.message}
           </p>
         )}
 

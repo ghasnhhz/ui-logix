@@ -82,16 +82,30 @@ export function DateField({
 export function TextareaField({
   id,
   label,
+  error,
   className,
   ...textarea
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   id: string;
   label: string;
+  error?: string;
 }) {
   return (
     <div className={className}>
       <FieldLabel htmlFor={id}>{label}</FieldLabel>
-      <textarea id={id} rows={3} className={`${CONTROL} resize-y`} {...textarea} />
+      <textarea
+        id={id}
+        rows={3}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={`${CONTROL} resize-y`}
+        {...textarea}
+      />
+      {error && (
+        <p id={`${id}-error`} className="mt-[6px] text-[12px] text-danger-ink">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

@@ -5,9 +5,10 @@ import { SESSION_COOKIE, verifySession } from "@/lib/auth/session";
 
 const handleI18n = createMiddleware(routing);
 
-// /results carries prices, and the whole gate promise is that a price never
-// renders before an account exists — a hand-typed URL must not get around it.
-const PROTECTED = ["/dashboard", "/cabinet", "/results"];
+// /results, /booking and /confirmed all carry prices, and the whole gate promise
+// is that a price never renders before an account exists — a hand-typed URL must
+// not get around it.
+const PROTECTED = ["/dashboard", "/cabinet", "/results", "/booking", "/confirmed"];
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

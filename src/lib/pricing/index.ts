@@ -25,5 +25,6 @@ export {
   modeCounts,
   SORT_KEYS,
   sortQuotes,
+  type QuoteKey,
   type SortKey,
 } from "./selection";
