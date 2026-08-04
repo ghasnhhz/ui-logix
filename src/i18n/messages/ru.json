@@ -9,7 +9,8 @@
     "total": "Итого",
     "viewAll": "Все",
     "swap": "Поменять",
-    "language": "Язык"
+    "language": "Язык",
+    "genericError": "Что-то пошло не так. Попробуйте ещё раз."
   },
   "landing": {
     "heroLine1": "Возите умнее.",
@@ -78,6 +79,8 @@
     "quote": "Новый запрос",
     "cabinet": "Мой кабинет",
     "getQuote": "Получить ставку",
+    "newBadge": "НОВОЕ",
+    "logout": "Выйти",
     "crumbDashboard": "Панель",
     "crumbQuote": "Новый запрос",
     "crumbResults": "Результаты ставок",
@@ -205,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Назад к калькулятору",
-    "quotesFound": "ставок перевозчиков найдено",
+    "quotesFound": "{n} ставок перевозчиков найдено",
+    "benchSaveUpTo": "средняя рыночная · экономия до {amount}",
     "marketBenchmark": "БЕНЧМАРК РЫНКА",
     "transportMode": "СПОСОБ",
     "allModes": "Все способы",

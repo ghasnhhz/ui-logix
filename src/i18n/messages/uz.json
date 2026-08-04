@@ -9,7 +9,8 @@
     "total": "Jami",
     "viewAll": "Barchasi",
     "swap": "O‘rin almashtirish",
-    "language": "Til"
+    "language": "Til",
+    "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring."
   },
   "landing": {
     "heroLine1": "Aqlli yuboring.",
@@ -78,6 +79,8 @@
     "quote": "Yangi so‘rov",
     "cabinet": "Mening kabinetim",
     "getQuote": "Narx olish",
+    "newBadge": "YANGI",
+    "logout": "Chiqish",
     "crumbDashboard": "Boshqaruv paneli",
     "crumbQuote": "Yangi so‘rov",
     "crumbResults": "Narx natijalari",
@@ -205,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Kalkulyatorga qaytish",
-    "quotesFound": "Tashuvchi narxi topildi",
+    "quotesFound": "{n} ta tashuvchi narxi topildi",
+    "benchSaveUpTo": "o‘rtacha bozor · tejov {amount}",
     "marketBenchmark": "BOZOR BENCHMARKI",
     "transportMode": "TASHUV USULI",
     "allModes": "Barcha usullar",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpDown, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -8,7 +8,7 @@ import { LocaleSwitcher } from "@/components/shell/locale-switcher";
 import { LaneChips } from "./lane-chips";
 import { laneDistanceKm, type PlaceCode } from "@/lib/pricing";
 import { formatKm, PLACE_OPTIONS } from "@/lib/ui/places";
-import { DEFAULT_SPEC } from "@/lib/wizard/spec";
+import { DEFAULT_SPEC, specFromParams } from "@/lib/wizard/spec";
 
 const ASSURANCES = ["assureNoCard", "assureFast", "assureCarriers"] as const;
 
@@ -25,6 +25,20 @@ export function QuoteCard() {
   const [origin, setOrigin] = useState<PlaceCode>(DEFAULT_SPEC.origin);
   const [destination, setDestination] = useState<PlaceCode>(DEFAULT_SPEC.destination);
   const [date, setDate] = useState(DEFAULT_SPEC.date);
+
+  // Coming back from wizard step 1 must not throw the route away. The page is
+  // statically rendered, so the lane is read after mount from the URL the
+  // wizard wrote — `useSearchParams` would opt / out of the prerender, and the
+  // shell paints identically either way.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (![...params.keys()].length) return;
+
+    const spec = specFromParams(params);
+    setOrigin(spec.origin);
+    setDestination(spec.destination);
+    setDate(spec.date);
+  }, []);
 
   // The route is already captured here, so the CTA lands on the mode step.
   const href = `/quote?step=2&from=landing&origin=${origin}&dest=${destination}&date=${date}`;

@@ -11,6 +11,7 @@ type FieldError = { message: string; field?: string };
 
 export function AuthCard({ mode }: { mode: Mode }) {
   const t = useTranslations("auth");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [error, setError] = useState<FieldError | null>(null);
   const [pending, setPending] = useState(false);
@@ -35,7 +36,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
 
     if (!response.ok) {
       const payload = await response.json().catch(() => null);
-      setError(payload?.error ?? { message: "Something went wrong" });
+      setError(payload?.error ?? { message: tc("genericError") });
       setPending(false);
       return;
     }
@@ -143,7 +144,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
 
         <div className="mt-[22px] flex items-center gap-[14px]">
           <div className="h-px flex-1 bg-border" />
-          <span className="whitespace-nowrap text-[12px] text-ink-400">
+          <span className="whitespace-nowrap text-[12px] text-ink-500">
             {t("orCalc")}
           </span>
           <div className="h-px flex-1 bg-border" />
@@ -168,7 +169,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
         </p>
       </div>
 
-      <p className="mt-[22px] max-w-[404px] text-center text-[12px] leading-normal text-ink-400">
+      <p className="mt-[22px] max-w-[404px] text-center text-[12px] leading-normal text-ink-500">
         {t("termsPrefix")}{" "}
         <a href="#" className="cursor-pointer underline">
           {t("termsOfService")}

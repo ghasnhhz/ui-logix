@@ -9,7 +9,8 @@
     "total": "Total",
     "viewAll": "View All",
     "swap": "Swap",
-    "language": "Language"
+    "language": "Language",
+    "genericError": "Something went wrong. Please try again."
   },
   "landing": {
     "heroLine1": "Ship Smarter.",
@@ -78,6 +79,8 @@
     "quote": "New Quote",
     "cabinet": "My Cabinet",
     "getQuote": "Get Quote",
+    "newBadge": "NEW",
+    "logout": "Log out",
     "crumbDashboard": "Dashboard",
     "crumbQuote": "New Quote",
     "crumbResults": "Quote Results",
@@ -205,7 +208,8 @@
   },
   "results": {
     "backToQuote": "Back to calculator",
-    "quotesFound": "Carrier Quotes Found",
+    "quotesFound": "{n} Carrier Quotes Found",
+    "benchSaveUpTo": "avg. market rate · save up to {amount}",
     "marketBenchmark": "MARKET BENCHMARK",
     "transportMode": "TRANSPORT MODE",
     "allModes": "All Modes",
