@@ -7,6 +7,7 @@ import { STEP_COUNT } from "@/lib/wizard/spec";
 import { StepCargo } from "./step-cargo";
 import { StepDetails } from "./step-details";
 import { StepMode } from "./step-mode";
+import { StepReview } from "./step-review";
 import { StepRoute } from "./step-route";
 import { Stepper } from "./stepper";
 import { useWizard } from "./wizard-provider";
@@ -41,6 +42,7 @@ export function Wizard() {
         {step === 2 && <StepMode />}
         {step === 3 && <StepCargo />}
         {step === 4 && <StepDetails />}
+        {step === 5 && <StepReview />}
       </div>
 
       <div className="mt-[18px] flex items-center gap-[14px]">
