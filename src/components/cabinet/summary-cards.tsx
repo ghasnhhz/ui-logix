@@ -20,7 +20,12 @@ export function SummaryCards({ totals }: { totals: CabinetTotals }) {
       valueClass: vsMarketTone(totals.savedTotal),
       label: t("savedTotal"),
       // No bookings means no average to state — the line goes, it is not zeroed.
-      sub: totals.savedPct === null ? null : t("savedTotalSub", { pct: Math.abs(totals.savedPct).toFixed(1) }),
+      sub:
+        totals.savedPct === null
+          ? null
+          : t(totals.savedPct <= 0 ? "savedTotalSubBelow" : "savedTotalSubAbove", {
+              pct: Math.abs(totals.savedPct).toFixed(1),
+            }),
     },
     {
       key: "quotes",
