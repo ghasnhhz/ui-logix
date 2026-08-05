@@ -19,13 +19,26 @@ export const STEP_COUNT = 5;
 export const MODES: readonly Mode[] = ["AIR", "LTL", "FTL", "FCL"];
 export const CARGO_TYPES = Object.keys(CARGO_BASE_CLASS) as CargoType[];
 
-// The comp's own starting shipment (U_Logix_Web_dc.html line 997). The pricing
-// goldens are calibrated against it, and a fixed date keeps the server and the
-// client rendering the same string. Revisit the date before the demo.
-export const DEFAULT_SPEC: WizardSpec = {
+// Three weeks out: far enough that every mode is still bookable, near enough to
+// read as a real plan rather than a placeholder.
+export const SHIP_LEAD_DAYS = 21;
+
+// UTC, because the result is a date-only string that also travels in the wizard
+// URL and into Quote.shipDate. Adding the offset in local time would let a
+// request either side of midnight put a different day in the URL than on screen.
+export function defaultShipDate(now: Date = new Date()) {
+  const at = new Date(now);
+  at.setUTCDate(at.getUTCDate() + SHIP_LEAD_DAYS);
+  return at.toISOString().slice(0, 10);
+}
+
+// The comp's own starting shipment (U_Logix_Web_dc.html line 997), minus its
+// date — the pricing goldens are calibrated against these values. The date is
+// not here on purpose: it has to be computed per render, and a constant would
+// let a caller read a stale one.
+export const DEFAULT_SPEC: Omit<WizardSpec, "date"> = {
   origin: "TAS",
   destination: "ALA",
-  date: "2026-08-27",
   mode: "LTL",
   cargoType: "textiles",
   weight: 850,
@@ -80,14 +93,19 @@ const num = (raw: string | undefined, fallback: number) => {
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-export function specFromParams(input: ParamInput): WizardSpec {
+// The date fallback is injectable so a client caller can be handed the value the
+// server already rendered, rather than computing a second one that disagrees.
+export function specFromParams(
+  input: ParamInput,
+  fallbackDate: string = defaultShipDate(),
+): WizardSpec {
   const get = reader(input);
   const date = get(KEYS.date);
 
   return {
     origin: oneOf<PlaceCode>(PLACE_CODES, get(KEYS.origin), DEFAULT_SPEC.origin),
     destination: oneOf<PlaceCode>(PLACE_CODES, get(KEYS.destination), DEFAULT_SPEC.destination),
-    date: date && ISO_DATE.test(date) ? date : DEFAULT_SPEC.date,
+    date: date && ISO_DATE.test(date) ? date : fallbackDate,
     mode: oneOf<Mode>(MODES, get(KEYS.mode), DEFAULT_SPEC.mode),
     cargoType: oneOf<CargoType>(CARGO_TYPES, get(KEYS.cargoType), DEFAULT_SPEC.cargoType),
     weight: num(get(KEYS.weight), DEFAULT_SPEC.weight),

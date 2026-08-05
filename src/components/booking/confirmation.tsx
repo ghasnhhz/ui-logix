@@ -1,6 +1,7 @@
 import { CircleCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { shipDateLabel } from "@/lib/ui/dates";
 import { money } from "@/lib/ui/money";
 
 export type ConfirmationData = {
@@ -25,7 +26,7 @@ export function Confirmation({ data }: { data: ConfirmationData }) {
     { label: tw("lMode"), value: data.mode },
     { label: tw("lOrigin"), value: data.origin },
     { label: tw("lDest"), value: data.destination },
-    { label: tw("lShipDate"), value: data.shipDate },
+    { label: tw("lShipDate"), value: shipDateLabel(tc, data.shipDate) },
     { label: tr("transit"), value: `${data.transitDays} ${tc("days")}` },
     { label: tc("total"), value: money(data.allIn) },
   ];

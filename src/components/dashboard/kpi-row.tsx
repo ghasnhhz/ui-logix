@@ -2,6 +2,7 @@ import { DollarSign, FileText, TrendingDown, TrendingUp, Truck } from "lucide-re
 import { useTranslations } from "next-intl";
 import type { DashboardKpis } from "@/lib/cabinet/metrics";
 import { money, signedMoney } from "@/lib/ui/money";
+import { vsMarketTone } from "@/lib/ui/vs-market";
 import { KpiCard, type KpiPill } from "./kpi-card";
 
 const signed = (delta: number) => (delta > 0 ? `+${delta}` : String(delta));
@@ -21,7 +22,7 @@ export function KpiRow({ kpis }: { kpis: DashboardKpis }) {
       ? undefined
       : {
           text: t("kpiSavedPill", { pct: Math.abs(kpis.savedPct).toFixed(1) }),
-          tone: kpis.savedPct <= 0 ? "success" : "neutral",
+          tone: kpis.savedPct <= 0 ? "success" : "warning",
           Icon: kpis.savedPct <= 0 ? TrendingDown : TrendingUp,
         };
 
@@ -47,6 +48,7 @@ export function KpiRow({ kpis }: { kpis: DashboardKpis }) {
         Icon={TrendingUp}
         tile="bg-success text-success-ink"
         value={signedMoney(kpis.savedThisMonth)}
+        valueClass={vsMarketTone(kpis.savedThisMonth)}
         label={t("kpiSaved")}
         sub={t("kpiSavedSub")}
         pill={savedPill}
