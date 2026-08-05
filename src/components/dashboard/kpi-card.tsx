@@ -5,12 +5,14 @@ type IconComponent = ComponentType<{ className?: string; "aria-hidden"?: boolean
 
 export type KpiPill = {
   text: string;
-  tone: "success" | "neutral";
+  tone: "success" | "warning" | "neutral";
   Icon?: IconComponent;
 };
 
 const PILL_TONE = {
   success: "bg-success text-success-ink",
+  // warning-ink is only legible on the warning fill, never on white (D-031).
+  warning: "bg-warning text-warning-ink",
   neutral: "bg-page-alt text-ink-600",
 } as const;
 
@@ -18,6 +20,7 @@ export function KpiCard({
   Icon,
   tile,
   value,
+  valueClass = "",
   label,
   sub,
   pill,
@@ -25,6 +28,7 @@ export function KpiCard({
   Icon: IconComponent;
   tile: string;
   value: string;
+  valueClass?: string;
   label: string;
   sub: string;
   pill?: KpiPill;
@@ -47,7 +51,9 @@ export function KpiCard({
         )}
       </div>
 
-      <p className="mt-[14px] font-mono text-[26px] font-semibold tracking-[-0.03em]">{value}</p>
+      <p className={`mt-[14px] font-mono text-[26px] font-semibold tracking-[-0.03em] ${valueClass}`}>
+        {value}
+      </p>
       {/* Labels wrap rather than truncate — "Расходы с начала года" and
           "Yil boshidan xarajat" both outrun the English at this card width. */}
       <p className="mt-[3px] text-pretty text-[13px] font-semibold leading-tight">{label}</p>
