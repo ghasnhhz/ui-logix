@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ChevronLeft } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import {
   benchmarkMedian,
@@ -16,6 +16,7 @@ import {
   type Quote,
   type SortKey,
 } from "@/lib/pricing";
+import { shipDateLabel } from "@/lib/ui/dates";
 import { BenchmarkBar } from "./benchmark-bar";
 import { EmptyState } from "./empty-state";
 import { ModeFilter } from "./mode-filter";
@@ -32,6 +33,7 @@ export type ResultsData = {
 
 export function ResultsView({ data }: { data: ResultsData }) {
   const t = useTranslations("results");
+  const format = useFormatter();
   const [filter, setFilter] = useState<Filter>("ALL");
   const [sort, setSort] = useState<SortKey>("price");
 
@@ -68,7 +70,8 @@ export function ResultsView({ data }: { data: ResultsData }) {
             {t("quotesFound", { n: view.rows.length })}
           </h1>
           <p className="mt-[5px] text-[13px] text-ink-500">
-            <span className="font-semibold text-ink-600">{data.lane}</span> · {data.shipDate}
+            <span className="font-semibold text-ink-600">{data.lane}</span> ·{" "}
+            {shipDateLabel(format, data.shipDate)}
           </p>
         </div>
 
