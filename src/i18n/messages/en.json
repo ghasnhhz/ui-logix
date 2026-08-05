@@ -121,7 +121,7 @@
     "kpiQuotes": "Quotes This Month",
     "kpiQuotesSub": "{n, plural, =0 {none converted yet} one {# converted to a booking} other {# converted to bookings}}",
     "kpiQuotesPill": "{delta} vs last month",
-    "kpiSaved": "Saved This Month",
+    "kpiSaved": "vs Market This Month",
     "kpiSavedSub": "vs. avg. market rate",
     "kpiSavedPill": "{pct}% avg cost",
     "kpiSpend": "Total Spend YTD",

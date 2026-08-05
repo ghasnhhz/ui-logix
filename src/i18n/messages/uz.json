@@ -121,7 +121,7 @@
     "kpiQuotes": "Shu oydagi so‘rovlar",
     "kpiQuotesSub": "{n, plural, =0 {hali bronga aylanmadi} other {# tasi bronga aylandi}}",
     "kpiQuotesPill": "{delta} o‘tgan oyga",
-    "kpiSaved": "Shu oyda tejaldi",
+    "kpiSaved": "Bu oyda bozorga nisbatan",
     "kpiSavedSub": "o‘rtacha bozor narxiga nisbatan",
     "kpiSavedPill": "{pct}% xarajat",
     "kpiSpend": "Yil boshidan xarajat",
