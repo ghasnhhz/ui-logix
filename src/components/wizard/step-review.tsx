@@ -1,7 +1,7 @@
 "use client";
 
 import { Calendar, Flag, MapPin, Package, Ruler, Scale, Tag, Truck, Zap } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { cargoMetrics, PLACES } from "@/lib/pricing";
 import { CARGO_UI } from "@/lib/ui/cargo";
 import { shipDateLabel } from "@/lib/ui/dates";
@@ -9,14 +9,14 @@ import { useWizard } from "./wizard-provider";
 
 export function StepReview() {
   const t = useTranslations("wizard");
-  const format = useFormatter();
+  const tc = useTranslations("common");
   const { spec } = useWizard();
   const metrics = cargoMetrics(spec);
 
   const cards = [
     { Icon: MapPin, label: t("lOrigin"), value: PLACES[spec.origin] },
     { Icon: Flag, label: t("lDest"), value: PLACES[spec.destination] },
-    { Icon: Calendar, label: t("lShipDate"), value: shipDateLabel(format, spec.date) },
+    { Icon: Calendar, label: t("lShipDate"), value: shipDateLabel(tc, spec.date) },
     { Icon: Truck, label: t("lMode"), value: spec.mode },
     {
       Icon: Package,

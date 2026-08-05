@@ -12,7 +12,20 @@
     "language": "Til",
     "showPassword": "Parolni ko‘rsatish",
     "hidePassword": "Parolni yashirish",
-    "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring."
+    "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring.",
+    "dateFmt": "{d}-{month}, {y}",
+    "m1": "yanvar",
+    "m2": "fevral",
+    "m3": "mart",
+    "m4": "aprel",
+    "m5": "may",
+    "m6": "iyun",
+    "m7": "iyul",
+    "m8": "avgust",
+    "m9": "sentabr",
+    "m10": "oktabr",
+    "m11": "noyabr",
+    "m12": "dekabr"
   },
   "errors": {
     "required": "Majburiy maydon",

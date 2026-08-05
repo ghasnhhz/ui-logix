@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ChevronLeft } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import {
   benchmarkMedian,
@@ -33,7 +33,7 @@ export type ResultsData = {
 
 export function ResultsView({ data }: { data: ResultsData }) {
   const t = useTranslations("results");
-  const format = useFormatter();
+  const tc = useTranslations("common");
   const [filter, setFilter] = useState<Filter>("ALL");
   const [sort, setSort] = useState<SortKey>("price");
 
@@ -71,7 +71,7 @@ export function ResultsView({ data }: { data: ResultsData }) {
           </h1>
           <p className="mt-[5px] text-[13px] text-ink-500">
             <span className="font-semibold text-ink-600">{data.lane}</span> ·{" "}
-            {shipDateLabel(format, data.shipDate)}
+            {shipDateLabel(tc, data.shipDate)}
           </p>
         </div>
 

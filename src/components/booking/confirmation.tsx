@@ -1,5 +1,5 @@
 import { CircleCheck } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { shipDateLabel } from "@/lib/ui/dates";
 import { money } from "@/lib/ui/money";
@@ -20,14 +20,13 @@ export function Confirmation({ data }: { data: ConfirmationData }) {
   const tc = useTranslations("common");
   const tr = useTranslations("results");
   const tw = useTranslations("wizard");
-  const format = useFormatter();
 
   const rows = [
     { label: t("carrier"), value: data.carrierName },
     { label: tw("lMode"), value: data.mode },
     { label: tw("lOrigin"), value: data.origin },
     { label: tw("lDest"), value: data.destination },
-    { label: tw("lShipDate"), value: shipDateLabel(format, data.shipDate) },
+    { label: tw("lShipDate"), value: shipDateLabel(tc, data.shipDate) },
     { label: tr("transit"), value: `${data.transitDays} ${tc("days")}` },
     { label: tc("total"), value: money(data.allIn) },
   ];

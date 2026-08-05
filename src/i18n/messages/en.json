@@ -12,7 +12,20 @@
     "language": "Language",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "genericError": "Something went wrong. Please try again."
+    "genericError": "Something went wrong. Please try again.",
+    "dateFmt": "{month} {d}, {y}",
+    "m1": "January",
+    "m2": "February",
+    "m3": "March",
+    "m4": "April",
+    "m5": "May",
+    "m6": "June",
+    "m7": "July",
+    "m8": "August",
+    "m9": "September",
+    "m10": "October",
+    "m11": "November",
+    "m12": "December"
   },
   "errors": {
     "required": "Required",

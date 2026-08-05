@@ -11,9 +11,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     locale,
     messages: (await import(`./messages/${locale}.json`)).default,
-    // Ship dates are date-only values held at UTC midnight. Left unset the
-    // formatter uses whatever zone it runs in, so the server and a UTC+5 browser
-    // would render different days for the same value and hydration would fail.
+    // Every date in the app is a date-only value held at UTC midnight. Nothing
+    // formats one through Intl today — see lib/ui/dates.ts for why — but left
+    // unset next-intl adopts whatever zone it runs in, so anything that starts
+    // would silently render a different day on the server than in the browser.
     timeZone: "UTC",
   };
 });
