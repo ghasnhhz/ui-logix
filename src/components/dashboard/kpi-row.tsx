@@ -21,7 +21,9 @@ export function KpiRow({ kpis }: { kpis: DashboardKpis }) {
     kpis.savedPct === null
       ? undefined
       : {
-          text: t("kpiSavedPill", { pct: Math.abs(kpis.savedPct).toFixed(1) }),
+          text: t(kpis.savedPct <= 0 ? "kpiSavedPillBelow" : "kpiSavedPillAbove", {
+            pct: Math.abs(kpis.savedPct).toFixed(1),
+          }),
           tone: kpis.savedPct <= 0 ? "success" : "warning",
           Icon: kpis.savedPct <= 0 ? TrendingDown : TrendingUp,
         };
