@@ -50,8 +50,11 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
+  // The app ships its own en/uz/ru. Chrome translates on a locale mismatch — an
+  // English browser on /ru — and rewrites the DOM before hydration, which React
+  // then fails to reconcile.
   return (
-    <html lang={locale}>
+    <html lang={locale} translate="no">
       <body
         className={`${jakarta.variable} ${manrope.variable} ${plexMono.variable}`}
       >
