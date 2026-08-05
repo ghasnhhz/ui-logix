@@ -15,7 +15,10 @@ const LABEL = "micro-label mb-[3px] block text-[9.5px] font-medium text-ink-500"
 const VALUE =
   "min-h-[24px] w-full cursor-pointer border-none bg-transparent p-0 text-[15px] font-semibold text-ink";
 
-export function QuoteCard() {
+// The date arrives from the server so that hydration compares two identical
+// strings — computing it here would render one value on the prerender and
+// another in the browser.
+export function QuoteCard({ initialDate }: { initialDate: string }) {
   const t = useTranslations("landing");
   const tc = useTranslations("common");
   const ta = useTranslations("auth");
@@ -23,7 +26,7 @@ export function QuoteCard() {
 
   const [origin, setOrigin] = useState<PlaceCode>(DEFAULT_SPEC.origin);
   const [destination, setDestination] = useState<PlaceCode>(DEFAULT_SPEC.destination);
-  const [date, setDate] = useState(DEFAULT_SPEC.date);
+  const [date, setDate] = useState(initialDate);
 
   // Coming back from wizard step 1 must not throw the route away. The page is
   // statically rendered, so the lane is read after mount from the URL the
@@ -33,11 +36,11 @@ export function QuoteCard() {
     const params = new URLSearchParams(window.location.search);
     if (![...params.keys()].length) return;
 
-    const spec = specFromParams(params);
+    const spec = specFromParams(params, initialDate);
     setOrigin(spec.origin);
     setDestination(spec.destination);
     setDate(spec.date);
-  }, []);
+  }, [initialDate]);
 
   // The route is already captured here, so the CTA lands on the mode step.
   const href = `/quote?step=2&from=landing&origin=${origin}&dest=${destination}&date=${date}`;
