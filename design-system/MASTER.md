@@ -189,6 +189,7 @@ every user. Replace on sight using this mapping:
 | 💡 | `Lightbulb` | dashboard save tip |
 | ⬇ | `Download` | cabinet CSV export |
 | ↓ ↑ | `TrendingDown` / `TrendingUp` | savings KPI delta direction |
+| 👁 | `Eye` / `EyeOff` | password visibility toggle |
 
 The comp draws the sidebar's three nav glyphs and the results star rating as CSS
 boxes and `★★★★☆` text respectively. Both become Lucide: five `Star`s with the
