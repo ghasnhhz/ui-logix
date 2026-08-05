@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpDown, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { LocaleSwitcher } from "@/components/shell/locale-switcher";
 import { LaneChips } from "./lane-chips";
 import { laneDistanceKm, type PlaceCode } from "@/lib/pricing";
 import { formatKm, PLACE_OPTIONS } from "@/lib/ui/places";
@@ -44,17 +43,8 @@ export function QuoteCard() {
   const href = `/quote?step=2&from=landing&origin=${origin}&dest=${destination}&date=${date}`;
 
   return (
-    <div className="w-full max-w-[420px] rounded-[14px] bg-surface p-[26px] shadow-[0_4px_24px_rgba(15,23,42,.06)]">
-      <div className="flex flex-wrap items-center gap-[10px]">
-        <p className="flex items-center gap-[7px] rounded-full bg-[#ECFDF5] px-[11px] py-[6px] text-[11px] font-bold text-success-ink">
-          <Check className="size-[13px] flex-none" aria-hidden="true" />
-          {t("freeNoSignup")}
-        </p>
-        <div className="flex-1" />
-        <LocaleSwitcher variant="light" />
-      </div>
-
-      <h2 className="mt-[14px] text-[21px] font-bold tracking-[-0.025em]">{t("title")}</h2>
+    <div className="w-full max-w-[420px] flex-none rounded-[14px] border border-border bg-surface p-[26px] shadow-[0_4px_24px_rgba(15,23,42,.06)]">
+      <h2 className="text-[21px] font-bold tracking-[-0.025em]">{t("title")}</h2>
       <p className="mt-[6px] text-pretty text-[13px] leading-normal text-ink-500">{t("sub")}</p>
 
       <div className="mt-5 overflow-hidden rounded-card border border-border">
