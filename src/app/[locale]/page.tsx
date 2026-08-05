@@ -16,7 +16,9 @@ export default async function LandingPage({
     <div className="flex min-h-screen flex-col bg-page">
       <GuestBar />
       <main className="flex-1 px-4 py-10 sm:px-6">
-        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
+        {/* Two columns from 900px, as the old split screen did — a 1024 viewport
+            carries a scrollbar, so Tailwind's own lg: would stack there. */}
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-10 min-[900px]:flex-row min-[900px]:items-center min-[900px]:gap-14">
           <Hero />
           <QuoteCard />
         </div>
