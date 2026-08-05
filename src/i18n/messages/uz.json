@@ -10,6 +10,8 @@
     "viewAll": "Barchasi",
     "swap": "O‘rin almashtirish",
     "language": "Til",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
     "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring."
   },
   "errors": {

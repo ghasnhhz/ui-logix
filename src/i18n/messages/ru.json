@@ -10,6 +10,8 @@
     "viewAll": "Все",
     "swap": "Поменять",
     "language": "Язык",
+    "showPassword": "Показать пароль",
+    "hidePassword": "Скрыть пароль",
     "genericError": "Что-то пошло не так. Попробуйте ещё раз."
   },
   "errors": {

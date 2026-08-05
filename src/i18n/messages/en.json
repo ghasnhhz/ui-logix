@@ -10,6 +10,8 @@
     "viewAll": "View All",
     "swap": "Swap",
     "language": "Language",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "genericError": "Something went wrong. Please try again."
   },
   "errors": {
