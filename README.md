@@ -4,7 +4,7 @@ Freight aggregator for SME shippers across Central Asia and CIS. Price a shipmen
 across six carriers, compare all-in costs against a market benchmark, and book in
 one click.
 
-This repository is the Phase 1 web MVP.
+This repository is the Phase 1 web MVP: https://u-logix.vercel.app/
 
 ## What it does
 
