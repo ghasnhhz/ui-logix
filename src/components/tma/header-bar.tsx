@@ -80,7 +80,10 @@ export function HeaderBar() {
               lang={option}
               aria-current={on ? "true" : undefined}
               onClick={() => setLocale(option as Locale)}
-              className={`cursor-pointer rounded-[5px] px-[7px] py-[4px] text-[10px] font-bold uppercase transition-colors duration-150 ${
+              // The pill is the comp's size; the touch target is not. The
+              // pseudo-element takes the tappable area to 44px tall without
+              // growing a header that Telegram already crowds from above.
+              className={`relative cursor-pointer rounded-[5px] px-[9px] py-[4px] text-[10px] font-bold uppercase transition-colors duration-150 after:absolute after:inset-x-0 after:-inset-y-[11px] after:content-[''] ${
                 on ? "bg-blue text-white" : "text-navy-muted hover:text-white"
               }`}
             >
