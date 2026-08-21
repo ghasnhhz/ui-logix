@@ -13,6 +13,11 @@ const PROTECTED = ["/dashboard", "/cabinet", "/results", "/booking", "/confirmed
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // The Mini App carries no locale segment — Telegram supplies the language, so
+  // the locale is resolved in the browser from initDataUnsafe. Left to next-intl
+  // this would redirect to /en/tma and the route would never render.
+  if (pathname === "/tma" || pathname.startsWith("/tma/")) return NextResponse.next();
+
   // Resolve the locale prefix first so an unauthenticated /ru/dashboard lands on
   // /ru/login rather than the default locale's login page.
   const [, maybeLocale, ...rest] = pathname.split("/");
