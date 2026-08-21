@@ -33,6 +33,9 @@ export function useMainButton(onAction: (action: MainButtonAction) => void) {
     if (!button) return;
 
     if (!tone) {
+      // Clear the spinner too, or the next state to claim the button flashes
+      // the one left over from a fetch.
+      button.hideProgress();
       button.hide();
       return;
     }
