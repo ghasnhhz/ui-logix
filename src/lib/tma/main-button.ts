@@ -15,9 +15,19 @@ export type MainButtonAction =
   | "goShips"
   | "newRequest";
 
+/** Keys under the `tma.main` namespace — a union so `t()` stays typechecked. */
+export type MainLabelKey =
+  | "tryIt"
+  | "continue"
+  | "getQuotes"
+  | "fetching"
+  | "createAndSee"
+  | "confirmBook"
+  | "newRequest"
+  | "trackShipment";
+
 export type MainButtonSpec = {
-  /** A key under the `tma.main` namespace. */
-  labelKey: string;
+  labelKey: MainLabelKey;
   tone: MainButtonTone;
   action: MainButtonAction | null;
   progress: boolean;

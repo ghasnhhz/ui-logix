@@ -17,6 +17,7 @@ const announce = () => window.dispatchEvent(new Event(MOCK_CHROME_EVENT));
 type ButtonState = {
   text: string;
   color: string;
+  textColor: string;
   isVisible: boolean;
   isActive: boolean;
   isProgressVisible: boolean;
@@ -34,6 +35,7 @@ const chrome: MockChrome = {
   main: {
     text: "",
     color: "#2563EB",
+    textColor: "#FFFFFF",
     isVisible: false,
     isActive: true,
     isProgressVisible: false,
@@ -68,6 +70,7 @@ const mainButton: TelegramMainButton = {
   setParams: (params) => {
     if (params.text !== undefined) chrome.main.text = params.text;
     if (params.color !== undefined) chrome.main.color = params.color;
+    if (params.text_color !== undefined) chrome.main.textColor = params.text_color;
     if (params.is_active !== undefined) chrome.main.isActive = params.is_active;
     if (params.is_visible !== undefined) chrome.main.isVisible = params.is_visible;
     announce();
