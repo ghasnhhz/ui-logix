@@ -11,6 +11,16 @@ export const webApp = (): TelegramWebApp | null =>
 export const isMock = () =>
   typeof window !== "undefined" && window.__ulxTmaMock === true;
 
+/**
+ * telegram-web-app.js loads in any browser and defines `window.Telegram`, so
+ * the script being present says nothing about where the page is open. Outside a
+ * Telegram client the SDK reports platform "unknown" and carries no initData —
+ * that is the signal, and getting it wrong means posting messages at a parent
+ * window that will never answer.
+ */
+export const insideTelegram = (app: TelegramWebApp) =>
+  Boolean(app.platform) && app.platform !== "unknown";
+
 // Bot API versions ship features, not the whole surface: a client on 6.0 has no
 // setHeaderColor and no safe-area insets. Every optional call is gated.
 const supports = (app: TelegramWebApp, version: string) => {

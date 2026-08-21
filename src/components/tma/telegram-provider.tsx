@@ -1,7 +1,14 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { bootstrap, isMock, readViewport, webApp, type Viewport } from "@/lib/tma/telegram";
+import {
+  bootstrap,
+  insideTelegram,
+  isMock,
+  readViewport,
+  webApp,
+  type Viewport,
+} from "@/lib/tma/telegram";
 import type { TelegramUser, TelegramWebApp } from "@/lib/tma/types";
 
 type Status = "loading" | "ready" | "unavailable";
@@ -61,13 +68,17 @@ export function TelegramProvider({ children }: { children: React.ReactNode }) {
 
     (async () => {
       app = await waitForWebApp();
+      const usable = app ? insideTelegram(app) : false;
 
-      // D-050. Telegram will not load localhost, so development gets a stub.
-      // It leaves initData empty and sets no cookie — it cannot authenticate.
-      if (!app && process.env.NODE_ENV !== "production") {
+      // D-050. Telegram will not load localhost, so development gets a stub —
+      // over the top of the real SDK when that loaded outside a client. It
+      // leaves initData empty and sets no cookie: it cannot authenticate.
+      if (!usable && process.env.NODE_ENV !== "production") {
         const { installMock } = await import("@/lib/tma/mock");
         installMock();
         app = webApp();
+      } else if (!usable) {
+        app = null;
       }
 
       if (cancelled) return;
