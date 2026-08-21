@@ -51,7 +51,10 @@ export const viewport: Viewport = {
 // rewrites the DOM before hydration when it thinks the page needs translating.
 export default function TmaLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" translate="no">
+    // telegram-web-app.js writes its own --tg-viewport-* variables onto <html>
+    // before React hydrates, which React then reports as a mismatch. The
+    // suppression is scoped to this element's attributes; children still warn.
+    <html lang="en" translate="no" suppressHydrationWarning>
       <body
         className={`${jakarta.variable} ${manrope.variable} ${plexMono.variable} bg-navy`}
       >
