@@ -44,14 +44,16 @@ export const TONE: Record<MainButtonTone, { color: string; textColor: string }> 
 };
 
 export function mainButtonFor(state: TmaState): MainButtonSpec | null {
-  if (state.screen === "start") {
-    return { labelKey: "tryIt", tone: "amber", action: "startWizard", progress: false };
-  }
-
+  // The sheet is modal, so its button owns the bottom of the screen whatever is
+  // behind it.
   if (state.gate) {
     return state.guest
       ? { labelKey: "createAndSee", tone: "amber", action: "signup", progress: false }
       : { labelKey: "confirmBook", tone: "amber", action: "confirmBooking", progress: false };
+  }
+
+  if (state.screen === "start") {
+    return { labelKey: "tryIt", tone: "amber", action: "startWizard", progress: false };
   }
 
   if (state.screen === "wizard") {
