@@ -501,6 +501,10 @@
       "days": "d",
       "reviews": "reviews",
       "onTime": "on-time"
+    },
+    "unavailable": {
+      "title": "Open U Logix in Telegram",
+      "body": "This Mini App runs inside the Telegram client. Open it from the U Logix bot."
     }
   }
 }

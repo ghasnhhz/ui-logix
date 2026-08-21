@@ -501,6 +501,10 @@
       "days": "дн",
       "reviews": "отзывов",
       "onTime": "в срок"
+    },
+    "unavailable": {
+      "title": "Откройте U Logix в Telegram",
+      "body": "Это мини-приложение работает внутри Telegram. Откройте его через бот U Logix."
     }
   }
 }
