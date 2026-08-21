@@ -6,6 +6,7 @@ import type { MainButtonAction } from "@/lib/tma/main-button";
 import { TmaAppProvider, useTmaApp } from "./app-provider";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
+import { JumpBar } from "./screens/jump-bar";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { ScreenFrame } from "./screen-frame";
 import { TabBar } from "./tab-bar";
@@ -85,6 +86,7 @@ function Screens() {
         name={state.screen}
         step={state.screen === "wizard" ? state.step : undefined}
       />
+      <JumpBar />
     </ScreenFrame>
   );
 }
