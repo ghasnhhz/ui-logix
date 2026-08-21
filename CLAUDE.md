@@ -9,7 +9,13 @@ U Logix is a freight aggregator for SME shippers in Central Asia and CIS — thi
 Booking.com for cargo. A user prices a shipment across six carriers, compares
 all-in costs against a market benchmark, and books in one click.
 
-This repo is the **Phase 1 web MVP**: a two-day build for an investor demo.
+**Phase 1 — shipped.** Web MVP, live at https://u-logix.vercel.app.
+
+**Phase 2 — current.** Telegram Mini App, same repo, same database, same pricing
+engine. See `harness/TMA.md`.
+
+Two surfaces, one backend. `src/app/[locale]/` is web, `src/app/tma/` is the
+Mini App. Everything below the UI is shared and stays shared.
 
 ## Stack
 
@@ -56,8 +62,8 @@ PR. Tracked docs are `README.md`, `design/`, and `design-system/` only.
 
 **5. The pricing engine imports nothing from Next.js.**
 `src/lib/pricing/` is pure TypeScript — no `next/*`, no React, no Prisma, no
-environment access. Phase 2 extracts it into a standalone service for the
-Telegram bot, and that must be a file move, not a rewrite.
+environment access. Both surfaces call it. If a quote for the same shipment ever
+differs between web and Telegram, this rule was broken.
 
 ## Feature workflow
 
@@ -135,3 +141,10 @@ Before opening any PR that touches UI, run the skill's pre-delivery checklist
   "your quotes are saved." A quote that dies on refresh breaks the demo.
 - **Every user-facing string goes through next-intl.** All three locales, always.
   A missing `uz` key is a build-time failure, not a runtime fallback.
+- **`password` is nullable now.** Telegram users have no password. Any query or
+  route that assumes one must handle null. Web login rejects a Telegram-only
+  account with the normal invalid-credentials response — never a stack trace.
+- **`initDataUnsafe` is unverified.** It is fine for language and display name.
+  Anything that reaches the database goes through server-side HMAC verification
+  of `initData` first.
+- **`100vh` is wrong in a Telegram webview.** Use `viewportStableHeight`.

@@ -337,5 +337,174 @@
     "csv": "CSV yuklab olindi",
     "requote": "So‘rov tarixdan to‘ldirildi",
     "welcome": "Akkaunt yaratildi — bron yakunlanmoqda"
+  },
+  "tma": {
+    "head": {
+      "start": "U Logix",
+      "startSub": "yuk platformasi",
+      "calc": "Yuk kalkulyatori",
+      "calcGuest": "Akkaunt shart emas",
+      "results": "Tashuvchilarni taqqoslash",
+      "home": "Boshqaruv paneli",
+      "ships": "Mening kabinetim",
+      "done": "Bron tasdiqlandi"
+    },
+    "hero": {
+      "line1": "Aqlli yuboring.",
+      "line1b": "Qiyin emas.",
+      "line2": "Solishtir. Bron qil. Kuzat.",
+      "sub": "Ishonchli logistika provayderlaridan narxlarni solishtiring, eng yaxshi variantni daqiqalarda bron qiling va barcha yuklarni bitta platformadan boshqaring.",
+      "trustLine": "Markaziy Osiyo va MDHda 1,200+ SME ishonadi",
+      "featCompareTitle": "Har bir tashuvchini soniyalarda solishtiring",
+      "featCompareSub": "Bir nechta provayder narxi yonma-yon.",
+      "featBenchmarkTitle": "To‘g‘ri narx to‘layotganingizni biling",
+      "featBenchmarkSub": "Har bir narx bozor tariflariga taqqoslanadi.",
+      "featManageTitle": "Qog‘ozbozliksiz bron va boshqaruv",
+      "featManageSub": "Bron qiling, kuzating va hammasi bir joyda."
+    },
+    "main": {
+      "tryIt": "Bepul sinab ko‘rish",
+      "continue": "Davom etish",
+      "getQuotes": "Tashuvchi narxlarini olish",
+      "fetching": "6 tashuvchidan narx olinmoqda…",
+      "createAndSee": "Akkaunt yaratib narxlarni ko‘rish",
+      "confirmBook": "Tasdiqlash va bron",
+      "newRequest": "Yangi narx so‘rovi",
+      "trackShipment": "Yukni kuzatish"
+    },
+    "wizard": {
+      "freeNoSignup": "Bepul · ro‘yxatdan o‘tish shart emas",
+      "stepCounter": "BOSQICH {step} / 5",
+      "s1Title": "Yuk qayerga boradi?",
+      "s1Sub": "Jo‘natish va yetkazish joyini tanlang.",
+      "s2Title": "Qanday jo‘natmoqchisiz?",
+      "s2Sub": "Har bir usul narx va vaqt tanlovi.",
+      "s3Title": "Nima jo‘natasiz?",
+      "s3Sub": "Eng yaqin variantni tanlang.",
+      "s4Title": "O‘lcham va og‘irlik",
+      "s4Sub": "Yukning umumiy o‘lchamlari.",
+      "s5Title": "Yukni tekshiring",
+      "s5Sub": "Hammasi hali tahrirlanadi.",
+      "origin": "JO‘NATISH",
+      "destination": "YETKAZISH",
+      "shipDate": "JO‘NATISH SANASI",
+      "laneDistance": "MASOFA",
+      "totalWeight": "OG‘IRLIK (KG)",
+      "pieces": "JOYLAR",
+      "dims": "BIR JOY O‘LCHAMI (SM)",
+      "calcMetrics": "HISOBLANGAN",
+      "volume": "Hajm",
+      "volWeight": "Hajm og‘irligi",
+      "chargeable": "Hisob og‘irligi",
+      "freightClass": "Freight class",
+      "classNote": "Freight class bo‘yicha tashuvchilar hisob-kitob qiladi — uni yuk turi va shu zichlikdan o‘zimiz chiqaramiz.",
+      "edit": "Tahrir",
+      "readyTitle": "Narx olishga tayyor",
+      "readyBody": "6 tashuvchiga bir vaqtda so‘rov yuboramiz, ~30 soniyada narx qaytadi. Akkaunt hali shart emas."
+    },
+    "review": {
+      "origin": "JO‘NATISH",
+      "dest": "YETKAZISH",
+      "shipDate": "SANA",
+      "mode": "USUL",
+      "cargo": "YUK TURI",
+      "freightClass": "FREIGHT CLASS",
+      "weight": "OG‘IRLIK",
+      "dims": "O‘LCHAMLAR",
+      "carrier": "TASHUVCHI",
+      "total": "Jami"
+    },
+    "results": {
+      "marketBenchmark": "BOZOR BENCHMARKI",
+      "benchLine": "o‘rtacha bozor · tejov {amount}",
+      "sortPrice": "Arzon",
+      "sortFast": "Tez",
+      "sortRated": "Reyting",
+      "allModes": "Barchasi",
+      "airFreight": "Havo",
+      "ltlTrucking": "LTL",
+      "ftlTrucking": "FTL",
+      "fclOcean": "FCL",
+      "bestValue": "ENG YAXSHI",
+      "allInTotal": "all-in",
+      "baseRate": "ASOSIY",
+      "fuelSurcharge": "YOQILG‘I",
+      "transit": "MUDDAT",
+      "book": "Bron",
+      "quotesFound": "tashuvchi narxi topildi",
+      "belowMarket": "past",
+      "aboveMarket": "yuqori"
+    },
+    "gate": {
+      "oneStepLeft": "BIR QADAM QOLDI",
+      "title": "Narxlarni ko‘rish uchun bepul akkaunt yarating",
+      "titleBook": "Bronni tasdiqlang",
+      "subSignup": "Yukingiz hisoblandi va tayyor. Narxlar saqlanib, bron qilinadigan bo‘lishi uchun tashuvchi narxlarini ko‘rsatishdan oldin akkaunt so‘raymiz.",
+      "subBook": "Telegram identifikatsiyasi tasdiqlangan. Tashuvchi va summani tekshirib, bronni yuboring.",
+      "benefitRates": "6 tashuvchi narxini to‘liq tarkibi bilan ko‘rasiz",
+      "benefitSaved": "Narxlar saqlanadi va 48 soat amal qiladi",
+      "benefitBook": "Bir bosishda bron qilib, yukni kuzatasiz",
+      "yourShipment": "SIZNING YUKINGIZ",
+      "viaTelegram": "Telegram orqali",
+      "companyLabel": "Kompaniya nomi",
+      "phone": "Telefon",
+      "keepComparing": "Solishtirishda davom etish",
+      "backToRates": "Narxlarga qaytish"
+    },
+    "home": {
+      "kpiActive": "Faol yuklar",
+      "savedLabel": "Bozorga nisbatan tejov",
+      "qaQuote": "Yangi narx so‘rovi",
+      "qaQuoteSub": "6 tashuvchini bir zumda solishtir",
+      "recentShipments": "So‘nggi yuklar",
+      "viewAll": "Barchasi"
+    },
+    "ships": {
+      "tabAll": "Barchasi",
+      "tabShipments": "Yuklar",
+      "tabQuotes": "Narxlar",
+      "exportCsv": "CSV yuklab olish",
+      "requote": "Qayta so‘rash",
+      "track": "Kuzatish"
+    },
+    "status": {
+      "quoted": "Narx bor",
+      "pending": "Kutilmoqda",
+      "booked": "Bron",
+      "transit": "Yo‘lda",
+      "delivered": "Yetkazildi",
+      "expired": "Eskirgan"
+    },
+    "done": {
+      "title": "Bron qilindi.",
+      "sub": "Tashuvchi yukingizni oldi. «Yuklar»da kuzatasiz — email yozishmasi kerak emas.",
+      "bookingRef": "BRON RAQAMI"
+    },
+    "notes": {
+      "settle": "To‘lov tashuvchi bilan to‘g‘ridan-to‘g‘ri, hisob-faktura asosida. Ilova ichida to‘lov bu versiyaga kirmaydi.",
+      "tgNotify": "Bot olib ketish, jo‘nash va yetkazishda sizga shu yerda yozadi. Ilova ochish shart emas.",
+      "seed": "Narxlar jonli carrier API emas, seeded bozor ma’lumotlaridan. Indikativ, 48 soat amal qiladi.",
+      "csv": "CSV’da so‘rov ID, yo‘nalish, usul, tashuvchi, muddat, all-in narx, benchmark va tejov bor."
+    },
+    "tabs": {
+      "home": "Asosiy",
+      "quote": "Narx",
+      "ships": "Kabinet"
+    },
+    "toast": {
+      "booked": "Bron tasdiqlandi",
+      "csv": "CSV yuklab olindi",
+      "requote": "So‘rov to‘ldirildi",
+      "welcome": "Akkaunt yaratildi"
+    },
+    "units": {
+      "days": "k",
+      "reviews": "sharh",
+      "onTime": "o‘z vaqtida"
+    },
+    "unavailable": {
+      "title": "U Logix’ni Telegramda oching",
+      "body": "Bu Mini App Telegram ilovasi ichida ishlaydi. Uni U Logix botidan oching."
+    }
   }
 }
