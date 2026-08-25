@@ -9,6 +9,7 @@ import { MessagesProvider } from "./messages-provider";
 import { JumpBar } from "./screens/jump-bar";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
+import { WizardScreen } from "./screens/wizard-screen";
 import { ScreenFrame } from "./screen-frame";
 import { TabBar } from "./tab-bar";
 import { TelegramProvider, useTelegram } from "./telegram-provider";
@@ -87,11 +88,10 @@ function Screens() {
     >
       {state.screen === "start" ? (
         <StartScreen />
+      ) : state.screen === "wizard" ? (
+        <WizardScreen />
       ) : (
-        <ScaffoldScreen
-          name={state.screen}
-          step={state.screen === "wizard" ? state.step : undefined}
-        />
+        <ScaffoldScreen name={state.screen} />
       )}
 
       {/* The mock's jump panel needs the padding back on a bleeding screen. */}
