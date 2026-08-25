@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useReducer } from "react";
 import { initialState, reduce, type TmaAction, type TmaState } from "@/lib/tma/state";
+import { useTelegram } from "./telegram-provider";
 
 type AppValue = { state: TmaState; dispatch: React.Dispatch<TmaAction> };
 
@@ -13,13 +14,20 @@ export function useTmaApp() {
   return value;
 }
 
-// Feature 8 replaces this with POST /api/auth/telegram. Until then the shell
-// asks the session route the web app already owns: a Telegram user has no
-// session yet and stays a guest, which is the correct state for Feature 7.
-async function hasSession() {
+// The cookie is issued from a server-side HMAC check of initData, never from
+// anything the client asserts. A failure of any kind — bad signature, no
+// account yet, no network — leaves the user a guest, which is a real state
+// here and not an error to show.
+async function signIn(initData: string) {
   try {
-    const response = await fetch("/api/auth/me");
-    return response.ok;
+    const response = await fetch("/api/auth/telegram", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData }),
+    });
+    if (!response.ok) return false;
+    const body = await response.json();
+    return body?.data?.authenticated === true;
   } catch {
     return false;
   }
@@ -31,20 +39,25 @@ const mockAuthed = () =>
 
 export function TmaAppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reduce, true, (guest) => initialState(guest));
+  const { app, status } = useTelegram();
 
   useEffect(() => {
     if (mockAuthed()) {
       dispatch({ type: "signedIn" });
       return;
     }
+    // The dev mock and any plain browser carry no initData (D-050), so there is
+    // nothing to verify and the request would be a guaranteed 401.
+    if (status !== "ready" || !app?.initData) return;
+
     let cancelled = false;
-    hasSession().then((signedIn) => {
+    signIn(app.initData).then((signedIn) => {
       if (signedIn && !cancelled) dispatch({ type: "signedIn" });
     });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [app, status]);
 
   const value = useMemo(() => ({ state, dispatch }), [state]);
 
