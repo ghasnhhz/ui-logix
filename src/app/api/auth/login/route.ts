@@ -9,11 +9,17 @@ export async function POST(request: Request) {
   if (!parsed.success) return failValidation(parsed.error);
 
   const { email, password } = parsed.data;
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true, email: true, company: true, phone: true, password: true },
+  });
 
-  // One message for both branches — telling an attacker which emails exist is
-  // free account enumeration.
-  if (!user || !(await verifyPassword(password, user.password))) {
+  // Three failures, one answer: no such account, wrong password, and a
+  // Telegram-only account with no password at all (D-046). The compare runs even
+  // when there is no hash, so they cost the same too — telling an attacker which
+  // emails exist, or which of them sign in through Telegram, is free enumeration.
+  const valid = await verifyPassword(password, user?.password ?? null);
+  if (!user || !valid) {
     return fail("Incorrect email or password", 401);
   }
 
