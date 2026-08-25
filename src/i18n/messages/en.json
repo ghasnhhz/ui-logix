@@ -402,6 +402,30 @@
       "readyTitle": "Ready to get quotes",
       "readyBody": "We query 6 carriers at once and return rates in ~30 seconds. Still no account needed."
     },
+    "mode": {
+      "airTitle": "Air Freight",
+      "airDesc": "Fast, premium, time-sensitive",
+      "ltlTitle": "LTL Trucking",
+      "ltlDesc": "Shared truck, priced by weight",
+      "ftlTitle": "FTL Trucking",
+      "ftlDesc": "Whole vehicle, no transloading",
+      "fclTitle": "FCL Ocean",
+      "fclDesc": "Cheapest per kilo, slowest"
+    },
+    "cargo": {
+      "textilesLabel": "Textiles",
+      "textilesHint": "Garments, fabric rolls",
+      "machineryLabel": "Machinery",
+      "machineryHint": "Dense, palletised goods",
+      "electronicsLabel": "Electronics",
+      "electronicsHint": "High-value cargo",
+      "foodLabel": "Food & agri",
+      "foodHint": "Non-perishable only",
+      "furnitureLabel": "Furniture",
+      "furnitureHint": "Bulky and light",
+      "otherLabel": "Something else",
+      "otherHint": "Priced on density"
+    },
     "review": {
       "origin": "ORIGIN",
       "dest": "DESTINATION",

@@ -402,6 +402,30 @@
       "readyTitle": "Готово к запросу",
       "readyBody": "Запросим 6 перевозчиков сразу и вернём ставки за ~30 секунд. Аккаунт всё ещё не нужен."
     },
+    "mode": {
+      "airTitle": "Авиа",
+      "airDesc": "Быстро, премиум, срочно",
+      "ltlTitle": "LTL авто",
+      "ltlDesc": "Догруз, по весу",
+      "ftlTitle": "FTL авто",
+      "ftlDesc": "Вся машина, без перегрузок",
+      "fclTitle": "FCL море",
+      "fclDesc": "Дешевле за кило, медленнее"
+    },
+    "cargo": {
+      "textilesLabel": "Текстиль",
+      "textilesHint": "Одежда, рулоны ткани",
+      "machineryLabel": "Оборудование",
+      "machineryHint": "Плотные паллеты",
+      "electronicsLabel": "Электроника",
+      "electronicsHint": "Дорогой груз",
+      "foodLabel": "Продукты",
+      "foodHint": "Только нескоропортящееся",
+      "furnitureLabel": "Мебель",
+      "furnitureHint": "Объёмная и лёгкая",
+      "otherLabel": "Другое",
+      "otherHint": "По плотности"
+    },
     "review": {
       "origin": "ОТПРАВЛЕНИЕ",
       "dest": "НАЗНАЧЕНИЕ",
