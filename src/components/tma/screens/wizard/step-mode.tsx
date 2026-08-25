@@ -42,7 +42,7 @@ export function StepMode({ spec, set }: StepProps) {
               <p className="mt-1 text-pretty text-[11.5px] leading-[1.45] text-ink-500">
                 {t(`mode.${short}Desc`)}
               </p>
-              <p className="mt-1.5 flex items-center gap-1 font-mono text-[10.5px] text-ink-400">
+              <p className="mt-1.5 flex items-center gap-1 font-mono text-[10.5px] text-ink-500">
                 <Clock className="size-3 flex-none" aria-hidden="true" />
                 {web(`mode${key}Days`)} {t("units.days")}
               </p>

@@ -62,7 +62,7 @@ export function WizardScreen() {
         ))}
       </div>
 
-      <p className="micro-label mt-3.5 text-[10px] text-ink-400">{t("stepCounter", { step })}</p>
+      <p className="micro-label mt-3.5 text-[10px] text-ink-500">{t("stepCounter", { step })}</p>
       <h2 className="mt-[5px] text-pretty text-[20px] font-bold leading-[1.2] tracking-[-0.025em]">
         {t(TITLES[step - 1])}
       </h2>

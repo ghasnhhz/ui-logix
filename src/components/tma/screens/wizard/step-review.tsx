@@ -63,7 +63,7 @@ export function StepReview({
             >
               <Icon className="size-[15px] flex-none text-ink-500" aria-hidden="true" />
               <span className="min-w-0 flex-1">
-                <span className="micro-label block text-[9px] text-ink-400">{label}</span>
+                <span className="micro-label block text-[9px] text-ink-500">{label}</span>
                 <span className="mt-[3px] block text-[13px] font-semibold">{value}</span>
               </span>
               <span className="flex-none text-[11.5px] font-semibold text-blue">{t("edit")}</span>

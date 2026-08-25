@@ -48,7 +48,7 @@ export function StepDetails({ spec, set }: StepProps) {
           {DIMENSIONS.map(([key, label], index) => (
             <Fragment key={key}>
               {index > 0 && (
-                <span className="flex-none text-[12px] text-ink-400" aria-hidden="true">
+                <span className="flex-none text-[12px] text-ink-500" aria-hidden="true">
                   ×
                 </span>
               )}
