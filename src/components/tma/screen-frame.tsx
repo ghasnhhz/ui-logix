@@ -12,14 +12,19 @@ import { useTelegram } from "./telegram-provider";
  *
  * Telegram's MainButton sits below the webview and is already excluded from
  * that height, so nothing here pads for it.
+ *
+ * `bleed` drops the body padding for a screen that paints to the edges — the
+ * navy welcome screen. Such a screen owns the safe-area inset itself.
  */
 export function ScreenFrame({
   header,
   footer,
+  bleed = false,
   children,
 }: {
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  bleed?: boolean;
   children: React.ReactNode;
 }) {
   const { viewport } = useTelegram();
@@ -31,8 +36,10 @@ export function ScreenFrame({
     >
       {header}
       <div
-        className="flex-1 overflow-y-auto px-3.5 pt-3.5"
-        style={{ paddingBottom: footer ? "14px" : `${24 + viewport.safeBottom}px` }}
+        className={`flex-1 overflow-y-auto ${bleed ? "" : "px-3.5 pt-3.5"}`}
+        style={{
+          paddingBottom: bleed ? 0 : footer ? "14px" : `${24 + viewport.safeBottom}px`,
+        }}
       >
         {children}
       </div>

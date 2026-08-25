@@ -402,6 +402,30 @@
       "readyTitle": "Narx olishga tayyor",
       "readyBody": "6 tashuvchiga bir vaqtda so‘rov yuboramiz, ~30 soniyada narx qaytadi. Akkaunt hali shart emas."
     },
+    "mode": {
+      "airTitle": "Havo yo‘li",
+      "airDesc": "Tez, premium, shoshilinch",
+      "ltlTitle": "LTL mashina",
+      "ltlDesc": "Umumiy mashina, og‘irlik bo‘yicha",
+      "ftlTitle": "FTL mashina",
+      "ftlDesc": "Butun mashina, qayta yuklashsiz",
+      "fclTitle": "FCL dengiz",
+      "fclDesc": "Kilogrammiga arzon, sekin"
+    },
+    "cargo": {
+      "textilesLabel": "To‘qimachilik",
+      "textilesHint": "Kiyim, mato rulonlari",
+      "machineryLabel": "Mashina",
+      "machineryHint": "Zich, palletlangan yuk",
+      "electronicsLabel": "Elektronika",
+      "electronicsHint": "Qimmat yuk",
+      "foodLabel": "Oziq-ovqat",
+      "foodHint": "Faqat tez buzilmaydigan",
+      "furnitureLabel": "Mebel",
+      "furnitureHint": "Katta va yengil",
+      "otherLabel": "Boshqa",
+      "otherHint": "Zichlik bo‘yicha"
+    },
     "review": {
       "origin": "JO‘NATISH",
       "dest": "YETKAZISH",

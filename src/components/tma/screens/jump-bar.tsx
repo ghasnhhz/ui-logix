@@ -9,8 +9,6 @@ import { useTelegram } from "../telegram-provider";
 // (D-050): a real client never renders it, and Features 9–12 delete it as the
 // screens they own become reachable on their own.
 const JUMPS: { label: string; actions: TmaAction[] }[] = [
-  { label: "start", actions: [{ type: "go", screen: "start" }] },
-  { label: "w1", actions: [{ type: "goStep", step: 1 }] },
   { label: "w5", actions: [{ type: "goStep", step: 5 }] },
   { label: "gate", actions: [{ type: "goStep", step: 5 }, { type: "openGate" }] },
   {
