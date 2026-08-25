@@ -8,6 +8,7 @@ import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { JumpBar } from "./screens/jump-bar";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
+import { StartScreen } from "./screens/start-screen";
 import { ScreenFrame } from "./screen-frame";
 import { TabBar } from "./tab-bar";
 import { TelegramProvider, useTelegram } from "./telegram-provider";
@@ -76,17 +77,29 @@ function Screens() {
   });
 
   const tabs = showTabs(state);
+  const bleed = state.screen === "start";
 
   return (
     <ScreenFrame
       header={<HeaderBar />}
       footer={tabs ? <TabBar /> : mock ? <MockMainButtonBar /> : undefined}
+      bleed={bleed}
     >
-      <ScaffoldScreen
-        name={state.screen}
-        step={state.screen === "wizard" ? state.step : undefined}
-      />
-      <JumpBar />
+      {state.screen === "start" ? (
+        <StartScreen />
+      ) : (
+        <ScaffoldScreen
+          name={state.screen}
+          step={state.screen === "wizard" ? state.step : undefined}
+        />
+      )}
+
+      {/* The mock's jump panel needs the padding back on a bleeding screen. */}
+      {mock && (
+        <div className={bleed ? "px-3.5 pb-3.5" : ""}>
+          <JumpBar />
+        </div>
+      )}
     </ScreenFrame>
   );
 }
