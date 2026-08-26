@@ -18,5 +18,12 @@ export const telegramSchema = z.object({
   initData: z.string().min(1),
 });
 
+// The Mini App's signup sheet asks for company and phone only — Telegram has
+// already identified the user, and the signed initData is the proof. Composed
+// from the two schemas above so the rules cannot drift apart.
+export const telegramSignupSchema = telegramSchema.extend(
+  signupSchema.pick({ company: true, phone: true }).shape,
+);
+
 export type SignupInput = z.infer<typeof signupSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
