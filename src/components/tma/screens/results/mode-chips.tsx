@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import type { ModeFilter } from "@/lib/pricing";
 
+// 44px rows, not the comp's 40: TMA.md § Layout sets the floor and nothing
+// here is crowded enough to need the pseudo-element trick the locale pills use.
 // ALL first, then the comp's order. The counts come from `modeCounts`, which
 // counts carriers on ALL and quotes on a mode — the chip reads 6, not 18.
 const FILTERS = [
@@ -38,7 +40,7 @@ export function ModeChips({
             type="button"
             aria-pressed={on}
             onClick={() => onPick(value)}
-            className={`flex min-h-10 flex-none cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-control border px-3 py-2 text-[11.5px] font-semibold transition-colors duration-150 ${
+            className={`flex min-h-11 flex-none cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-control border px-3 py-2 text-[11.5px] font-semibold transition-colors duration-150 ${
               on
                 ? "border-[1.5px] border-blue bg-info text-blue-hover"
                 : "border-border bg-surface text-ink-600 hover:border-border-strong"

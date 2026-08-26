@@ -33,7 +33,7 @@ export function SortToggle({
             type="button"
             aria-pressed={on}
             onClick={() => onPick(key)}
-            className={`min-h-10 flex-1 cursor-pointer rounded-[7px] py-[9px] text-[11px] font-semibold transition-colors duration-150 ${
+            className={`min-h-11 flex-1 cursor-pointer rounded-[7px] py-[9px] text-[11px] font-semibold transition-colors duration-150 ${
               on ? "bg-surface text-ink" : "text-ink-500 hover:text-ink"
             }`}
           >

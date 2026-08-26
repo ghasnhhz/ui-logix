@@ -106,7 +106,7 @@ export function TmaQuoteCard({
           <button
             type="button"
             onClick={onBook}
-            className={`ml-auto min-h-[42px] flex-none cursor-pointer whitespace-nowrap rounded-control px-[15px] text-[12px] font-bold transition-[filter] duration-150 hover:brightness-110 ${
+            className={`ml-auto min-h-11 flex-none cursor-pointer whitespace-nowrap rounded-control px-[15px] text-[12px] font-bold transition-[filter] duration-150 hover:brightness-110 ${
               best ? "bg-amber text-amber-ink" : "bg-navy text-white"
             }`}
           >
