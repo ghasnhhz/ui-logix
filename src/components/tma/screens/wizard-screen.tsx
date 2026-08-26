@@ -48,11 +48,11 @@ export function WizardScreen() {
 
   // No field here owns a server error — the wizard posts the shipment whole —
   // so anything coded points back at the cargo values rather than an input.
-  const failure = resolveError(state.error, {
-    fields: [],
-    t: te,
-    foreign: te("cargoDetails"),
-  });
+  // While the sheet is open it owns the error and this step is behind it;
+  // showing the same line in both places renders it twice.
+  const failure = state.gate
+    ? null
+    : resolveError(state.error, { fields: [], t: te, foreign: te("cargoDetails") });
 
   return (
     <div ref={root} className="enter">
