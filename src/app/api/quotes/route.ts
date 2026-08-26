@@ -44,7 +44,11 @@ export async function POST(request: Request) {
         benchmarkMedian: benchmarkMedian(displayedQuotes(quotes, "ALL")),
         expiresAt: new Date(Date.now() + QUOTE_TTL_MS),
       },
-      select: { id: true, reference: true },
+      // The stored rows come back with the id (D-055). The Mini App has no
+      // server-rendered results page to read them from, and handing back what
+      // was persisted means no surface can render a price the database does not
+      // already hold.
+      select: { id: true, reference: true, results: true },
     }),
   );
 
