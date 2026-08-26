@@ -7,6 +7,7 @@ import { TmaAppProvider, useTmaApp } from "./app-provider";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { JumpBar } from "./screens/jump-bar";
+import { ResultsScreen } from "./screens/results-screen";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
 import { WizardScreen } from "./screens/wizard-screen";
@@ -90,6 +91,10 @@ function Screens() {
         <StartScreen />
       ) : state.screen === "wizard" ? (
         <WizardScreen />
+      ) : state.screen === "results" ? (
+        // Keyed on the quote, so a second run starts back on ALL and cheapest
+        // rather than inheriting the last run's filter.
+        <ResultsScreen key={state.quoteId ?? "pending"} />
       ) : (
         <ScaffoldScreen name={state.screen} />
       )}
