@@ -43,13 +43,25 @@ export const TONE: Record<MainButtonTone, { color: string; textColor: string }> 
   muted: { color: "#94A3B8", textColor: "#FFFFFF" },
 };
 
+// signupSchema's own rule. Telegram's button is the sheet's only submit control,
+// so an incomplete form has to disable that rather than an in-page one.
+const MIN_COMPANY = 2;
+
 export function mainButtonFor(state: TmaState): MainButtonSpec | null {
   // The sheet is modal, so its button owns the bottom of the screen whatever is
   // behind it.
   if (state.gate) {
-    return state.guest
-      ? { labelKey: "createAndSee", tone: "amber", action: "signup", progress: false }
-      : { labelKey: "confirmBook", tone: "amber", action: "confirmBooking", progress: false };
+    if (!state.guest) {
+      return { labelKey: "confirmBook", tone: "amber", action: "confirmBooking", progress: false };
+    }
+
+    const ready = state.gateForm.company.trim().length >= MIN_COMPANY && !state.submitting;
+    return {
+      labelKey: "createAndSee",
+      tone: "amber",
+      action: ready ? "signup" : null,
+      progress: state.submitting,
+    };
   }
 
   if (state.screen === "start") {

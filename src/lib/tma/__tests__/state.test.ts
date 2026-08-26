@@ -13,6 +13,8 @@ const at = (patch: Partial<TmaState>): TmaState => ({
   ...patch,
 });
 
+const QUOTES = [{ carrierId: "MSK", mode: "LTL" }] as unknown as TmaState["quotes"];
+
 describe("initialState", () => {
   it("starts a guest on the welcome screen with the comp's shipment", () => {
     const state = initialState(true, "2026-09-11");
@@ -72,7 +74,55 @@ describe("reduce", () => {
   it("moves to results and clears the sheet when a fetch starts", () => {
     const state = reduce(at({ screen: "wizard", gate: true }), { type: "fetchStart" });
     expect(state).toMatchObject({ screen: "results", fetching: true, gate: false });
-    expect(reduce(state, { type: "fetchDone" }).fetching).toBe(false);
+  });
+
+  it("drops the previous quote when a new fetch starts", () => {
+    const state = reduce(
+      at({ quoteId: "q_old", quotes: QUOTES, selected: QUOTES[0] }),
+      { type: "fetchStart" }
+    );
+    expect(state).toMatchObject({ quoteId: null, quotes: [], selected: null });
+  });
+
+  it("carries the persisted quote onto the results screen", () => {
+    const state = reduce(at({ screen: "results", fetching: true }), {
+      type: "fetchDone",
+      quoteId: "q_1",
+      quotes: QUOTES,
+    });
+    expect(state).toMatchObject({ fetching: false, quoteId: "q_1", quotes: QUOTES });
+  });
+
+  // The account exists by the time a fetch can fail, so review's button reads
+  // "Get carrier quotes" and retrying costs one tap.
+  it("returns a failed fetch to the review step with the error", () => {
+    const state = reduce(at({ screen: "results", fetching: true }), {
+      type: "fetchFailed",
+      error: { message: "nope" },
+    });
+    expect(state).toMatchObject({
+      screen: "wizard",
+      step: STEP_COUNT,
+      fetching: false,
+      error: { message: "nope" },
+    });
+  });
+
+  it("keeps the sheet open on a failed signup and clears the error on retry", () => {
+    const failed = reduce(at({ gate: true, submitting: true }), {
+      type: "submitFailed",
+      error: { message: "nope" },
+    });
+    expect(failed).toMatchObject({ gate: true, submitting: false, error: { message: "nope" } });
+    expect(reduce(failed, { type: "submitStart" })).toMatchObject({
+      submitting: true,
+      error: null,
+    });
+  });
+
+  it("patches one gate field at a time", () => {
+    const state = reduce(at({}), { type: "patchGate", patch: { company: "Nazarov" } });
+    expect(state.gateForm).toEqual({ company: "Nazarov", phone: "" });
   });
 
   it("patches the shipment without replacing it", () => {
