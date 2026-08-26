@@ -5,7 +5,7 @@ import { OptionCard } from "@/components/wizard/option-card";
 import { CARGO_BASE_CLASS } from "@/lib/pricing";
 import { CARGO_UI } from "@/lib/ui/cargo";
 import { CARGO_TYPES } from "@/lib/wizard/spec";
-import type { StepProps } from "./fields";
+import type { StepProps } from "../../fields";
 
 export function StepCargo({ spec, set }: StepProps) {
   const t = useTranslations("tma.cargo");

@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { resolveError } from "@/lib/ui/form-error";
 import { STEP_COUNT, type WizardSpec } from "@/lib/wizard/spec";
 import { useTmaApp } from "../app-provider";
-import type { SetSpec } from "./wizard/fields";
+import type { SetSpec } from "../fields";
 import { StepCargo } from "./wizard/step-cargo";
 import { StepDetails } from "./wizard/step-details";
 import { StepMode } from "./wizard/step-mode";
@@ -24,6 +25,7 @@ const STEPS = Array.from({ length: STEP_COUNT }, (_, index) => index + 1);
  */
 export function WizardScreen() {
   const t = useTranslations("tma.wizard");
+  const te = useTranslations("errors");
   const { state, dispatch } = useTmaApp();
   const { spec, step } = state;
   const root = useRef<HTMLDivElement>(null);
@@ -43,6 +45,14 @@ export function WizardScreen() {
     (next: number) => dispatch({ type: "goStep", step: next }),
     [dispatch]
   );
+
+  // No field here owns a server error — the wizard posts the shipment whole —
+  // so anything coded points back at the cargo values rather than an input.
+  // While the sheet is open it owns the error and this step is behind it;
+  // showing the same line in both places renders it twice.
+  const failure = state.gate
+    ? null
+    : resolveError(state.error, { fields: [], t: te, foreign: te("cargoDetails") });
 
   return (
     <div ref={root} className="enter">
@@ -69,6 +79,17 @@ export function WizardScreen() {
       <p className="mt-1.5 text-pretty text-[12.5px] leading-[1.5] text-ink-500">
         {t(SUBS[step - 1])}
       </p>
+
+      {/* A quote that failed after the account was created lands back here.
+          The button now reads "Get carrier quotes", so retrying is one tap. */}
+      {failure && (
+        <p
+          role="alert"
+          className="mt-3 rounded-card border border-danger bg-danger/40 px-3.5 py-3 text-[12px] leading-[1.5] text-danger-ink"
+        >
+          {failure.message}
+        </p>
+      )}
 
       {/* Keyed so each step fades in on its own, as the comp does — the
           progress bar and the counter above it stay put. */}

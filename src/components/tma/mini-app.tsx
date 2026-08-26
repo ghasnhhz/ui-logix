@@ -4,9 +4,11 @@ import dynamic from "next/dynamic";
 import { showTabs } from "@/lib/tma/main-button";
 import type { MainButtonAction } from "@/lib/tma/main-button";
 import { TmaAppProvider, useTmaApp } from "./app-provider";
+import { GateSheet } from "./gate-sheet";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { JumpBar } from "./screens/jump-bar";
+import { ResultsScreen } from "./screens/results-screen";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
 import { WizardScreen } from "./screens/wizard-screen";
@@ -16,6 +18,7 @@ import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
 import { useBackButton } from "./use-back-button";
 import { useMainButton } from "./use-main-button";
+import { useQuoteFlow } from "./use-quote-flow";
 
 // Split out so the mock's in-page button bar is a chunk of its own and never
 // loads in a real client (D-050).
@@ -54,6 +57,7 @@ function Shell() {
 function Screens() {
   const { state, dispatch } = useTmaApp();
   const { mock } = useTelegram();
+  const flow = useQuoteFlow();
 
   useBackButton();
   useMainButton((action: MainButtonAction) => {
@@ -65,12 +69,12 @@ function Screens() {
         return dispatch({ type: "next" });
       case "getQuotes":
         // A guest is asked for an account before any price renders — the whole
-        // gate promise. Features 10 and 11 own what happens after the sheet.
-        return state.guest
-          ? dispatch({ type: "openGate" })
-          : dispatch({ type: "fetchStart" });
+        // gate promise.
+        return state.guest ? dispatch({ type: "openGate" }) : void flow.startFetch();
       case "signup":
+        return void flow.submitSignup();
       case "confirmBooking":
+        // Feature 11 books the selection; the sheet just closes for now.
         return dispatch({ type: "closeGate" });
       case "goShips":
         return dispatch({ type: "go", screen: "ships" });
@@ -81,25 +85,35 @@ function Screens() {
   const bleed = state.screen === "start";
 
   return (
-    <ScreenFrame
-      header={<HeaderBar />}
-      footer={tabs ? <TabBar /> : mock ? <MockMainButtonBar /> : undefined}
-      bleed={bleed}
-    >
-      {state.screen === "start" ? (
-        <StartScreen />
-      ) : state.screen === "wizard" ? (
-        <WizardScreen />
-      ) : (
-        <ScaffoldScreen name={state.screen} />
-      )}
+    // The sheet is a modal over the whole webview, so the frame and the overlay
+    // share one positioned root.
+    <div className="relative">
+      <ScreenFrame
+        header={<HeaderBar />}
+        footer={tabs ? <TabBar /> : mock ? <MockMainButtonBar /> : undefined}
+        bleed={bleed}
+      >
+        {state.screen === "start" ? (
+          <StartScreen />
+        ) : state.screen === "wizard" ? (
+          <WizardScreen />
+        ) : state.screen === "results" ? (
+          // Keyed on the quote, so a second run starts back on ALL and cheapest
+          // rather than inheriting the last run's filter.
+          <ResultsScreen key={state.quoteId ?? "pending"} />
+        ) : (
+          <ScaffoldScreen name={state.screen} />
+        )}
 
-      {/* The mock's jump panel needs the padding back on a bleeding screen. */}
-      {mock && (
-        <div className={bleed ? "px-3.5 pb-3.5" : ""}>
-          <JumpBar />
-        </div>
-      )}
-    </ScreenFrame>
+        {/* The mock's jump panel needs the padding back on a bleeding screen. */}
+        {mock && (
+          <div className={bleed ? "px-3.5 pb-3.5" : ""}>
+            <JumpBar />
+          </div>
+        )}
+      </ScreenFrame>
+
+      {state.gate && <GateSheet />}
+    </div>
   );
 }

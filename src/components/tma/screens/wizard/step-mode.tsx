@@ -6,7 +6,7 @@ import { OptionCard, RadioDot } from "@/components/wizard/option-card";
 import type { Mode } from "@/lib/pricing";
 import { MODE_UI } from "@/lib/ui/modes";
 import { MODES } from "@/lib/wizard/spec";
-import type { StepProps } from "./fields";
+import type { StepProps } from "../../fields";
 
 export function StepMode({ spec, set }: StepProps) {
   const t = useTranslations("tma");

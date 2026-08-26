@@ -92,6 +92,20 @@
   animation: ulx-enter 0.2s ease both;
 }
 
+/* The gate sheet rises from the bottom edge, as the mobile comp does. */
+@keyframes ulx-sheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@utility sheet-in {
+  animation: ulx-sheet 0.26s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 /* The signature treatment from MASTER §2 — field labels, eyebrows, reference
    numbers. Never body copy. */
 @utility micro-label {

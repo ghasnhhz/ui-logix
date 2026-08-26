@@ -41,7 +41,8 @@
     "alreadyBooked": "Bu hisob-kitob bo‘yicha buyurtma allaqachon rasmiylashtirilgan.",
     "carrierUnavailable": "Bu tashuvchi endi bu hisob-kitob tarkibida emas.",
     "notYourQuote": "Bu hisob-kitob boshqa hisobga tegishli.",
-    "cargoDetails": "Kalkulyatordagi yuk ma’lumotlarini tekshirib, qayta urinib ko‘ring."
+    "cargoDetails": "Kalkulyatordagi yuk ma’lumotlarini tekshirib, qayta urinib ko‘ring.",
+    "telegramRejected": "Telegram sizni tasdiqlay olmadi. Mini ilovani yopib, qaytadan oching."
   },
   "landing": {
     "heroLine1": "Aqlli yuboring.",

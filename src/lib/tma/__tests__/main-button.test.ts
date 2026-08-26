@@ -32,8 +32,24 @@ describe("mainButtonFor", () => {
 
   it("switches the sheet's button between signup and booking", () => {
     const open = { screen: "wizard", step: STEP_COUNT, gate: true } as const;
-    expect(mainButtonFor(at({ ...open, guest: true }))?.action).toBe("signup");
+    const filled = { company: "Nazarov Trading LLC", phone: "" };
+    expect(mainButtonFor(at({ ...open, guest: true, gateForm: filled }))?.action).toBe("signup");
     expect(mainButtonFor(at({ ...open, guest: false }))?.action).toBe("confirmBooking");
+  });
+
+  // Telegram's button is the sheet's only submit control, so it carries the
+  // form's readiness — there is no in-page button to grey out instead.
+  it("disables signup until a company is typed, and spins while it submits", () => {
+    const open = { screen: "wizard", step: STEP_COUNT, gate: true, guest: true } as const;
+    expect(mainButtonFor(at({ ...open }))?.action).toBeNull();
+    expect(mainButtonFor(at({ ...open, gateForm: { company: " N ", phone: "" } }))?.action)
+      .toBeNull();
+
+    const submitting = mainButtonFor(
+      at({ ...open, gateForm: { company: "Nazarov Trading LLC", phone: "" }, submitting: true })
+    );
+    expect(submitting).toMatchObject({ progress: true, tone: "amber" });
+    expect(submitting?.action).toBeNull();
   });
 
   it("lets the open sheet own the button over the screen behind it", () => {
