@@ -6,6 +6,8 @@ export type StepProps = { spec: WizardSpec; set: SetSpec };
 
 // 16px, not the web's 14px: iOS zooms a Telegram webview when a smaller field
 // takes focus and the layout does not zoom back out (see `src/app/tma/layout`).
+// That applies to every input in the Mini App, which is why this lives here
+// rather than beside the wizard that first needed it.
 export const FIELD =
   "min-h-[48px] w-full min-w-0 rounded-control border border-border-strong bg-surface px-3 py-3 text-[16px] text-ink transition-colors duration-150 hover:border-blue";
 

@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { STEP_COUNT, type WizardSpec } from "@/lib/wizard/spec";
 import { useTmaApp } from "../app-provider";
-import type { SetSpec } from "./wizard/fields";
+import type { SetSpec } from "../fields";
 import { StepCargo } from "./wizard/step-cargo";
 import { StepDetails } from "./wizard/step-details";
 import { StepMode } from "./wizard/step-mode";

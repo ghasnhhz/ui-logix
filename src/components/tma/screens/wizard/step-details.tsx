@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 import { NumberInput } from "@/components/wizard/number-input";
-import { FIELD, MicroLabel, type StepProps } from "./fields";
+import { FIELD, MicroLabel, type StepProps } from "../../fields";
 import { MetricsCard } from "./metrics-card";
 
 const DIMENSIONS = [

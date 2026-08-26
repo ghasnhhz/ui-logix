@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { laneDistanceKm, type PlaceCode } from "@/lib/pricing";
 import { formatKm, PLACE_OPTIONS } from "@/lib/ui/places";
-import { FIELD, MicroLabel, type StepProps } from "./fields";
+import { FIELD, MicroLabel, type StepProps } from "../../fields";
 
 export function StepRoute({ spec, set }: StepProps) {
   const t = useTranslations("tma.wizard");
