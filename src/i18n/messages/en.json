@@ -41,7 +41,8 @@
     "alreadyBooked": "This quote is already booked.",
     "carrierUnavailable": "That carrier is no longer part of this quote.",
     "notYourQuote": "This quote belongs to another account.",
-    "cargoDetails": "Check the cargo details in the calculator and try again."
+    "cargoDetails": "Check the cargo details in the calculator and try again.",
+    "telegramRejected": "Telegram could not confirm you. Close the Mini App and open it again."
   },
   "landing": {
     "heroLine1": "Ship Smarter.",

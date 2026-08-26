@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { showTabs } from "@/lib/tma/main-button";
 import type { MainButtonAction } from "@/lib/tma/main-button";
 import { TmaAppProvider, useTmaApp } from "./app-provider";
+import { GateSheet } from "./gate-sheet";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { JumpBar } from "./screens/jump-bar";
@@ -82,29 +83,35 @@ function Screens() {
   const bleed = state.screen === "start";
 
   return (
-    <ScreenFrame
-      header={<HeaderBar />}
-      footer={tabs ? <TabBar /> : mock ? <MockMainButtonBar /> : undefined}
-      bleed={bleed}
-    >
-      {state.screen === "start" ? (
-        <StartScreen />
-      ) : state.screen === "wizard" ? (
-        <WizardScreen />
-      ) : state.screen === "results" ? (
-        // Keyed on the quote, so a second run starts back on ALL and cheapest
-        // rather than inheriting the last run's filter.
-        <ResultsScreen key={state.quoteId ?? "pending"} />
-      ) : (
-        <ScaffoldScreen name={state.screen} />
-      )}
+    // The sheet is a modal over the whole webview, so the frame and the overlay
+    // share one positioned root.
+    <div className="relative">
+      <ScreenFrame
+        header={<HeaderBar />}
+        footer={tabs ? <TabBar /> : mock ? <MockMainButtonBar /> : undefined}
+        bleed={bleed}
+      >
+        {state.screen === "start" ? (
+          <StartScreen />
+        ) : state.screen === "wizard" ? (
+          <WizardScreen />
+        ) : state.screen === "results" ? (
+          // Keyed on the quote, so a second run starts back on ALL and cheapest
+          // rather than inheriting the last run's filter.
+          <ResultsScreen key={state.quoteId ?? "pending"} />
+        ) : (
+          <ScaffoldScreen name={state.screen} />
+        )}
 
-      {/* The mock's jump panel needs the padding back on a bleeding screen. */}
-      {mock && (
-        <div className={bleed ? "px-3.5 pb-3.5" : ""}>
-          <JumpBar />
-        </div>
-      )}
-    </ScreenFrame>
+        {/* The mock's jump panel needs the padding back on a bleeding screen. */}
+        {mock && (
+          <div className={bleed ? "px-3.5 pb-3.5" : ""}>
+            <JumpBar />
+          </div>
+        )}
+      </ScreenFrame>
+
+      {state.gate && <GateSheet />}
+    </div>
   );
 }

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   // else. `initDataUnsafe` on the client is the same payload unverified, and a
   // client-asserted id is not an identity.
   const verified = verifyInitData(initData, botToken);
-  if (!verified.ok) return fail("Invalid Telegram sign-in", 401);
+  if (!verified.ok) return fail("Invalid Telegram sign-in", 401, undefined, "telegramRejected");
 
   const { telegramId } = verified.identity;
 

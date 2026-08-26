@@ -16,7 +16,8 @@ export type ErrorCode =
   | "quoteExpired"
   | "alreadyBooked"
   | "carrierUnavailable"
-  | "notYourQuote";
+  | "notYourQuote"
+  | "telegramRejected";
 
 const FORMAT_CODES: Record<string, ErrorCode> = {
   email: "invalidEmail",
