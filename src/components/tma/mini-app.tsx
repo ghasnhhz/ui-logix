@@ -18,6 +18,7 @@ import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
 import { useBackButton } from "./use-back-button";
 import { useMainButton } from "./use-main-button";
+import { useQuoteFlow } from "./use-quote-flow";
 
 // Split out so the mock's in-page button bar is a chunk of its own and never
 // loads in a real client (D-050).
@@ -56,6 +57,7 @@ function Shell() {
 function Screens() {
   const { state, dispatch } = useTmaApp();
   const { mock } = useTelegram();
+  const flow = useQuoteFlow();
 
   useBackButton();
   useMainButton((action: MainButtonAction) => {
@@ -67,12 +69,12 @@ function Screens() {
         return dispatch({ type: "next" });
       case "getQuotes":
         // A guest is asked for an account before any price renders — the whole
-        // gate promise. Features 10 and 11 own what happens after the sheet.
-        return state.guest
-          ? dispatch({ type: "openGate" })
-          : dispatch({ type: "fetchStart" });
+        // gate promise.
+        return state.guest ? dispatch({ type: "openGate" }) : void flow.startFetch();
       case "signup":
+        return void flow.submitSignup();
       case "confirmBooking":
+        // Feature 11 books the selection; the sheet just closes for now.
         return dispatch({ type: "closeGate" });
       case "goShips":
         return dispatch({ type: "go", screen: "ships" });
