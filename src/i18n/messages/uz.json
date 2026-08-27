@@ -494,14 +494,6 @@
       "requote": "Qayta so‘rash",
       "track": "Kuzatish"
     },
-    "status": {
-      "quoted": "Narx bor",
-      "pending": "Kutilmoqda",
-      "booked": "Bron",
-      "transit": "Yo‘lda",
-      "delivered": "Yetkazildi",
-      "expired": "Eskirgan"
-    },
     "done": {
       "title": "Bron qilindi.",
       "sub": "Tashuvchi yukingizni oldi. «Yuklar»da kuzatasiz — email yozishmasi kerak emas.",

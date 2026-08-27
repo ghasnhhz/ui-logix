@@ -494,14 +494,6 @@
       "requote": "Re-quote",
       "track": "Track"
     },
-    "status": {
-      "quoted": "Quoted",
-      "pending": "Pending",
-      "booked": "Booked",
-      "transit": "In transit",
-      "delivered": "Delivered",
-      "expired": "Expired"
-    },
     "done": {
       "title": "Booking confirmed.",
       "sub": "The carrier has your shipment. Track it from Shipments — no email chain needed.",
