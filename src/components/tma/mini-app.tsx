@@ -8,12 +8,13 @@ import { GateSheet } from "./gate-sheet";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { DoneScreen } from "./screens/done-screen";
-import { JumpBar } from "./screens/jump-bar";
+import { HomeScreen } from "./screens/home-screen";
 import { ResultsScreen } from "./screens/results-screen";
-import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
 import { WizardScreen } from "./screens/wizard-screen";
 import { ScreenFrame } from "./screen-frame";
+import { ShipsScreen } from "./screens/ships-screen";
+import { ToastHost } from "./toast-host";
 import { TabBar } from "./tab-bar";
 import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
@@ -105,19 +106,15 @@ function Screens() {
           <ResultsScreen key={state.quoteId ?? "pending"} />
         ) : state.screen === "done" ? (
           <DoneScreen />
+        ) : state.screen === "home" ? (
+          <HomeScreen />
         ) : (
-          <ScaffoldScreen name={state.screen} />
-        )}
-
-        {/* The mock's jump panel needs the padding back on a bleeding screen. */}
-        {mock && (
-          <div className={bleed ? "px-3.5 pb-3.5" : ""}>
-            <JumpBar />
-          </div>
+          <ShipsScreen />
         )}
       </ScreenFrame>
 
       {state.gate && <GateSheet />}
+      <ToastHost />
     </div>
   );
 }

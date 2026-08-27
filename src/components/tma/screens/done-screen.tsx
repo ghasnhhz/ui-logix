@@ -3,7 +3,7 @@
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { PLACES } from "@/lib/pricing";
-import { selectedQuote } from "@/lib/tma/state";
+import { selectedQuote } from "@/lib/tma/selectors";
 import { money } from "@/lib/ui/money";
 import { useTmaApp } from "../app-provider";
 

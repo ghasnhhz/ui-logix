@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { STEP_COUNT } from "@/lib/wizard/spec";
+import type { CabinetRecord } from "@/lib/cabinet/records";
+import { headKey, recordsForTab, showBackButton } from "@/lib/tma/selectors";
 import {
-  headKey,
   initialState,
   reduce,
-  showBackButton,
   type TmaAccount,
   type TmaState,
 } from "@/lib/tma/state";
@@ -194,5 +194,53 @@ describe("chrome derivations", () => {
     expect(headKey(at({ screen: "wizard" }))).toBe("calc");
     expect(headKey(at({ screen: "start" }))).toBe("start");
     expect(headKey(at({ screen: "ships" }))).toBe("ships");
+  });
+});
+
+describe("the cabinet slice", () => {
+  const RECORDS = [
+    { quoteId: "q1", booked: true },
+    { quoteId: "q2", booked: false },
+  ] as unknown as CabinetRecord[];
+
+  it("keeps null and empty apart", () => {
+    expect(at({}).records).toBeNull();
+    const loaded = reduce(at({ recordsLoading: true }), {
+      type: "recordsDone",
+      records: [],
+      now: "2026-08-27T00:00:00.000Z",
+    });
+    expect(loaded.records).toEqual([]);
+    expect(loaded.recordsLoading).toBe(false);
+    expect(loaded.recordsAt).toBe("2026-08-27T00:00:00.000Z");
+  });
+
+  it("clears the error when a retry starts", () => {
+    const failed = reduce(at({}), {
+      type: "recordsFailed",
+      error: { message: "nope" },
+    });
+    expect(failed.recordsError).not.toBeNull();
+    expect(reduce(failed, { type: "recordsStart" }).recordsError).toBeNull();
+  });
+
+  it("drops the loaded rows when a booking lands, so the cabinet re-reads", () => {
+    const loaded = at({ records: RECORDS, recordsAt: "2026-08-27T00:00:00.000Z" });
+    const booked = reduce(loaded, { type: "booked", reference: "ULQ-2026-810850" });
+    expect(booked.records).toBeNull();
+    expect(booked.recordsAt).toBeNull();
+  });
+
+  it("filters the union by tab", () => {
+    expect(recordsForTab(RECORDS, "all")).toHaveLength(2);
+    expect(recordsForTab(RECORDS, "shipments")).toEqual([RECORDS[0]]);
+    expect(recordsForTab(RECORDS, "quotes")).toEqual([RECORDS[1]]);
+  });
+
+  it("re-announces a repeated toast through the nonce", () => {
+    const once = reduce(at({}), { type: "flash", key: "csv" });
+    const twice = reduce(once, { type: "flash", key: "csv" });
+    expect(twice.toast?.nonce).toBeGreaterThan(once.toast!.nonce);
+    expect(reduce(twice, { type: "dismissToast" }).toast).toBeNull();
   });
 });

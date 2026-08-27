@@ -13,6 +13,7 @@
     "showPassword": "Parolni ko‘rsatish",
     "hidePassword": "Parolni yashirish",
     "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring.",
+    "retry": "Qayta urinish",
     "dateFmt": "{d}-{month}, {y}",
     "m1": "yanvar",
     "m2": "fevral",
@@ -480,7 +481,6 @@
     },
     "home": {
       "kpiActive": "Faol yuklar",
-      "savedLabel": "Bozorga nisbatan tejov",
       "qaQuote": "Yangi narx so‘rovi",
       "qaQuoteSub": "6 tashuvchini bir zumda solishtir",
       "recentShipments": "So‘nggi yuklar",
@@ -494,14 +494,6 @@
       "requote": "Qayta so‘rash",
       "track": "Kuzatish"
     },
-    "status": {
-      "quoted": "Narx bor",
-      "pending": "Kutilmoqda",
-      "booked": "Bron",
-      "transit": "Yo‘lda",
-      "delivered": "Yetkazildi",
-      "expired": "Eskirgan"
-    },
     "done": {
       "title": "Bron qilindi.",
       "sub": "Tashuvchi yukingizni oldi. «Yuklar»da kuzatasiz — email yozishmasi kerak emas.",
@@ -511,7 +503,7 @@
       "settle": "To‘lov tashuvchi bilan to‘g‘ridan-to‘g‘ri, hisob-faktura asosida. Ilova ichida to‘lov bu versiyaga kirmaydi.",
       "tgNotify": "Bot olib ketish, jo‘nash va yetkazishda sizga shu yerda yozadi. Ilova ochish shart emas.",
       "seed": "Narxlar jonli carrier API emas, seeded bozor ma’lumotlaridan. Indikativ, 48 soat amal qiladi.",
-      "csv": "CSV’da so‘rov ID, yo‘nalish, usul, tashuvchi, muddat, all-in narx, benchmark va tejov bor."
+      "csv": "CSV’da har bir satr uchun so‘rov ID, qayerdan, qayerga, usul, tashuvchi, holat, all-in narx, benchmark va tejov bor."
     },
     "tabs": {
       "home": "Asosiy",

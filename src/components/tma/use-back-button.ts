@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { showBackButton } from "@/lib/tma/state";
+import { showBackButton } from "@/lib/tma/selectors";
 import { useTmaApp } from "./app-provider";
 import { useTelegram } from "./telegram-provider";
 

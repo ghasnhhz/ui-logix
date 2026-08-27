@@ -13,6 +13,7 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "genericError": "Something went wrong. Please try again.",
+    "retry": "Try again",
     "dateFmt": "{month} {d}, {y}",
     "m1": "January",
     "m2": "February",
@@ -480,7 +481,6 @@
     },
     "home": {
       "kpiActive": "Active shipments",
-      "savedLabel": "Saved vs market",
       "qaQuote": "New rate request",
       "qaQuoteSub": "Compare 6 carriers instantly",
       "recentShipments": "Recent shipments",
@@ -494,14 +494,6 @@
       "requote": "Re-quote",
       "track": "Track"
     },
-    "status": {
-      "quoted": "Quoted",
-      "pending": "Pending",
-      "booked": "Booked",
-      "transit": "In transit",
-      "delivered": "Delivered",
-      "expired": "Expired"
-    },
     "done": {
       "title": "Booking confirmed.",
       "sub": "The carrier has your shipment. Track it from Shipments — no email chain needed.",
@@ -511,7 +503,7 @@
       "settle": "Payment is arranged directly with the carrier against their invoice. In-app settlement is not part of this release.",
       "tgNotify": "The bot messages you here at pickup, departure and delivery. No app to open.",
       "seed": "Rates come from a seeded market dataset, not a live carrier API. Indicative, valid 48 hours.",
-      "csv": "CSV includes quote ID, route, mode, carrier, transit, all-in cost, benchmark and saving per row."
+      "csv": "CSV includes quote ID, origin, destination, mode, carrier, status, all-in cost, benchmark and saving per row."
     },
     "tabs": {
       "home": "Home",

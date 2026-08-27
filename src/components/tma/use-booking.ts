@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { selectedQuote } from "@/lib/tma/state";
+import { selectedQuote } from "@/lib/tma/selectors";
 import { isError, post } from "@/lib/ui/api-client";
 import { useTmaApp } from "./app-provider";
 import { useTelegram } from "./telegram-provider";

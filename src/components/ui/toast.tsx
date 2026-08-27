@@ -8,7 +8,15 @@ import { Check } from "lucide-react";
 // never needs to poll.
 const DISMISS_MS = 2600;
 
-export function Toast({ message }: { message: string }) {
+export function Toast({
+  message,
+  // The Mini App raises it clear of its own tab bar, as the comp does; the web
+  // has nothing at the bottom of the page to clear.
+  bottomClass = "bottom-6",
+}: {
+  message: string;
+  bottomClass?: string;
+}) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -22,7 +30,7 @@ export function Toast({ message }: { message: string }) {
     <div
       role="status"
       aria-live="polite"
-      className="enter fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-[9px] rounded-control bg-navy px-[18px] py-3 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,.18)]"
+      className={`enter fixed ${bottomClass} left-1/2 z-50 flex -translate-x-1/2 items-center gap-[9px] rounded-control bg-navy px-[18px] py-3 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,.18)]`}
     >
       <Check className="size-4 flex-none text-success-solid" aria-hidden="true" />
       {message}
