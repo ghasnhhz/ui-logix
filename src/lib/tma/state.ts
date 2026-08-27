@@ -1,59 +1,20 @@
-import { isSameQuote, type Quote, type QuoteKey } from "@/lib/pricing";
-import type { ApiError } from "@/lib/ui/api-client";
-import { DEFAULT_SPEC, STEP_COUNT, defaultShipDate, type WizardSpec } from "@/lib/wizard/spec";
+import { DEFAULT_SPEC, STEP_COUNT, defaultShipDate } from "@/lib/wizard/spec";
+import type { GateForm, TmaAccount, TmaAction, TmaState } from "./state-types";
 
 // The Mini App is one route with a state machine, not a route per screen — that
 // is how the comp models it and it is what Telegram's BackButton expects. There
 // is no URL to mirror: Telegram owns the chrome, and a webview has no address
 // bar for a user to read or share.
 
-export type Screen = "start" | "wizard" | "results" | "home" | "ships" | "done";
-
-/** The sheet's fields. Telegram supplies none of them. Signup ignores `email`. */
-export type GateForm = { company: string; phone: string; email: string };
-
-/** What the server said the account is, once it has verified `initData`. */
-export type TmaAccount = { email: string; company: string; phone: string | null };
-
-export type TmaState = {
-  screen: Screen;
-  step: number;
-  guest: boolean;
-  /** The gate sheet. Signup for a guest, booking confirm for a member. */
-  gate: boolean;
-  fetching: boolean;
-  /** The sheet's request is in flight — it stays up and shows progress. */
-  submitting: boolean;
-  error: ApiError | null;
-  spec: WizardSpec;
-  gateForm: GateForm;
-  account: TmaAccount | null;
-  // Prices only exist here once the server has persisted them, so a guest has
-  // no way to hold one: the account, the session and the row all come first.
-  quoteId: string | null;
-  quotes: Quote[];
-  /** The card the user tapped Book on. */
-  selected: QuoteKey | null;
-  bookedRef: string | null;
-};
-
-export type TmaAction =
-  | { type: "go"; screen: Screen }
-  | { type: "goStep"; step: number }
-  | { type: "next" }
-  | { type: "back" }
-  | { type: "openGate" }
-  | { type: "closeGate" }
-  | { type: "selectQuote"; quote: QuoteKey }
-  | { type: "patchGate"; patch: Partial<GateForm> }
-  | { type: "submitStart" }
-  | { type: "submitFailed"; error: ApiError }
-  | { type: "fetchStart" }
-  | { type: "fetchDone"; quoteId: string; quotes: Quote[] }
-  | { type: "fetchFailed"; error: ApiError }
-  | { type: "booked"; reference: string }
-  | { type: "patchSpec"; patch: Partial<WizardSpec> }
-  | { type: "signedIn"; account?: TmaAccount };
+export type {
+  CabTab,
+  GateForm,
+  Screen,
+  TmaAccount,
+  TmaAction,
+  TmaState,
+  ToastKey,
+} from "./state-types";
 
 export function initialState(guest: boolean, date = defaultShipDate()): TmaState {
   return {
@@ -71,6 +32,12 @@ export function initialState(guest: boolean, date = defaultShipDate()): TmaState
     quotes: [],
     selected: null,
     bookedRef: null,
+    records: null,
+    recordsAt: null,
+    recordsLoading: false,
+    recordsError: null,
+    cabTab: "all",
+    toast: null,
   };
 }
 
@@ -165,6 +132,11 @@ export function reduce(state: TmaState, action: TmaAction): TmaState {
         error: null,
         screen: "done",
         bookedRef: action.reference,
+        // Back from the done screen lands on the cabinet, which must not show
+        // the row set from before this booking existed.
+        records: null,
+        recordsAt: null,
+        recordsError: null,
       };
     case "patchSpec":
       return { ...state, spec: { ...state.spec, ...action.patch }, error: null };
@@ -177,22 +149,24 @@ export function reduce(state: TmaState, action: TmaAction): TmaState {
         account: action.account ?? state.account,
         gateForm: seedGate(state.gateForm, action.account),
       };
+    case "recordsStart":
+      return { ...state, recordsLoading: true, recordsError: null };
+    case "recordsDone":
+      return {
+        ...state,
+        recordsLoading: false,
+        records: action.records,
+        recordsAt: action.now,
+      };
+    case "recordsFailed":
+      return { ...state, recordsLoading: false, recordsError: action.error };
+    case "setCabTab":
+      return { ...state, cabTab: action.tab };
+    // The nonce, not the key, is what makes a repeat re-announce: exporting the
+    // CSV twice in a row must show the toast twice.
+    case "flash":
+      return { ...state, toast: { key: action.key, nonce: (state.toast?.nonce ?? 0) + 1 } };
+    case "dismissToast":
+      return { ...state, toast: null };
   }
 }
-
-// The tapped card, found in the array the server persisted (D-055) — the same
-// match `POST /api/bookings` makes against the same rows, so nothing on screen
-// can be a row the handler would reject.
-export function selectedQuote(state: TmaState): Quote | null {
-  const key = state.selected;
-  if (!key) return null;
-  return state.quotes.find((quote) => isSameQuote(quote, key)) ?? null;
-}
-
-/** Telegram's BackButton is hidden only on the first screen, as in the comp. */
-export const showBackButton = (state: TmaState) =>
-  state.gate || state.screen !== "start";
-
-/** The header's per-screen title and subtitle both come from the `tma.head` keys. */
-export const headKey = (state: TmaState) =>
-  state.screen === "wizard" ? "calc" : state.screen === "start" ? "start" : state.screen;

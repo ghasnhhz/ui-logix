@@ -3,7 +3,7 @@
 import { ChevronLeft, Truck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { locales, type Locale } from "@/i18n/routing";
-import { headKey, showBackButton } from "@/lib/tma/state";
+import { headKey, showBackButton } from "@/lib/tma/selectors";
 import { cityName } from "@/lib/ui/places";
 import { useTmaApp } from "./app-provider";
 import { useTmaLocale } from "./messages-provider";

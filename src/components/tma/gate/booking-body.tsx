@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { selectedQuote } from "@/lib/tma/state";
+import { selectedQuote } from "@/lib/tma/selectors";
 import { CARRIER_MARK } from "@/lib/ui/carriers";
 import { resolveError } from "@/lib/ui/form-error";
 import { money } from "@/lib/ui/money";
