@@ -65,7 +65,7 @@ export function HomeScreen() {
         <button
           type="button"
           onClick={() => dispatch({ type: "go", screen: "ships" })}
-          className="relative flex cursor-pointer items-center gap-0.5 text-[11.5px] font-semibold text-blue transition-colors duration-150 after:absolute after:inset-x-0 after:-inset-y-[13px] after:content-[''] hover:text-blue-hover"
+          className="relative flex cursor-pointer items-center gap-0.5 text-[11.5px] font-semibold text-blue transition-colors duration-150 after:absolute after:inset-x-0 after:-inset-y-[14px] after:content-[''] hover:text-blue-hover"
         >
           {t("viewAll")}
           <ChevronRight className="size-[13px]" aria-hidden="true" />

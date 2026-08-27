@@ -14,9 +14,10 @@ const carrierName = (record: CabinetRecord) =>
  * One row of the quote-and-booking union, shared by home's recent list and the
  * cabinet. `action` is the cabinet's per-row button; home passes none.
  *
- * A booked row shows its booking reference rather than the quote's — that is the
- * number the carrier answers to, and it is what a Track button would have
- * surfaced if Phase 2 had one (D-038).
+ * The identifier is the quote reference on every row, booked or not — it is what
+ * the web cabinet's QUOTE ID column and the CSV's first column both carry, and a
+ * booked row that read differently here would not be findable in the export the
+ * shipper hands their accountant.
  */
 export function RecordRow({
   record,
@@ -26,7 +27,6 @@ export function RecordRow({
   action?: React.ReactNode;
 }) {
   const carrier = carrierName(record);
-  const reference = record.bookingReference ?? record.reference;
 
   return (
     <article className="rounded-card border border-border bg-surface p-[13px]">
@@ -45,7 +45,7 @@ export function RecordRow({
               and the comp's em-dash placeholder would read as a carrier named
               "—" once these are real rows. */}
           <p className="mt-[2px] truncate font-mono text-[10px] text-ink-400">
-            {carrier ? `${reference} · ${carrier}` : reference}
+            {carrier ? `${record.reference} · ${carrier}` : record.reference}
           </p>
         </div>
 
