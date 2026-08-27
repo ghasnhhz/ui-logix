@@ -7,6 +7,7 @@ import { TmaAppProvider, useTmaApp } from "./app-provider";
 import { GateSheet } from "./gate-sheet";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
+import { DoneScreen } from "./screens/done-screen";
 import { JumpBar } from "./screens/jump-bar";
 import { ResultsScreen } from "./screens/results-screen";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
@@ -18,6 +19,7 @@ import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
 import { useBackButton } from "./use-back-button";
 import { useMainButton } from "./use-main-button";
+import { useBooking } from "./use-booking";
 import { useQuoteFlow } from "./use-quote-flow";
 
 // Split out so the mock's in-page button bar is a chunk of its own and never
@@ -58,6 +60,7 @@ function Screens() {
   const { state, dispatch } = useTmaApp();
   const { mock } = useTelegram();
   const flow = useQuoteFlow();
+  const booking = useBooking();
 
   useBackButton();
   useMainButton((action: MainButtonAction) => {
@@ -74,8 +77,7 @@ function Screens() {
       case "signup":
         return void flow.submitSignup();
       case "confirmBooking":
-        // Feature 11 books the selection; the sheet just closes for now.
-        return dispatch({ type: "closeGate" });
+        return void booking.confirmBooking();
       case "goShips":
         return dispatch({ type: "go", screen: "ships" });
     }
@@ -101,6 +103,8 @@ function Screens() {
           // Keyed on the quote, so a second run starts back on ALL and cheapest
           // rather than inheriting the last run's filter.
           <ResultsScreen key={state.quoteId ?? "pending"} />
+        ) : state.screen === "done" ? (
+          <DoneScreen />
         ) : (
           <ScaffoldScreen name={state.screen} />
         )}

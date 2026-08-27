@@ -5,6 +5,7 @@ import {
   initialState,
   reduce,
   showBackButton,
+  type TmaAccount,
   type TmaState,
 } from "@/lib/tma/state";
 
@@ -14,6 +15,12 @@ const at = (patch: Partial<TmaState>): TmaState => ({
 });
 
 const QUOTES = [{ carrierId: "MSK", mode: "LTL" }] as unknown as TmaState["quotes"];
+
+const ACCOUNT: TmaAccount = {
+  email: "tg-999000111@telegram.u-logix.invalid",
+  company: "Nazarov Trading LLC",
+  phone: "+998901234567",
+};
 
 describe("initialState", () => {
   it("starts a guest on the welcome screen with the comp's shipment", () => {
@@ -122,7 +129,7 @@ describe("reduce", () => {
 
   it("patches one gate field at a time", () => {
     const state = reduce(at({}), { type: "patchGate", patch: { company: "Nazarov" } });
-    expect(state.gateForm).toEqual({ company: "Nazarov", phone: "" });
+    expect(state.gateForm).toEqual({ company: "Nazarov", phone: "", email: "" });
   });
 
   it("patches the shipment without replacing it", () => {
@@ -135,6 +142,44 @@ describe("reduce", () => {
       guest: false,
       gate: false,
     });
+  });
+
+  // The booking sheet asks for what the account already holds, so it arrives
+  // filled — but never with the synthetic address (D-054) in the email field.
+  it("seeds the sheet from the account it signs in with", () => {
+    const state = reduce(at({}), { type: "signedIn", account: ACCOUNT });
+    expect(state.account).toEqual(ACCOUNT);
+    expect(state.gateForm).toEqual({
+      company: "Nazarov Trading LLC",
+      phone: "+998901234567",
+      email: "",
+    });
+  });
+
+  it("keeps a typed phone when the account has none", () => {
+    const typed = at({ gateForm: { company: "", phone: "+998901112233", email: "" } });
+    const state = reduce(typed, { type: "signedIn", account: { ...ACCOUNT, phone: null } });
+    expect(state.gateForm.phone).toBe("+998901112233");
+  });
+
+  it("keeps the booked row on screen so the done screen can render it", () => {
+    const state = reduce(
+      at({ gate: true, submitting: true, quotes: QUOTES, selected: QUOTES[0] }),
+      { type: "booked", reference: "ULQ-2026-213587" }
+    );
+    expect(state).toMatchObject({
+      screen: "done",
+      gate: false,
+      submitting: false,
+      bookedRef: "ULQ-2026-213587",
+      quotes: QUOTES,
+      selected: QUOTES[0],
+    });
+  });
+
+  it("drops a stale reference when the next request starts", () => {
+    const state = reduce(at({ bookedRef: "ULQ-2026-213587" }), { type: "fetchStart" });
+    expect(state.bookedRef).toBeNull();
   });
 });
 

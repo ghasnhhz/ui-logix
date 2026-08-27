@@ -473,6 +473,8 @@
       "viaTelegram": "Telegram orqali",
       "companyLabel": "Kompaniya nomi",
       "phone": "Telefon",
+      "emailLabel": "Email (ixtiyoriy)",
+      "emailHint": "Bron tasdig‘ini shu manzilga yuboramiz. Kerak bo‘lmasa, bo‘sh qoldiring.",
       "keepComparing": "Solishtirishda davom etish",
       "backToRates": "Narxlarga qaytish"
     },

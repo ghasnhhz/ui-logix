@@ -4,14 +4,15 @@ import { useEffect, useRef } from "react";
 import { Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTmaApp } from "./app-provider";
+import { BookingBody } from "./gate/booking-body";
 import { SignupBody } from "./gate/signup-body";
 import { useTelegram } from "./telegram-provider";
 
 /**
  * One sheet, two modes — the comp's biggest structural difference from the web
  * build (TMA.md § Screens). A guest gets signup; a member gets the booking
- * confirm, which Feature 11 fills in. It is mounted only while open, so the
- * focus move below runs once per opening.
+ * confirm. It is mounted only while open, so the focus move below runs once
+ * per opening.
  */
 export function GateSheet() {
   const { state, dispatch } = useTmaApp();
@@ -75,7 +76,7 @@ export function GateSheet() {
           {t(signup ? "subSignup" : "subBook")}
         </p>
 
-        {signup ? <SignupBody /> : <BookingScaffold />}
+        {signup ? <SignupBody /> : <BookingBody />}
 
         <button
           type="button"
@@ -85,17 +86,6 @@ export function GateSheet() {
           {t(signup ? "keepComparing" : "backToRates")}
         </button>
       </div>
-    </div>
-  );
-}
-
-// The booking half of the sheet is Feature 11 — the same placeholder convention
-// the screens use, so it is never mistaken for finished work.
-function BookingScaffold() {
-  return (
-    <div className="mt-3.5 rounded-card border border-dashed border-border-strong bg-surface p-4 font-mono text-xs text-ink-500">
-      <div className="text-ink">sheet · booking</div>
-      <div className="mt-1">feature-11</div>
     </div>
   );
 }

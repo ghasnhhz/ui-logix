@@ -1,4 +1,4 @@
-import type { Quote, QuoteKey } from "@/lib/pricing";
+import { isSameQuote, type Quote, type QuoteKey } from "@/lib/pricing";
 import type { ApiError } from "@/lib/ui/api-client";
 import { DEFAULT_SPEC, STEP_COUNT, defaultShipDate, type WizardSpec } from "@/lib/wizard/spec";
 
@@ -9,8 +9,11 @@ import { DEFAULT_SPEC, STEP_COUNT, defaultShipDate, type WizardSpec } from "@/li
 
 export type Screen = "start" | "wizard" | "results" | "home" | "ships" | "done";
 
-/** The signup sheet's two fields. Telegram supplies neither. */
-export type GateForm = { company: string; phone: string };
+/** The sheet's fields. Telegram supplies none of them. Signup ignores `email`. */
+export type GateForm = { company: string; phone: string; email: string };
+
+/** What the server said the account is, once it has verified `initData`. */
+export type TmaAccount = { email: string; company: string; phone: string | null };
 
 export type TmaState = {
   screen: Screen;
@@ -19,17 +22,19 @@ export type TmaState = {
   /** The gate sheet. Signup for a guest, booking confirm for a member. */
   gate: boolean;
   fetching: boolean;
-  /** The signup request is in flight — the sheet stays up and shows progress. */
+  /** The sheet's request is in flight — it stays up and shows progress. */
   submitting: boolean;
   error: ApiError | null;
   spec: WizardSpec;
   gateForm: GateForm;
+  account: TmaAccount | null;
   // Prices only exist here once the server has persisted them, so a guest has
   // no way to hold one: the account, the session and the row all come first.
   quoteId: string | null;
   quotes: Quote[];
-  /** The card the user tapped Book on. Feature 11 books it. */
+  /** The card the user tapped Book on. */
   selected: QuoteKey | null;
+  bookedRef: string | null;
 };
 
 export type TmaAction =
@@ -46,8 +51,9 @@ export type TmaAction =
   | { type: "fetchStart" }
   | { type: "fetchDone"; quoteId: string; quotes: Quote[] }
   | { type: "fetchFailed"; error: ApiError }
+  | { type: "booked"; reference: string }
   | { type: "patchSpec"; patch: Partial<WizardSpec> }
-  | { type: "signedIn" };
+  | { type: "signedIn"; account?: TmaAccount };
 
 export function initialState(guest: boolean, date = defaultShipDate()): TmaState {
   return {
@@ -59,10 +65,12 @@ export function initialState(guest: boolean, date = defaultShipDate()): TmaState
     submitting: false,
     error: null,
     spec: { ...DEFAULT_SPEC, date },
-    gateForm: { company: "", phone: "" },
+    gateForm: { company: "", phone: "", email: "" },
+    account: null,
     quoteId: null,
     quotes: [],
     selected: null,
+    bookedRef: null,
   };
 }
 
@@ -86,6 +94,14 @@ function back(state: TmaState): TmaState {
     default:
       return { ...state, screen: state.guest ? "wizard" : "home" };
   }
+}
+
+// The booking sheet asks for what the account already holds, so those arrive
+// filled. `email` stays empty: the account's address is the synthetic
+// `tg-…@telegram.u-logix.invalid` one (D-054), which would read as a real inbox.
+function seedGate(form: GateForm, account: TmaAccount | undefined): GateForm {
+  if (!account) return form;
+  return { ...form, company: account.company, phone: account.phone ?? form.phone };
 }
 
 export function reduce(state: TmaState, action: TmaAction): TmaState {
@@ -125,6 +141,7 @@ export function reduce(state: TmaState, action: TmaAction): TmaState {
         quoteId: null,
         quotes: [],
         selected: null,
+        bookedRef: null,
       };
     case "fetchDone":
       return { ...state, fetching: false, quoteId: action.quoteId, quotes: action.quotes };
@@ -138,11 +155,38 @@ export function reduce(state: TmaState, action: TmaAction): TmaState {
         step: STEP_COUNT,
         error: action.error,
       };
+    // `selected` and `quotes` survive: the done screen renders the booked row
+    // out of them rather than being handed a second copy of the same numbers.
+    case "booked":
+      return {
+        ...state,
+        submitting: false,
+        gate: false,
+        error: null,
+        screen: "done",
+        bookedRef: action.reference,
+      };
     case "patchSpec":
       return { ...state, spec: { ...state.spec, ...action.patch }, error: null };
     case "signedIn":
-      return { ...state, guest: false, gate: false, submitting: false };
+      return {
+        ...state,
+        guest: false,
+        gate: false,
+        submitting: false,
+        account: action.account ?? state.account,
+        gateForm: seedGate(state.gateForm, action.account),
+      };
   }
+}
+
+// The tapped card, found in the array the server persisted (D-055) — the same
+// match `POST /api/bookings` makes against the same rows, so nothing on screen
+// can be a row the handler would reject.
+export function selectedQuote(state: TmaState): Quote | null {
+  const key = state.selected;
+  if (!key) return null;
+  return state.quotes.find((quote) => isSameQuote(quote, key)) ?? null;
 }
 
 /** Telegram's BackButton is hidden only on the first screen, as in the comp. */
