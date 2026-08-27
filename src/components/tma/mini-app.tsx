@@ -9,9 +9,7 @@ import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { DoneScreen } from "./screens/done-screen";
 import { HomeScreen } from "./screens/home-screen";
-import { JumpBar } from "./screens/jump-bar";
 import { ResultsScreen } from "./screens/results-screen";
-import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
 import { WizardScreen } from "./screens/wizard-screen";
 import { ScreenFrame } from "./screen-frame";
@@ -110,17 +108,8 @@ function Screens() {
           <DoneScreen />
         ) : state.screen === "home" ? (
           <HomeScreen />
-        ) : state.screen === "ships" ? (
-          <ShipsScreen />
         ) : (
-          <ScaffoldScreen name={state.screen} />
-        )}
-
-        {/* The mock's jump panel needs the padding back on a bleeding screen. */}
-        {mock && (
-          <div className={bleed ? "px-3.5 pb-3.5" : ""}>
-            <JumpBar />
-          </div>
+          <ShipsScreen />
         )}
       </ScreenFrame>
 
