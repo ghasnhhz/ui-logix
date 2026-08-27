@@ -1,4 +1,4 @@
-import type { Quote, QuoteKey } from "@/lib/pricing";
+import { isSameQuote, type Quote, type QuoteKey } from "@/lib/pricing";
 import type { ApiError } from "@/lib/ui/api-client";
 import { DEFAULT_SPEC, STEP_COUNT, defaultShipDate, type WizardSpec } from "@/lib/wizard/spec";
 
@@ -96,10 +96,9 @@ function back(state: TmaState): TmaState {
   }
 }
 
-// The booking sheet asks for the same two fields the account already holds, so
-// they arrive filled. `email` stays empty on purpose: the account's address is
-// the synthetic `tg-…@telegram.u-logix.invalid` one (D-054) and showing it in a
-// field would read as a real inbox.
+// The booking sheet asks for what the account already holds, so those arrive
+// filled. `email` stays empty: the account's address is the synthetic
+// `tg-…@telegram.u-logix.invalid` one (D-054), which would read as a real inbox.
 function seedGate(form: GateForm, account: TmaAccount | undefined): GateForm {
   if (!account) return form;
   return { ...form, company: account.company, phone: account.phone ?? form.phone };
@@ -179,6 +178,15 @@ export function reduce(state: TmaState, action: TmaAction): TmaState {
         gateForm: seedGate(state.gateForm, action.account),
       };
   }
+}
+
+// The tapped card, found in the array the server persisted (D-055) — the same
+// match `POST /api/bookings` makes against the same rows, so nothing on screen
+// can be a row the handler would reject.
+export function selectedQuote(state: TmaState): Quote | null {
+  const key = state.selected;
+  if (!key) return null;
+  return state.quotes.find((quote) => isSameQuote(quote, key)) ?? null;
 }
 
 /** Telegram's BackButton is hidden only on the first screen, as in the comp. */
