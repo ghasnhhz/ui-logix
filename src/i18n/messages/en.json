@@ -473,6 +473,8 @@
       "viaTelegram": "via Telegram",
       "companyLabel": "Company name",
       "phone": "Phone",
+      "emailLabel": "Email (optional)",
+      "emailHint": "We send the booking confirmation here. Leave it blank to skip.",
       "keepComparing": "Keep comparing rates",
       "backToRates": "Back to rates"
     },
