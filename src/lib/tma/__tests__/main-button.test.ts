@@ -1,12 +1,29 @@
 import { describe, expect, it } from "vitest";
 import { STEP_COUNT } from "@/lib/wizard/spec";
-import { TONE, mainButtonFor, showTabs } from "@/lib/tma/main-button";
-import { initialState, type TmaState } from "@/lib/tma/state";
+import { TONE, bookingReady, mainButtonFor, showTabs } from "@/lib/tma/main-button";
+import { initialState, type TmaAccount, type TmaState } from "@/lib/tma/state";
 
 const at = (patch: Partial<TmaState>): TmaState => ({
   ...initialState(true, "2026-09-11"),
   ...patch,
 });
+
+const ACCOUNT: TmaAccount = {
+  email: "tg-999000111@telegram.u-logix.invalid",
+  company: "Nazarov Trading LLC",
+  phone: "+998901234567",
+};
+
+/** A member with the sheet open on a form the booking schema would accept. */
+const bookable = (patch: Partial<TmaState> = {}): TmaState =>
+  at({
+    screen: "results",
+    gate: true,
+    guest: false,
+    account: ACCOUNT,
+    gateForm: { company: ACCOUNT.company, phone: ACCOUNT.phone!, email: "" },
+    ...patch,
+  });
 
 describe("mainButtonFor", () => {
   it("offers the amber try-it button on the start screen", () => {
@@ -32,9 +49,9 @@ describe("mainButtonFor", () => {
 
   it("switches the sheet's button between signup and booking", () => {
     const open = { screen: "wizard", step: STEP_COUNT, gate: true } as const;
-    const filled = { company: "Nazarov Trading LLC", phone: "" };
+    const filled = { company: "Nazarov Trading LLC", phone: "", email: "" };
     expect(mainButtonFor(at({ ...open, guest: true, gateForm: filled }))?.action).toBe("signup");
-    expect(mainButtonFor(at({ ...open, guest: false }))?.action).toBe("confirmBooking");
+    expect(mainButtonFor(bookable({ ...open }))?.action).toBe("confirmBooking");
   });
 
   // Telegram's button is the sheet's only submit control, so it carries the
@@ -42,19 +59,22 @@ describe("mainButtonFor", () => {
   it("disables signup until a company is typed, and spins while it submits", () => {
     const open = { screen: "wizard", step: STEP_COUNT, gate: true, guest: true } as const;
     expect(mainButtonFor(at({ ...open }))?.action).toBeNull();
-    expect(mainButtonFor(at({ ...open, gateForm: { company: " N ", phone: "" } }))?.action)
+    expect(mainButtonFor(at({ ...open, gateForm: { company: " N ", phone: "", email: "" } }))?.action)
       .toBeNull();
 
     const submitting = mainButtonFor(
-      at({ ...open, gateForm: { company: "Nazarov Trading LLC", phone: "" }, submitting: true })
+      at({
+        ...open,
+        gateForm: { company: "Nazarov Trading LLC", phone: "", email: "" },
+        submitting: true,
+      })
     );
     expect(submitting).toMatchObject({ progress: true, tone: "amber" });
     expect(submitting?.action).toBeNull();
   });
 
   it("lets the open sheet own the button over the screen behind it", () => {
-    const behind = at({ screen: "results", fetching: false, gate: true, guest: false });
-    expect(mainButtonFor(behind)?.action).toBe("confirmBooking");
+    expect(mainButtonFor(bookable({ fetching: false }))?.action).toBe("confirmBooking");
   });
 
   it("takes the button over while rates are fetching, with no action", () => {
@@ -70,6 +90,30 @@ describe("mainButtonFor", () => {
 
   it("paints amber with amber-ink rather than the white the comp uses", () => {
     expect(TONE.amber).toEqual({ color: "#F5A623", textColor: "#3B2600" });
+  });
+});
+
+describe("bookingReady", () => {
+  it("wants a company and a phone, even though signup let the phone go", () => {
+    expect(bookingReady(bookable())).toBe(true);
+    expect(bookingReady(bookable({ gateForm: { company: "N", phone: "+998901234567", email: "" } }))).toBe(false);
+    expect(bookingReady(bookable({ gateForm: { company: "Nazarov", phone: "+998", email: "" } }))).toBe(false);
+  });
+
+  it("treats a blank email as the account's own address", () => {
+    expect(bookingReady(bookable({ gateForm: { company: "Nazarov", phone: "+998901234567", email: "  " } }))).toBe(true);
+    // No account to fall back to — the dev mock, and nothing in production.
+    expect(bookingReady(bookable({ account: null }))).toBe(false);
+  });
+
+  it("rejects an unfinished address and accepts a real one", () => {
+    const form = { company: "Nazarov", phone: "+998901234567" };
+    expect(bookingReady(bookable({ gateForm: { ...form, email: "alisher@" } }))).toBe(false);
+    expect(bookingReady(bookable({ gateForm: { ...form, email: "alisher@nazarov.uz" } }))).toBe(true);
+  });
+
+  it("stays false while the booking is in flight", () => {
+    expect(bookingReady(bookable({ submitting: true }))).toBe(false);
   });
 });
 

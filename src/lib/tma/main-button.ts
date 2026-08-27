@@ -43,16 +43,48 @@ export const TONE: Record<MainButtonTone, { color: string; textColor: string }> 
   muted: { color: "#94A3B8", textColor: "#FFFFFF" },
 };
 
-// signupSchema's own rule. Telegram's button is the sheet's only submit control,
-// so an incomplete form has to disable that rather than an in-page one.
+// The shared schemas' own minimums — signupSchema for the company, and
+// bookingRequestSchema for the phone. Telegram's button is the sheet's only
+// submit control, so an incomplete form has to disable that rather than an
+// in-page one.
 const MIN_COMPANY = 2;
+const MIN_PHONE = 6;
+
+// Deliberately loose. `z.email()` on the server is the real check and its
+// `invalidEmail` code renders on the field; this only stops the button
+// enabling on something obviously unfinished.
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * Booking asks for a phone even though signup did not, because the booking
+ * schema requires one. The email is optional: left blank it falls back to the
+ * account address — so it is only required when there is no account to fall
+ * back to, which is the dev mock and nothing else.
+ */
+export function bookingReady(state: TmaState) {
+  const { company, phone, email } = state.gateForm;
+  const typed = email.trim();
+  const emailOk = typed ? EMAIL.test(typed) : state.account !== null;
+
+  return (
+    !state.submitting &&
+    company.trim().length >= MIN_COMPANY &&
+    phone.trim().length >= MIN_PHONE &&
+    emailOk
+  );
+}
 
 export function mainButtonFor(state: TmaState): MainButtonSpec | null {
   // The sheet is modal, so its button owns the bottom of the screen whatever is
   // behind it.
   if (state.gate) {
     if (!state.guest) {
-      return { labelKey: "confirmBook", tone: "amber", action: "confirmBooking", progress: false };
+      return {
+        labelKey: "confirmBook",
+        tone: "amber",
+        action: bookingReady(state) ? "confirmBooking" : null,
+        progress: state.submitting,
+      };
     }
 
     const ready = state.gateForm.company.trim().length >= MIN_COMPANY && !state.submitting;
