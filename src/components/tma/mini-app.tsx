@@ -8,6 +8,7 @@ import { GateSheet } from "./gate-sheet";
 import { HeaderBar } from "./header-bar";
 import { MessagesProvider } from "./messages-provider";
 import { DoneScreen } from "./screens/done-screen";
+import { HomeScreen } from "./screens/home-screen";
 import { JumpBar } from "./screens/jump-bar";
 import { ResultsScreen } from "./screens/results-screen";
 import { ScaffoldScreen } from "./screens/scaffold-screen";
@@ -105,6 +106,8 @@ function Screens() {
           <ResultsScreen key={state.quoteId ?? "pending"} />
         ) : state.screen === "done" ? (
           <DoneScreen />
+        ) : state.screen === "home" ? (
+          <HomeScreen />
         ) : (
           <ScaffoldScreen name={state.screen} />
         )}

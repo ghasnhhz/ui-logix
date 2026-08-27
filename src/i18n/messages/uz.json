@@ -13,6 +13,7 @@
     "showPassword": "Parolni ko‘rsatish",
     "hidePassword": "Parolni yashirish",
     "genericError": "Xatolik yuz berdi. Qayta urinib ko‘ring.",
+    "retry": "Qayta urinish",
     "dateFmt": "{d}-{month}, {y}",
     "m1": "yanvar",
     "m2": "fevral",
@@ -480,7 +481,6 @@
     },
     "home": {
       "kpiActive": "Faol yuklar",
-      "savedLabel": "Bozorga nisbatan tejov",
       "qaQuote": "Yangi narx so‘rovi",
       "qaQuoteSub": "6 tashuvchini bir zumda solishtir",
       "recentShipments": "So‘nggi yuklar",

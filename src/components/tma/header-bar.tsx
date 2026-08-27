@@ -29,9 +29,12 @@ export function HeaderBar() {
         return `${lane} · ${state.spec.mode}`;
       case "done":
         return lane;
+      case "home":
+        return state.account?.company ?? "";
       default:
-        // Feature 12 fills these with the company and the record count.
-        return "";
+        // The comp puts a bare count under "My cabinet"; it waits for the rows
+        // rather than flashing a zero the account may not have.
+        return state.records ? String(state.records.length) : "";
     }
   };
 

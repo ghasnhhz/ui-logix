@@ -13,6 +13,7 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "genericError": "Something went wrong. Please try again.",
+    "retry": "Try again",
     "dateFmt": "{month} {d}, {y}",
     "m1": "January",
     "m2": "February",
@@ -480,7 +481,6 @@
     },
     "home": {
       "kpiActive": "Active shipments",
-      "savedLabel": "Saved vs market",
       "qaQuote": "New rate request",
       "qaQuoteSub": "Compare 6 carriers instantly",
       "recentShipments": "Recent shipments",
