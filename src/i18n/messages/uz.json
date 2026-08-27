@@ -503,7 +503,7 @@
       "settle": "To‘lov tashuvchi bilan to‘g‘ridan-to‘g‘ri, hisob-faktura asosida. Ilova ichida to‘lov bu versiyaga kirmaydi.",
       "tgNotify": "Bot olib ketish, jo‘nash va yetkazishda sizga shu yerda yozadi. Ilova ochish shart emas.",
       "seed": "Narxlar jonli carrier API emas, seeded bozor ma’lumotlaridan. Indikativ, 48 soat amal qiladi.",
-      "csv": "CSV’da so‘rov ID, yo‘nalish, usul, tashuvchi, muddat, all-in narx, benchmark va tejov bor."
+      "csv": "CSV’da har bir satr uchun so‘rov ID, qayerdan, qayerga, usul, tashuvchi, holat, all-in narx, benchmark va tejov bor."
     },
     "tabs": {
       "home": "Asosiy",

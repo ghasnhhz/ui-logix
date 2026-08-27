@@ -503,7 +503,7 @@
       "settle": "Payment is arranged directly with the carrier against their invoice. In-app settlement is not part of this release.",
       "tgNotify": "The bot messages you here at pickup, departure and delivery. No app to open.",
       "seed": "Rates come from a seeded market dataset, not a live carrier API. Indicative, valid 48 hours.",
-      "csv": "CSV includes quote ID, route, mode, carrier, transit, all-in cost, benchmark and saving per row."
+      "csv": "CSV includes quote ID, origin, destination, mode, carrier, status, all-in cost, benchmark and saving per row."
     },
     "tabs": {
       "home": "Home",

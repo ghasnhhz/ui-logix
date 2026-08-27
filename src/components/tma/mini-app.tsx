@@ -15,6 +15,8 @@ import { ScaffoldScreen } from "./screens/scaffold-screen";
 import { StartScreen } from "./screens/start-screen";
 import { WizardScreen } from "./screens/wizard-screen";
 import { ScreenFrame } from "./screen-frame";
+import { ShipsScreen } from "./screens/ships-screen";
+import { ToastHost } from "./toast-host";
 import { TabBar } from "./tab-bar";
 import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
@@ -108,6 +110,8 @@ function Screens() {
           <DoneScreen />
         ) : state.screen === "home" ? (
           <HomeScreen />
+        ) : state.screen === "ships" ? (
+          <ShipsScreen />
         ) : (
           <ScaffoldScreen name={state.screen} />
         )}
@@ -121,6 +125,7 @@ function Screens() {
       </ScreenFrame>
 
       {state.gate && <GateSheet />}
+      <ToastHost />
     </div>
   );
 }
