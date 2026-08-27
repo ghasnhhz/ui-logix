@@ -7,11 +7,11 @@ import { useTelegram } from "../telegram-provider";
 // The comp ships a "JUMP TO A SCREEN" panel beside the phone so every state can
 // be reviewed without walking the funnel. This is that panel, for the mock only
 // (D-050): a real client never renders it, and Features 9–12 delete it as the
-// screens they own become reachable on their own. The wizard, the gate and the
-// results are all reachable by walking the funnel now, and results cannot be
-// faked from here any more — it needs a quote the server actually persisted.
+// screens they own become reachable on their own. Everything up to the booking
+// confirmation is reachable by walking the funnel now, and none of it can be
+// faked from here any more — results needs a quote the server persisted, and
+// done needs a booking it accepted.
 const JUMPS: { label: string; actions: TmaAction[] }[] = [
-  { label: "done", actions: [{ type: "go", screen: "done" }] },
   { label: "home", actions: [{ type: "signedIn" }, { type: "go", screen: "home" }] },
   { label: "ships", actions: [{ type: "signedIn" }, { type: "go", screen: "ships" }] },
 ];
