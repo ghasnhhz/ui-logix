@@ -18,6 +18,7 @@ import { TelegramProvider, useTelegram } from "./telegram-provider";
 import { Unavailable } from "./unavailable";
 import { useBackButton } from "./use-back-button";
 import { useMainButton } from "./use-main-button";
+import { useBooking } from "./use-booking";
 import { useQuoteFlow } from "./use-quote-flow";
 
 // Split out so the mock's in-page button bar is a chunk of its own and never
@@ -58,6 +59,7 @@ function Screens() {
   const { state, dispatch } = useTmaApp();
   const { mock } = useTelegram();
   const flow = useQuoteFlow();
+  const booking = useBooking();
 
   useBackButton();
   useMainButton((action: MainButtonAction) => {
@@ -74,8 +76,7 @@ function Screens() {
       case "signup":
         return void flow.submitSignup();
       case "confirmBooking":
-        // Feature 11 books the selection; the sheet just closes for now.
-        return dispatch({ type: "closeGate" });
+        return void booking.confirmBooking();
       case "goShips":
         return dispatch({ type: "go", screen: "ships" });
     }

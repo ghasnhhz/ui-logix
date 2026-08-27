@@ -1,7 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useReducer } from "react";
-import { initialState, reduce, type TmaAction, type TmaState } from "@/lib/tma/state";
+import {
+  initialState,
+  reduce,
+  type TmaAccount,
+  type TmaAction,
+  type TmaState,
+} from "@/lib/tma/state";
 import { useTelegram } from "./telegram-provider";
 
 type AppValue = { state: TmaState; dispatch: React.Dispatch<TmaAction> };
@@ -14,22 +20,48 @@ export function useTmaApp() {
   return value;
 }
 
+type AccountRow = { email: string; company: string; phone: string | null };
+
+// Narrowed on the way in: the handlers select an id too, and the booking sheet
+// has no business holding one.
+const toAccount = (row: AccountRow): TmaAccount => ({
+  email: row.email,
+  company: row.company,
+  phone: row.phone,
+});
+
 // The cookie is issued from a server-side HMAC check of initData, never from
 // anything the client asserts. A failure of any kind — bad signature, no
 // account yet, no network — leaves the user a guest, which is a real state
-// here and not an error to show.
-async function signIn(initData: string) {
+// here and not an error to show. The account comes back with it because the
+// booking sheet fills itself from the row rather than from initDataUnsafe.
+async function signIn(initData: string): Promise<TmaAccount | null> {
   try {
     const response = await fetch("/api/auth/telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ initData }),
     });
-    if (!response.ok) return false;
+    if (!response.ok) return null;
     const body = await response.json();
-    return body?.data?.authenticated === true;
+    if (body?.data?.authenticated !== true) return null;
+    return toAccount(body.data.user as AccountRow);
   } catch {
-    return false;
+    return null;
+  }
+}
+
+// Development only. The mock leaves initData empty and cannot authenticate
+// (D-050), so `?tma-mock=authed` flips the flag — but a browser run against a
+// real session still needs the account behind that cookie, or the booking sheet
+// would come up blank where a real client's comes up filled.
+async function mockAccount(): Promise<TmaAccount | null> {
+  try {
+    const response = await fetch("/api/auth/me");
+    if (!response.ok) return null;
+    return toAccount((await response.json()).data as AccountRow);
+  } catch {
+    return null;
   }
 }
 
@@ -42,17 +74,23 @@ export function TmaAppProvider({ children }: { children: React.ReactNode }) {
   const { app, status } = useTelegram();
 
   useEffect(() => {
+    let cancelled = false;
+
     if (mockAuthed()) {
-      dispatch({ type: "signedIn" });
-      return;
+      mockAccount().then((account) => {
+        if (!cancelled) dispatch({ type: "signedIn", account: account ?? undefined });
+      });
+      return () => {
+        cancelled = true;
+      };
     }
+
     // The dev mock and any plain browser carry no initData (D-050), so there is
     // nothing to verify and the request would be a guaranteed 401.
     if (status !== "ready" || !app?.initData) return;
 
-    let cancelled = false;
-    signIn(app.initData).then((signedIn) => {
-      if (signedIn && !cancelled) dispatch({ type: "signedIn" });
+    signIn(app.initData).then((account) => {
+      if (account && !cancelled) dispatch({ type: "signedIn", account });
     });
     return () => {
       cancelled = true;

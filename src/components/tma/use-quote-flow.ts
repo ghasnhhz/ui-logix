@@ -11,7 +11,7 @@ import { useTelegram } from "./telegram-provider";
 // like on both surfaces.
 const TMA_FETCH_MS = 1500;
 
-type Account = { id: string; email: string };
+type Account = { id: string; email: string; company: string; phone: string | null };
 
 /**
  * The two async paths behind Telegram's MainButton.
@@ -68,7 +68,7 @@ export function useQuoteFlow() {
       return;
     }
 
-    dispatch({ type: "signedIn" });
+    dispatch({ type: "signedIn", account: account.data });
     dispatch({ type: "fetchStart" });
     await runQuote();
   }
